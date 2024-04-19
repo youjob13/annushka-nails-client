@@ -1,27 +1,31 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+  inject,
+} from '@angular/core';
 import { PasswordInputComponent } from '../../../shared/components/password-input/password-input.component';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
-interface LoginFormModel {
-  username: FormControl<string>;
-  password: FormControl<string>;
-}
+import { TuiButtonModule } from '@taiga-ui/core';
+import { ILoginFormModel, LoginFormModel } from './login-form.models';
 
 @Component({
   selector: 'ann-login-form',
   standalone: true,
-  imports: [ReactiveFormsModule, PasswordInputComponent],
+  imports: [ReactiveFormsModule, TuiButtonModule, PasswordInputComponent],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
+  @Output() send = new EventEmitter<ILoginFormModel>();
+
   protected readonly fb = inject(FormBuilder);
   protected readonly formModel: FormGroup<LoginFormModel>;
 
@@ -36,5 +40,18 @@ export class LoginFormComponent {
         nonNullable: true,
       }),
     });
+  }
+
+  public onSubmit(): void {
+    this.send.emit(this.formModel.getRawValue());
+    this.resetForm();
+  }
+
+  public onReset(): void {
+    this.resetForm();
+  }
+
+  private resetForm(): void {
+    this.formModel.reset();
   }
 }
