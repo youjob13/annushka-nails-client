@@ -1,0 +1,12 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+
+  & > .control {
+    width: 300px;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}
