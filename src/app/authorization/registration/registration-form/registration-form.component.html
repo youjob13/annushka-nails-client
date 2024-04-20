@@ -15,6 +15,7 @@
   </ng-template>
 
   <tui-input-password
+    #passwordControl
     autocomplete="current-password"
     class="b-form control"
     [formControl]="this.formModel.controls.password"
@@ -25,6 +26,25 @@
     Type password
   </tui-input-password>
 
+  <tui-input-password
+    #repeatPasswordControl
+    autocomplete="current-password"
+    class="b-form control"
+    [formControl]="this.formModel.controls.repeatedPassword"
+    [tuiTextfieldCustomContent]="
+      this.formModel.controls.repeatedPassword.valid ? success : ''
+    "
+  >
+    Repeat password
+  </tui-input-password>
+
+  <tui-checkbox
+    [ngModelOptions]="{ standalone: true }"
+    [(ngModel)]="passwordControl.isPasswordHidden"
+    (ngModelChange)="repeatPasswordControl.isPasswordHidden = $event"
+    class="tui-space_bottom-3"
+  ></tui-checkbox>
+
   <button
     appearance="primary"
     tuiButton
@@ -32,6 +52,6 @@
     class="tui-space_right-3 tui-space_bottom-3"
     (click)="onSubmit()"
   >
-    Sign In
+    Sign Up
   </button>
 </form>

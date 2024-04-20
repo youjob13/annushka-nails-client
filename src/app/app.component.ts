@@ -26,6 +26,4 @@ import { AppearanceModule } from './appereance/appereance.module';
   styleUrl: './app.component.scss',
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
 })
-export class AppComponent {
-  title = 'annushka-nails-clients';
-}
+export class AppComponent {}

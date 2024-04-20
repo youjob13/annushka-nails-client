@@ -3,9 +3,9 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'auth',
-    loadComponent: () =>
-      import('./authorization/authorization.component').then(
-        (m) => m.AuthorizationComponent
+    loadChildren: () =>
+      import('./authorization/auth-routing.module').then(
+        (m) => m.AuthRoutingModule
       ),
   },
   {
@@ -13,6 +13,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./userProfile/userProfile.component').then(
         (m) => m.UserProfileComponent
+      ),
+  },
+  {
+    path: 'about',
+    loadComponent: () =>
+      import('./appereance/about/about.component').then(
+        (m) => m.AboutComponent
       ),
   },
 ];

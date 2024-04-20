@@ -6,9 +6,12 @@ import {
   inject,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import {
@@ -16,8 +19,8 @@ import {
   TuiSvgModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
-import { LoginFormModel } from './login-form.models';
 import { AuthData } from '../../auth.models';
+import { RegistrationFormModel } from './registration-form.models';
 import {
   TuiCheckboxModule,
   TuiInputModule,
@@ -26,7 +29,7 @@ import {
 import { TuiIconModule } from '@taiga-ui/experimental';
 
 @Component({
-  selector: 'ann-login-form',
+  selector: 'ann-registration-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -37,28 +40,41 @@ import { TuiIconModule } from '@taiga-ui/experimental';
     TuiButtonModule,
     TuiIconModule,
     TuiInputPasswordModule,
+    FormsModule,
   ],
-  templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.scss',
+  templateUrl: './registration-form.component.html',
+  styleUrl: './registration-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginFormComponent {
+export class RegistrationFormComponent {
   @Output() send = new EventEmitter<AuthData>();
 
   protected readonly fb = inject(FormBuilder);
-  protected readonly formModel: FormGroup<LoginFormModel>;
+  protected readonly formModel: FormGroup<RegistrationFormModel>;
 
   constructor() {
     this.formModel = this.fb.group({
       username: this.fb.control('', {
-        validators: Validators.required,
+        validators: [Validators.required, Validators.minLength(4)],
         nonNullable: true,
       }),
       password: this.fb.control('', {
         validators: Validators.required,
         nonNullable: true,
       }),
+      repeatedPassword: this.fb.control('', {
+        validators: Validators.required,
+        nonNullable: true,
+      }),
+      hidePassword: this.fb.control(true, {
+        nonNullable: true,
+      }),
     });
+
+    this.formModel.addValidators(passwordsMatchValidator);
+    this.formModel.valueChanges.subscribe(() =>
+      console.log(this.formModel.valid)
+    );
   }
 
   public onSubmit(): void {
@@ -74,3 +90,18 @@ export class LoginFormComponent {
     this.formModel.reset();
   }
 }
+
+const passwordsMatchValidator: ValidatorFn = (
+  control: AbstractControl<RegistrationFormModel>
+) => {
+  const password = control.get('password')!;
+  const repeatedPassword = control.get('repeatedPassword')!;
+
+  if (password.value !== repeatedPassword.value) {
+    return {
+      notMatch: true,
+    };
+  }
+
+  return null;
+};
