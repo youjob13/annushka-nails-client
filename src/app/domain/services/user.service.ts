@@ -1,0 +1,15 @@
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, map } from 'rxjs';
+import { Role } from '../role.constants';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UserService {
+  private readonly userRole$$ = new BehaviorSubject(Role.Guest);
+  public readonly userRole$ = this.userRole$$.asObservable();
+
+  public readonly isAuthorized$ = this.userRole$$.pipe(
+    map((role) => role !== Role.Guest)
+  );
+}

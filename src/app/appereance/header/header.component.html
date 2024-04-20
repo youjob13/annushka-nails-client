@@ -9,7 +9,7 @@
 
   <nav class="navigation" tuiNavigationNav [style.background]="'inherit'">
     <tui-tabs tuiFade>
-      @for(nav of navigationItems; track nav.title) {
+      @for(nav of headerService.navigationItems; track nav.title) {
       <button tuiTab [routerLink]="nav.link">{{ nav.title }}</button>
       }
     </tui-tabs>
@@ -20,11 +20,11 @@
     <tui-badge-notification></tui-badge-notification>
   </button>
 
-  @if($signInButtonContent | async; as signInButtonContent) {
-  <button tuiButton [routerLink]="signInButtonContent.link">
-    {{ signInButtonContent.title }}
+  @if(authButtonContent$$ | async; as authButtonContent) {
+  <button tuiButton [routerLink]="authButtonContent.link">
+    {{ authButtonContent.title }}
   </button>
-  } @if(isAuthorized) {
-  <tui-avatar src="AI"></tui-avatar>
+  } @if(headerService.isAuthorized$$ | async) {
+  <tui-avatar routerLink="/user-profile" src="AI"></tui-avatar>
   }
 </header>

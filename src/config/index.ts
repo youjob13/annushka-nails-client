@@ -1,1 +1,1 @@
-export { AUTH_CONFIG } from './api-config';
+export { AUTH_CONFIG, API_CONFIG } from './api-config';

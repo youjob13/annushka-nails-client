@@ -1,43 +1,14 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { IMPORTS } from './header.config';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, filter } from 'rxjs';
-
-enum SignInButtonContent {
-  SignIn = 'Sign In',
-  SignUp = 'Sign Up',
-  SignOut = 'Sign Out',
-}
-
-const AUTH_BUTTON_CONTENT_BY_PATH = {
-  login: { title: SignInButtonContent.SignIn, link: '/auth/login' },
-  registration: {
-    title: SignInButtonContent.SignUp,
-    link: '/auth/registration',
-  },
-  logout: { title: SignInButtonContent.SignOut, link: '/logout' },
-} as const;
-
-const MAIN_NAVIGATION_ITEMS = [
-  {
-    title: 'Home',
-    link: '/',
-  },
-  {
-    title: 'About',
-    link: '/about',
-  },
-  {
-    title: 'Contact',
-    link: '/contact',
-  },
-];
+import { AuthRoute } from '../../domain/router.constants';
+import {
+  AUTH_BUTTON_CONTENT_BY_PATH,
+  SignInButtonContent,
+} from './header.constants';
+import { HeaderService } from './header.service';
 
 @Component({
   selector: 'ann-header',
@@ -48,39 +19,39 @@ const MAIN_NAVIGATION_ITEMS = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  @Input() isAuthorized = false;
-
   private readonly router = inject(Router);
+  public readonly headerService = inject(HeaderService);
 
-  protected readonly navigationItems = MAIN_NAVIGATION_ITEMS;
-
-  protected $signInButtonContent = new BehaviorSubject({
+  protected readonly authButtonContent$$ = new BehaviorSubject({
     title: SignInButtonContent.SignIn,
-    link: '/login',
+    link: `/${AuthRoute.Login}`,
   });
 
   constructor() {
     this.router.events
       .pipe(
         takeUntilDestroyed(),
-        filter((event) => event instanceof NavigationEnd),
-        filter(() => !this.isAuthorized)
+        filter((event) => event instanceof NavigationEnd)
+        // todo: fired on each navigation
       )
-      .subscribe(() => {
-        const content = this.getAuthButtonContent(this.router.url);
-        this.$signInButtonContent.next(content);
+      .subscribe({
+        next: () => {
+          const content = this.getAuthButtonContent(this.router.url);
+          this.authButtonContent$$.next(content);
+        },
       });
   }
 
   private getAuthButtonContent(url: string) {
-    if (url.includes('login')) {
-      return AUTH_BUTTON_CONTENT_BY_PATH['registration'];
-    } else if (url.includes('registration')) {
-      return AUTH_BUTTON_CONTENT_BY_PATH['login'];
-    } else if (!this.isAuthorized) {
-      return AUTH_BUTTON_CONTENT_BY_PATH['login'];
+    if (url.includes(AuthRoute.Login)) {
+      return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Registration];
+    } else if (url.includes(AuthRoute.Registration)) {
+      return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Login];
+      // todo
+    } else if (!this.headerService.isAuthorized$$.getValue()) {
+      return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Login];
     }
 
-    return AUTH_BUTTON_CONTENT_BY_PATH['logout'];
+    return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Logout];
   }
 }

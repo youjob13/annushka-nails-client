@@ -8,7 +8,9 @@ import {
   TuiAlertModule,
   TUI_SANITIZER,
 } from '@taiga-ui/core';
-import { AppearanceModule } from './appereance/appereance.module';
+import { HeaderComponent } from './appereance/header/header.component';
+import { TUI_LANGUAGE, TUI_RUSSIAN_LANGUAGE } from '@taiga-ui/i18n';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'ann-root',
@@ -17,13 +19,19 @@ import { AppearanceModule } from './appereance/appereance.module';
     HttpClientModule,
     RouterOutlet,
     RouterLink,
-    AppearanceModule,
+    HeaderComponent,
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
+  providers: [
+    { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
+    {
+      provide: TUI_LANGUAGE,
+      useValue: of(TUI_RUSSIAN_LANGUAGE),
+    },
+  ],
 })
 export class AppComponent {}

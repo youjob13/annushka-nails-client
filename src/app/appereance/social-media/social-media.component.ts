@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'ann-navigation',
+  selector: 'ann-social-media',
   standalone: true,
   imports: [],
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.scss',
+  templateUrl: './social-media.component.html',
+  styleUrl: './social-media.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavigationComponent {}
+export class SocialMediaComponent {}

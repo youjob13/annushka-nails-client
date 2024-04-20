@@ -1,0 +1,25 @@
+<div class="date-time-control">
+  <tui-calendar
+    class="date-control"
+    [ngClass]="{ selected: items.length > 0 }"
+    [disabledItemHandler]="disabledItemHandler"
+    [value]="value"
+    (dayClick)="onDayClick($event)"
+  ></tui-calendar>
+
+  <div class="times-control" [ngClass]="{ visible: items.length > 0 }">
+    <div>Available times</div>
+
+    <form [formGroup]="testForm">
+      @for(item of items; track item) {
+      <tui-radio-labeled
+        formControlName="testValue1"
+        class="tui-space_bottom-3"
+        [item]="item"
+      >
+        {{ item }}
+      </tui-radio-labeled>
+      }
+    </form>
+  </div>
+</div>
