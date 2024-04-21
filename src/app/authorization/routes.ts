@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthorizationComponent } from './authorization.component';
-import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
 
 export const routes: Routes = [
   {
@@ -10,11 +10,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'login',
-        component: LoginComponent,
+        component: LoginFormComponent,
       },
       {
         path: 'registration',
-        component: RegistrationComponent,
+        component: RegistrationFormComponent,
       },
     ],
   },
