@@ -11,7 +11,6 @@ export enum MainRoute {
 export enum AuthRoute {
   Login = 'login',
   Registration = 'registration',
-  Logout = 'logout',
   ForgotPassword = 'forgot-password',
   ResetPassword = 'reset-password',
 }

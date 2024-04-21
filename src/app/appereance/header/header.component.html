@@ -20,10 +20,13 @@
     <tui-badge-notification></tui-badge-notification>
   </button>
 
-  @if(authButtonContent$$ | async; as authButtonContent) {
+  @if(authButtonContent$$ | async; as authButtonContent ) {
+  @if(authButtonContent !== null) {
   <button tuiButton [routerLink]="authButtonContent.link">
     {{ authButtonContent.title }}
   </button>
+  } } @else if(headerService.isAuthorized$$ | async) {
+  <button tuiButton (click)="logout()">Log out</button>
   } @if(headerService.isAuthorized$$ | async) {
   <tui-avatar routerLink="/user-profile" src="AI"></tui-avatar>
   }
