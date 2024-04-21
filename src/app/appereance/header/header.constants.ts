@@ -1,4 +1,4 @@
-import { MainRoute, AuthRoute } from '../../domain/router.constants';
+import { AuthRoute, MainRoute } from '../../domain/router.constants';
 
 export enum SignInButtonContent {
   SignIn = 'Sign In',

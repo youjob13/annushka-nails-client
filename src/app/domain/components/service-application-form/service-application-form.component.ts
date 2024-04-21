@@ -1,11 +1,11 @@
 import { AsyncPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
-  FormGroup,
-  FormControl,
-  ReactiveFormsModule,
   FormBuilder,
+  FormControl,
+  FormGroup,
   FormsModule,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
 import {

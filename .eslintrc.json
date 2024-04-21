@@ -26,8 +26,18 @@
             "prefix": "ann",
             "style": "kebab-case"
           }
-        ],
-        "@angular-eslint/no-input-rename": "off"
+        ]
+        // "@angular-eslint/no-input-rename": "off",
+        // "sort-imports": [
+        //   "error",
+        //   {
+        //     "ignoreCase": false,
+        //     "ignoreDeclarationSort": false,
+        //     "ignoreMemberSort": false,
+        //     "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+        //     "allowSeparatedGroups": false
+        //   }
+        // ]
       }
     },
     {
