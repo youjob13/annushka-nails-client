@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { adminGuard } from './admin/admin.guard';
-import { MainRoute } from './domain/router.constants';
 import { userProfileGuard } from './appereance/user-profile/user-profile.guard';
+import { MainRoute } from './domain/router.constants';
 
 export const routes: Routes = [
   {

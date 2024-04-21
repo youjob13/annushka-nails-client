@@ -16,14 +16,14 @@ import {
   TuiSvgModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
-import { LoginFormModel } from './login-form.models';
-import { AuthData } from '../../auth.models';
+import { TuiIconModule } from '@taiga-ui/experimental';
 import {
   TuiCheckboxModule,
   TuiInputModule,
   TuiInputPasswordModule,
 } from '@taiga-ui/kit';
-import { TuiIconModule } from '@taiga-ui/experimental';
+import { AuthData } from '../../auth.models';
+import { LoginFormModel } from './login-form.models';
 
 @Component({
   selector: 'ann-login-form',

@@ -12,6 +12,7 @@ import {
   TuiCalendarModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
+import { TuiCountryIsoCode } from '@taiga-ui/i18n';
 import {
   TuiInputModule,
   TuiInputPhoneInternationalModule,
@@ -19,7 +20,6 @@ import {
   TuiSortCountriesPipeModule,
   TuiTextareaModule,
 } from '@taiga-ui/kit';
-import { TuiCountryIsoCode } from '@taiga-ui/i18n';
 
 const DATE_TIME_MAP = new Map([
   [3, ['11:00', '12:00', '13:00']],

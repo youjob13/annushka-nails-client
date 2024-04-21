@@ -4,8 +4,8 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { LoginFormComponent } from './login-form/login-form.component';
 import { AuthData } from '../auth.models';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 @Component({
   selector: 'ann-login',
