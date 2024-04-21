@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject } from 'rxjs';
 import { MainRoute } from '../../domain/router.constants';
 import { PermissionsService } from '../../domain/services/permissions.service';
 import { UserService } from '../../domain/services/user.service';
-import { BehaviorSubject } from 'rxjs';
 import { MAIN_NAVIGATION_ITEMS } from './header.constants';
 
 @Injectable({

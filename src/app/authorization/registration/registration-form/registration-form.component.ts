@@ -19,14 +19,14 @@ import {
   TuiSvgModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
-import { AuthData } from '../../auth.models';
-import { RegistrationFormModel } from './registration-form.models';
+import { TuiIconModule } from '@taiga-ui/experimental';
 import {
   TuiCheckboxModule,
   TuiInputModule,
   TuiInputPasswordModule,
 } from '@taiga-ui/kit';
-import { TuiIconModule } from '@taiga-ui/experimental';
+import { AuthData } from '../../auth.models';
+import { RegistrationFormModel } from './registration-form.models';
 
 @Component({
   selector: 'ann-registration-form',

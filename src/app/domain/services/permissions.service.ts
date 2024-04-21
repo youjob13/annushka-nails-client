@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { UserService } from './user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject } from 'rxjs';
 import { Role } from '../role.constants';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',

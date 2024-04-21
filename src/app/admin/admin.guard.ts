@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { PermissionsService } from '../domain/services/permissions.service';
-import { MainRoute } from '../domain/router.constants';
 import { map } from 'rxjs';
+import { MainRoute } from '../domain/router.constants';
+import { PermissionsService } from '../domain/services/permissions.service';
 
 export const adminGuard: CanActivateFn = () => {
   const permissionsService = inject(PermissionsService);

@@ -8,10 +8,9 @@ describe('ServiceApplicationFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ServiceApplicationFormComponent]
-    })
-    .compileComponents();
-    
+      imports: [ServiceApplicationFormComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ServiceApplicationFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { AuthData } from '../auth.models';
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
 
 @Component({
   selector: 'ann-registration',

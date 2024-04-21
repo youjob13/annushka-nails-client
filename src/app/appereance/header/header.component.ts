@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { IMPORTS } from './header.config';
-import { NavigationEnd, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
 import { AuthRoute } from '../../domain/router.constants';
+import { IMPORTS } from './header.config';
 import {
   AUTH_BUTTON_CONTENT_BY_PATH,
   SignInButtonContent,
