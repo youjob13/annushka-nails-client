@@ -22,7 +22,8 @@ import {
   TuiInputModule,
   TuiInputPasswordModule,
 } from '@taiga-ui/kit';
-import { AuthData } from '../../auth.models';
+import { PASSWORD_REGEXP } from '../auth.constants';
+import { LoginAuthData } from '../auth.models';
 import { LoginFormModel } from './login-form.models';
 
 @Component({
@@ -43,15 +44,24 @@ import { LoginFormModel } from './login-form.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
-  @Output() send = new EventEmitter<AuthData>();
+  @Output() send = new EventEmitter<LoginAuthData>();
 
-  protected readonly fb = inject(FormBuilder);
+  private readonly fb = inject(FormBuilder);
   protected readonly formModel: FormGroup<LoginFormModel>;
+
+  protected readonly PasswordRegexp = PASSWORD_REGEXP;
+
+  protected get usernameControl() {
+    return this.formModel.controls.username;
+  }
+  protected get passwordControl() {
+    return this.formModel.controls.password;
+  }
 
   constructor() {
     this.formModel = this.fb.group({
       username: this.fb.control('', {
-        validators: Validators.required,
+        validators: [Validators.required, Validators.minLength(3)],
         nonNullable: true,
       }),
       password: this.fb.control('', {

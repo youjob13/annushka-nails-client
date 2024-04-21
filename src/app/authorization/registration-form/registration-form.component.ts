@@ -5,13 +5,14 @@ import {
   Output,
   inject,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import {
@@ -25,7 +26,8 @@ import {
   TuiInputModule,
   TuiInputPasswordModule,
 } from '@taiga-ui/kit';
-import { AuthData } from '../../auth.models';
+import { PASSWORD_REGEXP } from '../auth.constants';
+import { RegistrationAuthData } from '../auth.models';
 import { RegistrationFormModel } from './registration-form.models';
 
 @Component({
@@ -47,15 +49,30 @@ import { RegistrationFormModel } from './registration-form.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent {
-  @Output() send = new EventEmitter<AuthData>();
+  @Output() send = new EventEmitter<RegistrationAuthData>();
 
-  protected readonly fb = inject(FormBuilder);
+  private readonly fb = inject(FormBuilder);
   protected readonly formModel: FormGroup<RegistrationFormModel>;
+  protected readonly hidePassword = this.fb.control(true, {
+    nonNullable: true,
+  });
+
+  protected readonly PasswordRegexp = PASSWORD_REGEXP;
+
+  protected get usernameControl() {
+    return this.formModel.controls.username;
+  }
+  protected get passwordControl() {
+    return this.formModel.controls.password;
+  }
+  protected get repeatedPasswordControl() {
+    return this.formModel.controls.repeatedPassword;
+  }
 
   constructor() {
     this.formModel = this.fb.group({
       username: this.fb.control('', {
-        validators: [Validators.required, Validators.minLength(4)],
+        validators: [Validators.required, Validators.minLength(3)],
         nonNullable: true,
       }),
       password: this.fb.control('', {
@@ -63,17 +80,19 @@ export class RegistrationFormComponent {
         nonNullable: true,
       }),
       repeatedPassword: this.fb.control('', {
-        validators: Validators.required,
-        nonNullable: true,
-      }),
-      hidePassword: this.fb.control(true, {
+        validators: [Validators.required],
         nonNullable: true,
       }),
     });
 
-    this.formModel.addValidators(passwordsMatchValidator);
-    this.formModel.valueChanges.subscribe(() =>
-      console.log(this.formModel.valid)
+    this.passwordControl.valueChanges
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => {
+        this.repeatedPasswordControl.updateValueAndValidity();
+      });
+
+    this.repeatedPasswordControl.addValidators(
+      getPasswordMatcherValidator(this.passwordControl)
     );
   }
 
@@ -91,17 +110,16 @@ export class RegistrationFormComponent {
   }
 }
 
-const passwordsMatchValidator: ValidatorFn = (
-  control: AbstractControl<RegistrationFormModel>
+const getPasswordMatcherValidator = (
+  originalPasswordControl: FormControl<string>
 ) => {
-  const password = control.get('password')!;
-  const repeatedPassword = control.get('repeatedPassword')!;
+  return (repeatedPasswordControl: AbstractControl<string>) => {
+    if (originalPasswordControl.value !== repeatedPasswordControl.value) {
+      return {
+        notMatch: true,
+      };
+    }
 
-  if (password.value !== repeatedPassword.value) {
-    return {
-      notMatch: true,
-    };
-  }
-
-  return null;
+    return null;
+  };
 };
