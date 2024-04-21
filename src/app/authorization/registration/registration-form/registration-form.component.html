@@ -4,7 +4,10 @@
     autocomplete="current-password"
     [formControl]="this.formModel.controls.username"
     [tuiTextfieldCustomContent]="
-      this.formModel.controls.username.valid ? success : ''
+      !this.formModel.controls.username.dirty &&
+      this.formModel.controls.username.valid
+        ? success
+        : fail
     "
   >
     Username
@@ -14,13 +17,20 @@
     <tui-svg src="tuiIconCheck" class="success tui-space_left-3"></tui-svg>
   </ng-template>
 
+  <ng-template #fail>
+    <tui-svg src="tuiIconCheck" class="fail tui-space_left-3"></tui-svg>
+  </ng-template>
+
   <tui-input-password
     #passwordControl
     autocomplete="current-password"
     class="b-form control"
     [formControl]="this.formModel.controls.password"
     [tuiTextfieldCustomContent]="
-      this.formModel.controls.password.valid ? success : ''
+      !this.formModel.controls.password.dirty &&
+      this.formModel.controls.password.valid
+        ? success
+        : fail
     "
   >
     Type password
@@ -32,7 +42,12 @@
     class="b-form control"
     [formControl]="this.formModel.controls.repeatedPassword"
     [tuiTextfieldCustomContent]="
-      this.formModel.controls.repeatedPassword.valid ? success : ''
+      this.formModel.controls.repeatedPassword.dirty &&
+      this.formModel.controls.repeatedPassword.invalid
+        ? fail
+        : this.formModel.controls.repeatedPassword.valid
+        ? success
+        : ''
     "
   >
     Repeat password

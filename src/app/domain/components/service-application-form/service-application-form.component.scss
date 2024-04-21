@@ -1,3 +1,19 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.section {
+  width: 400px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgb(200, 200, 200);
+    padding-bottom: 30px;
+  }
+}
+
 .date-time-control {
   display: flex;
   column-gap: 18px;
