@@ -1,2 +1,30 @@
-header works!
-<ann-navigation></ann-navigation>
+<header tuiNavigationHeader [style.position]="'sticky'">
+  <span tuiNavigationLogo>
+    <!-- <tui-icon icon="tuiIconHome"></tui-icon> -->
+    <span tuiFade>Annushka nails</span>
+    <!-- <tui-badge>Test</tui-badge> -->
+  </span>
+
+  <hr />
+
+  <nav class="navigation" tuiNavigationNav [style.background]="'inherit'">
+    <tui-tabs tuiFade>
+      @for(nav of headerService.navigationItems; track nav.title) {
+      <button tuiTab [routerLink]="nav.link">{{ nav.title }}</button>
+      }
+    </tui-tabs>
+  </nav>
+
+  <button iconLeft="tuiIconBell" tuiIconButton>
+    Notifications
+    <tui-badge-notification></tui-badge-notification>
+  </button>
+
+  @if(authButtonContent$$ | async; as authButtonContent) {
+  <button tuiButton [routerLink]="authButtonContent.link">
+    {{ authButtonContent.title }}
+  </button>
+  } @if(headerService.isAuthorized$$ | async) {
+  <tui-avatar routerLink="/user-profile" src="AI"></tui-avatar>
+  }
+</header>

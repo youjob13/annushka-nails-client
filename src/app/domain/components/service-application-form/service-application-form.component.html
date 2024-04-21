@@ -1,0 +1,67 @@
+<div class="section">
+  <div>
+    @for(service of services; track service.name) {
+    <tui-radio-labeled
+      [formControl]="serviceControl"
+      class="tui-space_bottom-3"
+      [item]="service.id"
+    >
+      <div>{{ service.name }}</div>
+      <div class="price">{{ service.price }}</div>
+      <div class="description">{{ service.description }}</div>
+    </tui-radio-labeled>
+    }
+  </div>
+</div>
+
+<div class="section">
+  <div class="date-time-control">
+    <tui-calendar
+      class="date-control"
+      [ngClass]="{ selected: availableTimesForSelectedDay.length > 0 }"
+      [disabledItemHandler]="disabledItemHandler"
+      [value]="selectedDay"
+      (dayClick)="onDayClick($event)"
+    ></tui-calendar>
+
+    <div
+      class="times-control"
+      [ngClass]="{ visible: availableTimesForSelectedDay.length > 0 }"
+    >
+      <div>Available times</div>
+
+      <div>
+        @for(time of availableTimesForSelectedDay; track time) {
+        <tui-radio-labeled
+          [formControl]="timeControl"
+          class="tui-space_bottom-3"
+          [item]="time"
+        >
+          {{ time }}
+        </tui-radio-labeled>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <tui-input [formControl]="userNameControl">
+    Type a name / email / IG
+    <input tuiTextfield type="email" />
+  </tui-input>
+
+  <tui-input-phone-international
+    [formControl]="phoneControl"
+    [countries]="(countries | tuiSortCountries | async) || []"
+    [(countryIsoCode)]="countryIsoCode"
+  >
+    Type your number
+  </tui-input-phone-international>
+
+  <tui-textarea [formControl]="commentControl"> Type a comment </tui-textarea>
+</div>
+
+<p>Notify via Telegram / email / phone?? / whatsapp / our app</p>
+
+<button tuiButton (click)="submit()">Click</button>
