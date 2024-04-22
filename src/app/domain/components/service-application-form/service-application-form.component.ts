@@ -1,100 +1,91 @@
-import { AsyncPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
 } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
-import {
-  TuiCalendarModule,
-  TuiTextfieldControllerModule,
-} from '@taiga-ui/core';
+import { TuiAlertService } from '@taiga-ui/core';
 import { TuiCountryIsoCode } from '@taiga-ui/i18n';
+import { take } from 'rxjs';
+import { IMPORTS } from './service-application-form.imports';
 import {
-  TuiInputModule,
-  TuiInputPhoneInternationalModule,
-  TuiRadioLabeledModule,
-  TuiSortCountriesPipeModule,
-  TuiTextareaModule,
-} from '@taiga-ui/kit';
+  ContactsFormGroup,
+  DateFormGroup,
+  FormModel,
+  IService,
+} from './service-application-form.models';
 
 const DATE_TIME_MAP = new Map([
   [3, ['11:00', '12:00', '13:00']],
   [5, ['09:00', '11:30', '12:00', '13:00']],
 ]);
 
-type DateFormGroup = FormGroup<{
-  day: FormControl<TuiDay | null>;
-  time: FormControl<string | null>;
-}>;
-
-type ContactsFormGroup = FormGroup<{
-  name: FormControl<string | null>;
-  phone: FormControl<number | null>;
-  comment: FormControl<string | null>;
-}>;
-
-interface FormModel {
-  service: FormControl<string>;
-  date: DateFormGroup;
-  contacts: ContactsFormGroup;
-}
-
-interface IService {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-}
-
 const SERVICES: IService[] = [
   {
     id: '1',
-    name: 'Service 1',
+    name: 'Base manicure',
     price: 25,
-    description: 'Service 1 description',
+    description: 'Base manicure description',
   },
   {
     id: '2',
-    name: 'Service 2',
+    name: 'Professional manicure',
     price: 25,
-    description: 'Service 2 description',
+    description: 'Our masters will make your nails perfect!',
   },
   {
     id: '3',
-    name: 'Service 3',
+    name: 'Super manicure',
     price: 25,
-    description: 'Service 3 description',
+    description: 'The best option for the most demanding customers!',
   },
 ];
+
+const NOTIFY = [
+  {
+    id: '4',
+    name: 'Telegram',
+  },
+  {
+    id: '5',
+    name: 'WhatsApp',
+  },
+  {
+    id: '2',
+    name: 'Our App',
+  },
+  {
+    id: '1',
+    name: 'SMS',
+  },
+  {
+    id: '2',
+    name: 'Email',
+  },
+];
+
+const LOADER = `<svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"/></svg>`;
 
 @Component({
   selector: 'ann-service-application-form',
   standalone: true,
-  imports: [
-    NgClass,
-    TuiCalendarModule,
-    TuiRadioLabeledModule,
-    ReactiveFormsModule,
-    TuiTextfieldControllerModule,
-    FormsModule,
-    AsyncPipe,
-    TuiInputModule,
-    TuiTextareaModule,
-    TuiInputPhoneInternationalModule,
-    TuiSortCountriesPipeModule,
-  ],
+  imports: IMPORTS,
   templateUrl: './service-application-form.component.html',
   styleUrl: './service-application-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServiceApplicationFormComponent {
   private readonly fb = inject(FormBuilder);
+  private tuiAlertService = inject(TuiAlertService);
+  public isLoading = false;
 
+  readonly loader = LOADER;
   protected services: IService[] = SERVICES;
+  protected notifyVia = NOTIFY;
   protected availableTimesForSelectedDay: string[] = [];
 
   protected selectedDay: TuiDay | null = null;
@@ -108,6 +99,9 @@ export class ServiceApplicationFormComponent {
   }
   protected get dateGroup(): DateFormGroup {
     return this.formModel.controls.date;
+  }
+  protected get notifyViaControl(): FormModel['notifyVia'] {
+    return this.formModel.controls.notifyVia;
   }
   protected get timeControl(): DateFormGroup['controls']['time'] {
     return this.dateGroup.controls.time;
@@ -130,30 +124,63 @@ export class ServiceApplicationFormComponent {
   public disabledItemHandler = ({ day }: TuiDay) => {
     return !this.isDayAvailableForApplying(day);
   };
+  public disabledAllItemsHandler = () => {
+    return true;
+  };
 
   constructor() {
     this.formModel = this.fb.group<FormModel>({
-      service: this.fb.control('', { nonNullable: true }),
+      service: this.fb.control('', {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
       date: this.fb.group(
         {
-          day: this.fb.control(null),
-          time: this.fb.control(null),
+          day: this.fb.control({
+            value: null,
+            validators: Validators.required,
+          }),
+          time: this.fb.control({
+            value: null,
+            validators: Validators.required,
+          }),
         },
-        { nonNullable: true }
+        { nonNullable: true, validators: validateDateGroup }
       ),
       contacts: this.fb.group(
         {
-          name: this.fb.control(null),
+          name: this.fb.control(null, { validators: Validators.required }),
           phone: this.fb.control(null),
           comment: this.fb.control(null),
         },
         { nonNullable: true }
       ),
+      notifyVia: this.fb.group({
+        ...this.notifyVia.reduce<Record<string, FormControl<boolean>>>(
+          (acc, item) => {
+            acc[item.name] = this.fb.control(false, { nonNullable: true });
+            return acc;
+          },
+          {}
+        ),
+      }),
+    });
+
+    this.timeControl.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
+      this.timeControl.markAsTouched();
     });
   }
 
   public submit(): void {
-    console.log(this.formModel.value);
+    console.log(this.formModel.value, this.dateGroup.invalid);
+    this.isLoading = true;
+    setTimeout(() => {
+      this.tuiAlertService
+        .open('Request received!', { status: 'success' })
+        .pipe(take(1))
+        .subscribe();
+      this.isLoading = false;
+    }, 5000);
   }
 
   public onDayClick(day: TuiDay): void {
@@ -181,3 +208,14 @@ export class ServiceApplicationFormComponent {
     return DATE_TIME_MAP.has(day);
   }
 }
+
+const validateDateGroup = (
+  dateGroup: DateFormGroup
+): ValidationErrors | null => {
+  const isValid =
+    dateGroup.controls.time.touched &&
+    !!dateGroup.controls.day.value &&
+    !!dateGroup.controls.time.value;
+
+  return isValid ? null : { error: 'error text' };
+};

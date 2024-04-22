@@ -18,6 +18,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: MainRoute.About,
+    loadComponent: () =>
+      import('./appereance/gallery/gallery.component').then(
+        (m) => m.GalleryComponent
+      ),
+  },
+  {
     path: MainRoute.Feedbacks,
     loadComponent: () =>
       import('./appereance/feedbacks/feedbacks.component').then(

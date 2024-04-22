@@ -1,0 +1,60 @@
+import { AsyncPipe, KeyValuePipe, NgClass } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  TuiButtonModule,
+  TuiCalendarModule,
+  TuiGroupModule,
+  TuiMaskAccessorModule,
+  TuiSvgModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
+import {
+  TuiCardModule,
+  TuiHeaderModule,
+  TuiIconModule,
+  TuiSurfaceModule,
+  TuiTitleModule,
+} from '@taiga-ui/experimental';
+import {
+  TuiAvatarModule,
+  TuiBadgeModule,
+  TuiBadgedContentModule,
+  TuiCheckboxBlockModule,
+  TuiInputModule,
+  TuiInputPhoneInternationalModule,
+  TuiRadioBlockModule,
+  TuiRadioLabeledModule,
+  TuiSortCountriesPipeModule,
+  TuiTextareaModule,
+  TuiValueAccessorModule,
+} from '@taiga-ui/kit';
+
+export const IMPORTS = [
+  NgClass,
+  TuiCalendarModule,
+  TuiRadioBlockModule,
+  TuiRadioLabeledModule,
+  ReactiveFormsModule,
+  TuiTextfieldControllerModule,
+  FormsModule,
+  AsyncPipe,
+  TuiInputModule,
+  TuiTextareaModule,
+  TuiInputPhoneInternationalModule,
+  TuiSortCountriesPipeModule,
+  TuiAvatarModule,
+  TuiSurfaceModule,
+  TuiCardModule,
+  TuiValueAccessorModule,
+  TuiMaskAccessorModule,
+  TuiHeaderModule,
+  TuiTitleModule,
+  TuiGroupModule,
+  TuiCheckboxBlockModule,
+  KeyValuePipe,
+  TuiSvgModule,
+  TuiBadgeModule,
+  TuiBadgedContentModule,
+  TuiButtonModule,
+  TuiIconModule,
+];

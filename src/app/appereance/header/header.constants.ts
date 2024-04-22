@@ -23,6 +23,10 @@ export const MAIN_NAVIGATION_ITEMS = [
     link: MainRoute.Home,
   },
   {
+    title: 'Gallery',
+    link: MainRoute.Gallery,
+  },
+  {
     title: 'About',
     link: MainRoute.About,
   },

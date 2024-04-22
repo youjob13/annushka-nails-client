@@ -1,15 +1,26 @@
 <div class="section">
   <div>
     @for(service of services; track service.name) {
-    <tui-radio-labeled
+    <tui-radio-block
       [formControl]="serviceControl"
-      class="tui-space_bottom-3"
+      class="option tui-space_bottom-3"
       [item]="service.id"
+      size="m"
+      [hideRadio]="true"
+      tuiHeader
+      tuiSurface="elevated"
+      [pseudoDisabled]="isLoading"
     >
-      <div>{{ service.name }}</div>
-      <div class="price">{{ service.price }}</div>
-      <div class="description">{{ service.description }}</div>
-    </tui-radio-labeled>
+      <div class="content">
+        <h3 class="title" tuiTitle="s">
+          {{ service.name }}
+        </h3>
+        <p class="subtitle" tuiSubtitle="s">
+          {{ service.description }} |
+          <tui-badge class="price" [value]="service.price + '$'"></tui-badge>
+        </p>
+      </div>
+    </tui-radio-block>
     }
   </div>
 </div>
@@ -19,7 +30,9 @@
     <tui-calendar
       class="date-control"
       [ngClass]="{ selected: availableTimesForSelectedDay.length > 0 }"
-      [disabledItemHandler]="disabledItemHandler"
+      [disabledItemHandler]="
+        isLoading ? disabledAllItemsHandler : disabledItemHandler
+      "
       [value]="selectedDay"
       (dayClick)="onDayClick($event)"
     ></tui-calendar>
@@ -28,11 +41,15 @@
       class="times-control"
       [ngClass]="{ visible: availableTimesForSelectedDay.length > 0 }"
     >
-      <div>Available times</div>
+      <div class="header">
+        <h3 class="title">Available times</h3>
+        <h4 class="subtitle">Choose a time for service</h4>
+      </div>
 
       <div>
         @for(time of availableTimesForSelectedDay; track time) {
         <tui-radio-labeled
+          [pseudoDisabled]="isLoading"
           [formControl]="timeControl"
           class="tui-space_bottom-3"
           [item]="time"
@@ -46,12 +63,31 @@
 </div>
 
 <div class="section">
-  <tui-input [formControl]="userNameControl">
-    Type a name / email / IG
-    <input tuiTextfield type="email" />
-  </tui-input>
+  <tui-badged-content
+    contentTop="tuiIconCheckCircleLarge"
+    [colorTop]="
+      usernameControlRef.valid
+        ? 'var(--tui-positive-night)'
+        : 'var(--tui-negative-night)'
+    "
+  >
+    <tui-input
+      #usernameControlRef
+      [required]="true"
+      [readOnly]="isLoading"
+      [disabled]="isLoading"
+      class="control"
+      [formControl]="userNameControl"
+    >
+      Type a name / email / IG
+      <input tuiTextfield type="email" />
+    </tui-input>
+  </tui-badged-content>
 
   <tui-input-phone-international
+    [readOnly]="isLoading"
+    [disabled]="isLoading"
+    class="control"
     [formControl]="phoneControl"
     [countries]="(countries | tuiSortCountries | async) || []"
     [(countryIsoCode)]="countryIsoCode"
@@ -59,9 +95,42 @@
     Type your number
   </tui-input-phone-international>
 
-  <tui-textarea [formControl]="commentControl"> Type a comment </tui-textarea>
+  <tui-textarea
+    [readOnly]="isLoading"
+    [disabled]="isLoading"
+    class="comment"
+    [formControl]="commentControl"
+  >
+    Type a comment
+  </tui-textarea>
 </div>
 
-<p>Notify via Telegram / email / phone?? / whatsapp / our app</p>
+<!-- [collapsed]="true" -->
+<div tuiGroup class="group">
+  @for(control of notifyViaControl.controls | keyvalue; track control.key) {
+  <tui-checkbox-block
+    [disabled]="isLoading"
+    [hideCheckbox]="true"
+    [readOnly]="isLoading"
+    contentAlign="right"
+    [formControl]="control.value"
+    size="s"
+  >
+    {{ control.key }}
+  </tui-checkbox-block>
+  }
+</div>
 
-<button tuiButton (click)="submit()">Click</button>
+<button
+  tuiButton
+  type="button"
+  [disabled]="formModel.invalid || isLoading"
+  [icon]="isLoading ? loaderRef : null"
+  (click)="submit()"
+>
+  Send
+</button>
+
+<ng-template #loaderRef>
+  <tui-svg class="loader" [src]="loader"></tui-svg>
+</ng-template>

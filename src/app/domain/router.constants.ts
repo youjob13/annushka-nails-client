@@ -3,6 +3,7 @@ export enum MainRoute {
   Auth = 'auth',
   UserProfile = 'user-profile',
   About = 'about',
+  Gallery = 'gallery',
   Home = 'home',
   Feedbacks = 'feedbacks',
   SocialMedia = 'social-media',
