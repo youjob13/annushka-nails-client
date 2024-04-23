@@ -1,1 +1,6 @@
-<ann-service-application-form> </ann-service-application-form>
+<ann-service-application-form
+  [services]="servicesService.services$ | async"
+  [requestInProgress]="!!(servicesService.requestInProgress$ | async)"
+  (send)="applyForService($event)"
+>
+</ann-service-application-form>

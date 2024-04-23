@@ -18,10 +18,3 @@ export interface FormModel {
   contacts: ContactsFormGroup;
   notifyVia: FormGroup<Record<string, FormControl<boolean>>>;
 }
-
-export interface IService {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-}

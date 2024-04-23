@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  inject,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
@@ -8,67 +15,23 @@ import {
   Validators,
 } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
-import { TuiAlertService } from '@taiga-ui/core';
 import { TuiCountryIsoCode } from '@taiga-ui/i18n';
-import { take } from 'rxjs';
+import { NOTIFY_VIA } from '../../constants';
 import { IMPORTS } from './service-application-form.imports';
 import {
   ContactsFormGroup,
   DateFormGroup,
   FormModel,
-  IService,
 } from './service-application-form.models';
 
+import * as DTO from '../../../dto';
+import { LOADER } from './service-application-form.constants';
+
+// todo: should be generated automatically
 const DATE_TIME_MAP = new Map([
   [3, ['11:00', '12:00', '13:00']],
   [5, ['09:00', '11:30', '12:00', '13:00']],
 ]);
-
-const SERVICES: IService[] = [
-  {
-    id: '1',
-    name: 'Base manicure',
-    price: 25,
-    description: 'Base manicure description',
-  },
-  {
-    id: '2',
-    name: 'Professional manicure',
-    price: 25,
-    description: 'Our masters will make your nails perfect!',
-  },
-  {
-    id: '3',
-    name: 'Super manicure',
-    price: 25,
-    description: 'The best option for the most demanding customers!',
-  },
-];
-
-const NOTIFY = [
-  {
-    id: '4',
-    name: 'Telegram',
-  },
-  {
-    id: '5',
-    name: 'WhatsApp',
-  },
-  {
-    id: '2',
-    name: 'Our App',
-  },
-  {
-    id: '1',
-    name: 'SMS',
-  },
-  {
-    id: '2',
-    name: 'Email',
-  },
-];
-
-const LOADER = `<svg width="24px" height="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z"/></svg>`;
 
 @Component({
   selector: 'ann-service-application-form',
@@ -79,13 +42,15 @@ const LOADER = `<svg width="24px" height="24px" xmlns="http://www.w3.org/2000/sv
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServiceApplicationFormComponent {
-  private readonly fb = inject(FormBuilder);
-  private tuiAlertService = inject(TuiAlertService);
-  public isLoading = false;
+  @Input() requestInProgress: boolean = false;
+  @Input() services: DTO.IService[] | null = [];
 
-  readonly loader = LOADER;
-  protected services: IService[] = SERVICES;
-  protected notifyVia = NOTIFY;
+  @Output() send = new EventEmitter<FormGroup<FormModel>['value']>();
+
+  private readonly fb = inject(FormBuilder);
+
+  protected readonly loader = LOADER;
+  protected readonly notifyVia = NOTIFY_VIA;
   protected availableTimesForSelectedDay: string[] = [];
 
   protected selectedDay: TuiDay | null = null;
@@ -172,15 +137,7 @@ export class ServiceApplicationFormComponent {
   }
 
   public submit(): void {
-    console.log(this.formModel.value, this.dateGroup.invalid);
-    this.isLoading = true;
-    setTimeout(() => {
-      this.tuiAlertService
-        .open('Request received!', { status: 'success' })
-        .pipe(take(1))
-        .subscribe();
-      this.isLoading = false;
-    }, 5000);
+    this.send.emit(this.formModel.value);
   }
 
   public onDayClick(day: TuiDay): void {

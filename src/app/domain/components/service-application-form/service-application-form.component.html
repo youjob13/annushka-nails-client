@@ -8,7 +8,7 @@
     [hideRadio]="true"
     tuiHeader
     tuiSurface="elevated"
-    [pseudoDisabled]="isLoading"
+    [pseudoDisabled]="requestInProgress"
   >
     <div class="content">
       <h3 class="title" tuiTitle="s">
@@ -29,7 +29,7 @@
       class="date-control"
       [ngClass]="{ selected: availableTimesForSelectedDay.length > 0 }"
       [disabledItemHandler]="
-        isLoading ? disabledAllItemsHandler : disabledItemHandler
+        requestInProgress ? disabledAllItemsHandler : disabledItemHandler
       "
       [value]="selectedDay"
       (dayClick)="onDayClick($event)"
@@ -47,7 +47,7 @@
       <div>
         @for(time of availableTimesForSelectedDay; track time) {
         <tui-radio-labeled
-          [pseudoDisabled]="isLoading"
+          [pseudoDisabled]="requestInProgress"
           [formControl]="timeControl"
           class="tui-space_bottom-3"
           [item]="time"
@@ -72,8 +72,8 @@
     <tui-input
       #usernameControlRef
       [required]="true"
-      [readOnly]="isLoading"
-      [disabled]="isLoading"
+      [readOnly]="requestInProgress"
+      [disabled]="requestInProgress"
       class="control"
       [formControl]="userNameControl"
     >
@@ -83,8 +83,8 @@
   </tui-badged-content>
 
   <tui-input-phone-international
-    [readOnly]="isLoading"
-    [disabled]="isLoading"
+    [readOnly]="requestInProgress"
+    [disabled]="requestInProgress"
     class="control"
     [formControl]="phoneControl"
     [countries]="(countries | tuiSortCountries | async) || []"
@@ -94,8 +94,8 @@
   </tui-input-phone-international>
 
   <tui-textarea
-    [readOnly]="isLoading"
-    [disabled]="isLoading"
+    [readOnly]="requestInProgress"
+    [disabled]="requestInProgress"
     class="comment"
     [formControl]="commentControl"
   >
@@ -107,9 +107,9 @@
 <div tuiGroup class="group">
   @for(control of notifyViaControl.controls | keyvalue; track control.key) {
   <tui-checkbox-block
-    [disabled]="isLoading"
+    [disabled]="requestInProgress"
     [hideCheckbox]="true"
-    [readOnly]="isLoading"
+    [readOnly]="requestInProgress"
     [title]="control.key"
     contentAlign="right"
     [formControl]="control.value"
@@ -123,8 +123,8 @@
 <button
   tuiButton
   type="button"
-  [disabled]="formModel.invalid || isLoading"
-  [icon]="isLoading ? loaderRef : null"
+  [disabled]="formModel.invalid || requestInProgress"
+  [icon]="requestInProgress ? loaderRef : null"
   (click)="submit()"
 >
   Send

@@ -6,7 +6,7 @@ import { TuiRootModule } from '@taiga-ui/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app.routes';
-import { httpAlertInterceptor } from './domain/http-alert.interceptor';
+import { httpAlertInterceptor } from './domain/interceptors/http-alert.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

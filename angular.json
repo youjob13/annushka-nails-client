@@ -71,7 +71,8 @@
               "buildTarget": "annushka-nails-clients:build:production"
             },
             "development": {
-              "buildTarget": "annushka-nails-clients:build:development"
+              "buildTarget": "annushka-nails-clients:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
