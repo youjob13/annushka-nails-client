@@ -3,6 +3,7 @@ export enum MainRoute {
   Auth = 'auth',
   UserProfile = 'user-profile',
   About = 'about',
+  Gallery = 'gallery',
   Home = 'home',
   Feedbacks = 'feedbacks',
   SocialMedia = 'social-media',
@@ -11,7 +12,6 @@ export enum MainRoute {
 export enum AuthRoute {
   Login = 'login',
   Registration = 'registration',
-  Logout = 'logout',
   ForgotPassword = 'forgot-password',
   ResetPassword = 'reset-password',
 }

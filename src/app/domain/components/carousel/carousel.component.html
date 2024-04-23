@@ -1,0 +1,28 @@
+<div tuiCarouselButtons class="wrapper">
+  <button
+    icon="tuiIconChevronLeftLarge"
+    title="Previous"
+    tuiIconButton
+    type="button"
+    (click)="carousel.prev()"
+  ></button>
+
+  <tui-carousel #carousel class="carousel" [duration]="10000" [itemsCount]="3">
+    @for(item of [1,2,3,4,5,6,7,8,9,0,11]; track item) {
+    <tui-island *tuiItem class="tui-island_text-align_center">
+      <h2 class="tui-island__title">{{ item }} Failed to load</h2>
+      <p>
+        <tui-marker-icon mode="error" src="tuiIconClose"></tui-marker-icon>
+      </p>
+    </tui-island>
+    }
+  </tui-carousel>
+
+  <button
+    icon="tuiIconChevronRightLarge"
+    title="Next"
+    tuiIconButton
+    type="button"
+    (click)="carousel.next()"
+  ></button>
+</div>

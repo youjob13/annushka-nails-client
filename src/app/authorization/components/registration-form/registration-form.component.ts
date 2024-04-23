@@ -25,9 +25,11 @@ import {
   TuiCheckboxModule,
   TuiInputModule,
   TuiInputPasswordModule,
+  TuiProgressModule,
 } from '@taiga-ui/kit';
-import { PASSWORD_REGEXP } from '../auth.constants';
-import { RegistrationAuthData } from '../auth.models';
+import { PASSWORD_REGEXP } from '../../auth.constants';
+import { RegistrationAuthData } from '../../auth.models';
+import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
 import { RegistrationFormModel } from './registration-form.models';
 
 @Component({
@@ -43,9 +45,11 @@ import { RegistrationFormModel } from './registration-form.models';
     TuiIconModule,
     TuiInputPasswordModule,
     FormsModule,
+    TuiProgressModule,
+    ProgressBarComponent,
   ],
   templateUrl: './registration-form.component.html',
-  styleUrl: './registration-form.component.scss',
+  styleUrl: '../../common.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent {
@@ -56,6 +60,8 @@ export class RegistrationFormComponent {
   protected readonly hidePassword = this.fb.control(true, {
     nonNullable: true,
   });
+
+  protected formCompleteProgress = 0;
 
   protected readonly PasswordRegexp = PASSWORD_REGEXP;
 
@@ -83,6 +89,15 @@ export class RegistrationFormComponent {
         validators: [Validators.required],
         nonNullable: true,
       }),
+    });
+
+    this.formModel.statusChanges.pipe(takeUntilDestroyed()).subscribe(() => {
+      this.formCompleteProgress =
+        [
+          this.usernameControl.valid,
+          this.passwordControl.valid,
+          this.repeatedPasswordControl.valid,
+        ].filter(Boolean).length / Object.keys(this.formModel.controls).length;
     });
 
     this.passwordControl.valueChanges

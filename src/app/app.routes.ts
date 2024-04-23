@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { adminGuard } from './admin/admin.guard';
 import { userProfileGuard } from './appereance/user-profile/user-profile.guard';
+import { authorizationGuard } from './authorization/services/authorization.guard';
 import { MainRoute } from './domain/router.constants';
 
 export const routes: Routes = [
@@ -14,6 +15,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./appereance/about/about.component').then(
         (m) => m.AboutComponent
+      ),
+  },
+  {
+    path: MainRoute.About,
+    loadComponent: () =>
+      import('./appereance/gallery/gallery.component').then(
+        (m) => m.GalleryComponent
       ),
   },
   {
@@ -32,6 +40,7 @@ export const routes: Routes = [
   },
   {
     path: MainRoute.Auth,
+    canActivate: [authorizationGuard],
     loadChildren: () =>
       import('./authorization/auth-routing.module').then(
         (m) => m.AuthRoutingModule

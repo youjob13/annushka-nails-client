@@ -1,3 +1,5 @@
+<ann-progress-bar [progress]="formCompleteProgress"></ann-progress-bar>
+
 <form class="controls">
   <tui-input
     #usernameControlRef
@@ -32,6 +34,29 @@
     Type password
   </tui-input-password>
 
+  <tui-input-password
+    #repeatedPasswordControlRef
+    autocomplete="current-password"
+    class="b-form control"
+    [formControl]="repeatedPasswordControl"
+    [tuiTextfieldCustomContent]="
+      !repeatedPasswordControlRef.touched
+        ? ''
+        : repeatedPasswordControlRef.valid
+        ? success
+        : error
+    "
+  >
+    Repeat password
+  </tui-input-password>
+
+  <tui-checkbox
+    [ngModelOptions]="{ standalone: true }"
+    [(ngModel)]="passwordControlRef.isPasswordHidden"
+    (ngModelChange)="repeatedPasswordControlRef.isPasswordHidden = $event"
+    class="tui-space_bottom-3"
+  ></tui-checkbox>
+
   <button
     appearance="primary"
     tuiButton
@@ -40,7 +65,7 @@
     [disabled]="formModel.invalid"
     (click)="onSubmit()"
   >
-    Sign In
+    Sign Up
   </button>
 </form>
 

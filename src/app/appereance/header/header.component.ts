@@ -4,10 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
 import { AuthRoute } from '../../domain/router.constants';
 import { IMPORTS } from './header.config';
-import {
-  AUTH_BUTTON_CONTENT_BY_PATH,
-  SignInButtonContent,
-} from './header.constants';
+import { AUTH_BUTTON_CONTENT_BY_PATH } from './header.constants';
 import { HeaderService } from './header.service';
 
 @Component({
@@ -22,10 +19,10 @@ export class HeaderComponent {
   private readonly router = inject(Router);
   public readonly headerService = inject(HeaderService);
 
-  protected readonly authButtonContent$$ = new BehaviorSubject({
-    title: SignInButtonContent.SignIn,
-    link: `/${AuthRoute.Login}`,
-  });
+  protected readonly authButtonContent$$ = new BehaviorSubject<Record<
+    'link' | 'title',
+    string
+  > | null>(null);
 
   constructor() {
     this.router.events
@@ -42,16 +39,18 @@ export class HeaderComponent {
       });
   }
 
+  public logout() {
+    this.headerService.logout();
+  }
+
   private getAuthButtonContent(url: string) {
     if (url.includes(AuthRoute.Login)) {
       return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Registration];
     } else if (url.includes(AuthRoute.Registration)) {
       return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Login];
-      // todo
     } else if (!this.headerService.isAuthorized$$.getValue()) {
       return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Login];
     }
-
-    return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Logout];
+    return null;
   }
 }

@@ -1,10 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Output,
-  inject,
-} from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
   FormGroup,
@@ -13,6 +9,7 @@ import {
 } from '@angular/forms';
 import {
   TuiButtonModule,
+  TuiLoaderModule,
   TuiSvgModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
@@ -21,9 +18,12 @@ import {
   TuiCheckboxModule,
   TuiInputModule,
   TuiInputPasswordModule,
+  TuiProgressModule,
 } from '@taiga-ui/kit';
-import { PASSWORD_REGEXP } from '../auth.constants';
-import { LoginAuthData } from '../auth.models';
+import { BehaviorSubject, finalize } from 'rxjs';
+import { PASSWORD_REGEXP } from '../../auth.constants';
+import { AuthService } from '../../services/auth.service';
+import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
 import { LoginFormModel } from './login-form.models';
 
 @Component({
@@ -38,18 +38,25 @@ import { LoginFormModel } from './login-form.models';
     TuiButtonModule,
     TuiIconModule,
     TuiInputPasswordModule,
+    TuiLoaderModule,
+    AsyncPipe,
+    TuiProgressModule,
+    ProgressBarComponent,
   ],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.scss',
+  styleUrl: '../../common.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
-  @Output() send = new EventEmitter<LoginAuthData>();
+  private readonly authService = inject(AuthService);
+
+  protected formCompleteProgress = 0;
 
   private readonly fb = inject(FormBuilder);
   protected readonly formModel: FormGroup<LoginFormModel>;
 
   protected readonly PasswordRegexp = PASSWORD_REGEXP;
+  protected readonly isLoading$$ = new BehaviorSubject<boolean>(false);
 
   protected get usernameControl() {
     return this.formModel.controls.username;
@@ -69,10 +76,21 @@ export class LoginFormComponent {
         nonNullable: true,
       }),
     });
+
+    this.formModel.statusChanges.pipe(takeUntilDestroyed()).subscribe(() => {
+      this.formCompleteProgress =
+        [this.usernameControl.valid, this.passwordControl.valid].filter(Boolean)
+          .length / Object.keys(this.formModel.controls).length;
+    });
   }
 
   public onSubmit(): void {
-    this.send.emit(this.formModel.getRawValue());
+    this.isLoading$$.next(true);
+
+    this.authService
+      .login(this.formModel.getRawValue())
+      .pipe(finalize(() => this.isLoading$$.next(false)))
+      .subscribe();
     this.resetForm();
   }
 

@@ -12,4 +12,9 @@ export class UserService {
   public readonly isAuthorized$ = this.userRole$$.pipe(
     map((role) => role !== Role.Guest)
   );
+
+  public setRole(role: Role) {
+    this.userRole$$.next(role);
+    return this.isAuthorized$;
+  }
 }

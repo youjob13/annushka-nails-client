@@ -1,0 +1,61 @@
+<ann-progress-bar [progress]="formCompleteProgress"></ann-progress-bar>
+
+<tui-loader
+  [inheritColor]="true"
+  [overlay]="true"
+  [showLoader]="!!(isLoading$$ | async)"
+>
+  <form class="controls">
+    <tui-input
+      #usernameControlRef
+      class="b-form control username"
+      autocomplete="current-password"
+      [formControl]="usernameControl"
+      [tuiTextfieldCustomContent]="
+        !usernameControlRef.touched
+          ? ''
+          : usernameControlRef.valid
+          ? success
+          : error
+      "
+    >
+      Username
+    </tui-input>
+
+    <tui-input-password
+      #passwordControlRef
+      autocomplete="current-password"
+      class="b-form control"
+      [pattern]="PasswordRegexp"
+      [formControl]="passwordControl"
+      [tuiTextfieldCustomContent]="
+        !passwordControlRef.touched
+          ? ''
+          : passwordControlRef.valid
+          ? success
+          : error
+      "
+    >
+      Type password
+    </tui-input-password>
+
+    <button
+      appearance="primary"
+      tuiButton
+      type="button"
+      class="tui-space_right-3 tui-space_bottom-3"
+      [disabled]="formModel.invalid"
+      (click)="onSubmit()"
+    >
+      Sign In
+    </button>
+  </form>
+</tui-loader>
+
+<ng-template #success>
+  <tui-svg src="tuiIconCheck" class="success tui-space_left-3"></tui-svg>
+</ng-template>
+
+<ng-template #error>
+  <tui-svg src="tuiIconCheck" class="fail tui-space_left-3"></tui-svg>
+</ng-template>

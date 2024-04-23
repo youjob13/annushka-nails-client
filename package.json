@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config ./src/proxy.conf.json",
+    "mock-server": "json-server --watch db.json --port 3000 ",
     "build": "ng build",
     "compile": "tsc --project tsconfig.app.json --noEmit",
     "watch": "ng build --watch --configuration development",
@@ -54,6 +55,7 @@
     "husky": "^9.0.11",
     "jasmine-core": "~5.1.0",
     "jest": "^29.7.0",
+    "json-server": "1.0.0-alpha.23",
     "semantic-release": "^23.0.8",
     "typescript": "~5.4.2"
   }
