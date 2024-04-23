@@ -48,6 +48,8 @@ export class HeaderComponent {
       return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Registration];
     } else if (url.includes(AuthRoute.Registration)) {
       return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Login];
+    } else if (!this.headerService.isAuthorized$$.getValue()) {
+      return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Login];
     }
     return null;
   }

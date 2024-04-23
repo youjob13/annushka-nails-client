@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.progress-label {
+  margin-bottom: 20px;
+}
+
+.progress {
+  margin: 0 auto;
+  z-index: 1111;
+  font-size: 35px;
+  transition: 1s;
+}

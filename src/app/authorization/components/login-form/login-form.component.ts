@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
   FormGroup,
@@ -17,11 +18,12 @@ import {
   TuiCheckboxModule,
   TuiInputModule,
   TuiInputPasswordModule,
+  TuiProgressModule,
 } from '@taiga-ui/kit';
 import { BehaviorSubject, finalize } from 'rxjs';
-import { UserService } from '../../domain/services/user.service';
-import { PASSWORD_REGEXP } from '../auth.constants';
-import { AuthService } from '../services/auth.service';
+import { PASSWORD_REGEXP } from '../../auth.constants';
+import { AuthService } from '../../services/auth.service';
+import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
 import { LoginFormModel } from './login-form.models';
 
 @Component({
@@ -38,14 +40,17 @@ import { LoginFormModel } from './login-form.models';
     TuiInputPasswordModule,
     TuiLoaderModule,
     AsyncPipe,
+    TuiProgressModule,
+    ProgressBarComponent,
   ],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.scss',
+  styleUrl: '../../common.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
   private readonly authService = inject(AuthService);
-  private readonly userService = inject(UserService);
+
+  protected formCompleteProgress = 0;
 
   private readonly fb = inject(FormBuilder);
   protected readonly formModel: FormGroup<LoginFormModel>;
@@ -70,6 +75,12 @@ export class LoginFormComponent {
         validators: Validators.required,
         nonNullable: true,
       }),
+    });
+
+    this.formModel.statusChanges.pipe(takeUntilDestroyed()).subscribe(() => {
+      this.formCompleteProgress =
+        [this.usernameControl.valid, this.passwordControl.valid].filter(Boolean)
+          .length / Object.keys(this.formModel.controls).length;
     });
   }
 

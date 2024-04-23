@@ -1,28 +1,26 @@
 <div class="section">
-  <div>
-    @for(service of services; track service.name) {
-    <tui-radio-block
-      [formControl]="serviceControl"
-      class="option tui-space_bottom-3"
-      [item]="service.id"
-      size="m"
-      [hideRadio]="true"
-      tuiHeader
-      tuiSurface="elevated"
-      [pseudoDisabled]="isLoading"
-    >
-      <div class="content">
-        <h3 class="title" tuiTitle="s">
-          {{ service.name }}
-        </h3>
-        <p class="subtitle" tuiSubtitle="s">
-          {{ service.description }} |
-          <tui-badge class="price" [value]="service.price + '$'"></tui-badge>
-        </p>
-      </div>
-    </tui-radio-block>
-    }
-  </div>
+  @for(service of services; track service.name) {
+  <tui-radio-block
+    [formControl]="serviceControl"
+    class="option tui-space_bottom-3"
+    [item]="service.id"
+    size="m"
+    [hideRadio]="true"
+    tuiHeader
+    tuiSurface="elevated"
+    [pseudoDisabled]="isLoading"
+  >
+    <div class="content">
+      <h3 class="title" tuiTitle="s">
+        {{ service.name }}
+      </h3>
+      <p class="subtitle" tuiSubtitle="s">
+        {{ service.description }} |
+        <tui-badge class="price" [value]="service.price + '$'"></tui-badge>
+      </p>
+    </div>
+  </tui-radio-block>
+  }
 </div>
 
 <div class="section">
@@ -112,6 +110,7 @@
     [disabled]="isLoading"
     [hideCheckbox]="true"
     [readOnly]="isLoading"
+    [title]="control.key"
     contentAlign="right"
     [formControl]="control.value"
     size="s"

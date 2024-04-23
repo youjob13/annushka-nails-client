@@ -3,6 +3,7 @@
   align-items: center;
   flex-direction: column;
   gap: 30px;
+  counter-reset: count;
 }
 
 // card option
@@ -13,11 +14,43 @@
 }
 
 .section {
+  position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 1000px;
   row-gap: 10px;
+  counter-increment: count;
+
+  &::before,
+  &::after {
+    position: absolute;
+    left: 4%;
+    top: 10%;
+  }
+
+  &::before {
+    content: "";
+
+    bottom: 0;
+    width: 1px;
+    height: 110%;
+    background-color: rgb(200, 200, 200);
+  }
+
+  &::after {
+    content: counter(count, decimal);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgb(200, 200, 200);
+    background-color: #fff;
+  }
 
   &:not(:last-child) {
     border-bottom: 1px solid rgb(200, 200, 200);
