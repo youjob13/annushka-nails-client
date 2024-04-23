@@ -1,22 +1,22 @@
 export const NOTIFY_VIA = [
   {
-    id: '4',
+    id: 'telegram',
     name: 'Telegram',
   },
   {
-    id: '5',
+    id: 'whats_app',
     name: 'WhatsApp',
   },
   {
-    id: '2',
-    name: 'Our App',
+    id: 'app',
+    name: 'App',
   },
   {
-    id: '1',
+    id: 'sms',
     name: 'SMS',
   },
   {
-    id: '2',
+    id: 'email',
     name: 'Email',
   },
 ] as const;

@@ -18,7 +18,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: MainRoute.About,
+    path: MainRoute.Gallery,
     loadComponent: () =>
       import('./appereance/gallery/gallery.component').then(
         (m) => m.GalleryComponent
