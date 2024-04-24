@@ -5,13 +5,16 @@ import { authorizationGuard } from './authorization/services/authorization.guard
 import { MainRoute } from './domain/router.constants';
 
 export const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/home' },
   {
     path: MainRoute.Home,
+    data: { animation: 'Home' },
     loadComponent: () =>
       import('./appereance/home/home.component').then((m) => m.HomeComponent),
   },
   {
     path: MainRoute.About,
+    data: { animation: 'About' },
     loadComponent: () =>
       import('./appereance/about/about.component').then(
         (m) => m.AboutComponent
@@ -19,6 +22,7 @@ export const routes: Routes = [
   },
   {
     path: MainRoute.Gallery,
+    data: { animation: 'Gallery' },
     loadComponent: () =>
       import('./appereance/gallery/gallery.component').then(
         (m) => m.GalleryComponent
@@ -26,6 +30,7 @@ export const routes: Routes = [
   },
   {
     path: MainRoute.Feedbacks,
+    data: { animation: 'Feedbacks' },
     loadComponent: () =>
       import('./appereance/feedbacks/feedbacks.component').then(
         (m) => m.FeedbacksComponent
@@ -33,6 +38,7 @@ export const routes: Routes = [
   },
   {
     path: MainRoute.SocialMedia,
+    data: { animation: 'SocialMedia' },
     loadComponent: () =>
       import('./appereance/social-media/social-media.component').then(
         (m) => m.SocialMediaComponent
@@ -40,6 +46,7 @@ export const routes: Routes = [
   },
   {
     path: MainRoute.Auth,
+    data: { animation: 'Auth' },
     canActivate: [authorizationGuard],
     loadChildren: () =>
       import('./authorization/auth-routing.module').then(
@@ -48,6 +55,7 @@ export const routes: Routes = [
   },
   {
     path: MainRoute.UserProfile,
+    data: { animation: 'UserProfile' },
     canActivate: [userProfileGuard],
     loadComponent: () =>
       import('./appereance/user-profile/user-profile.component').then(
@@ -56,6 +64,7 @@ export const routes: Routes = [
   },
   {
     path: MainRoute.Admin,
+    data: { animation: 'Admin' },
     canActivate: [adminGuard],
     loadComponent: () =>
       import('./admin/admin.component').then((m) => m.AdminComponent),

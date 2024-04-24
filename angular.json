@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "annushka-nails-clients": {
+      "i18n": {
+        "locales": {
+          "ru": "src/locale/messages.ru.xlf"
+        },
+        "sourceLocale": "en"
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,6 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "localize": ["ru"],
             "outputPath": "dist/annushka-nails-clients",
             "index": "src/index.html",
             "browser": "src/main.ts",

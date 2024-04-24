@@ -12,10 +12,6 @@ export const NOTIFY_VIA = [
     name: 'App',
   },
   {
-    id: 'sms',
-    name: 'SMS',
-  },
-  {
     id: 'email',
     name: 'Email',
   },

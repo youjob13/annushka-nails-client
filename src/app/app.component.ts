@@ -1,6 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import {
+  ChildrenOutletContexts,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
 import {
   TUI_SANITIZER,
   TuiAlertModule,
@@ -10,6 +14,7 @@ import {
 import { TUI_LANGUAGE, TUI_RUSSIAN_LANGUAGE } from '@taiga-ui/i18n';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { of } from 'rxjs';
+import { slideInAnimation } from './animations/route.animations';
 import { HeaderComponent } from './appereance/header/header.component';
 
 @Component({
@@ -26,6 +31,7 @@ import { HeaderComponent } from './appereance/header/header.component';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  animations: [slideInAnimation],
   providers: [
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
     {
@@ -34,4 +40,12 @@ import { HeaderComponent } from './appereance/header/header.component';
     },
   ],
 })
-export class AppComponent {}
+export class AppComponent {
+  private readonly contexts = inject(ChildrenOutletContexts);
+
+  getRouteAnimationData() {
+    return this.contexts.getContext('primary')?.route?.snapshot?.data?.[
+      'animation'
+    ];
+  }
+}
