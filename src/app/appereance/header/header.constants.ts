@@ -34,8 +34,4 @@ export const MAIN_NAVIGATION_ITEMS = [
     title: 'Your feedbacks',
     link: MainRoute.Feedbacks,
   },
-  {
-    title: 'Social media',
-    link: MainRoute.SocialMedia,
-  },
 ];

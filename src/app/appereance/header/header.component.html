@@ -26,6 +26,13 @@
   } } @else if(headerService.isAuthorized$$ | async) {
   <button tuiButton (click)="logout()">Log out</button>
   } @if(headerService.isAuthorized$$ | async) {
-  <tui-avatar routerLink="/user-profile" src="AI"></tui-avatar>
+  <tui-avatar
+    avatarUrl="tuiIconUser"
+    class="user-profile avatar"
+    routerLink="/user-profile"
+    routerLinkActive="active"
+    src="AI"
+  ></tui-avatar>
   }
+  <!-- [avatarUrl]="wrongUrl" -->
 </header>

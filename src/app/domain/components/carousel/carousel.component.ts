@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  TemplateRef,
+} from '@angular/core';
 import { TuiButtonModule, TuiLoaderModule } from '@taiga-ui/core';
 import { TuiIconModule } from '@taiga-ui/experimental';
-import {
-  TuiCarouselModule,
-  TuiIslandModule,
-  TuiMarkerIconModule,
-  TuiPaginationModule,
-} from '@taiga-ui/kit';
+import { TuiCarouselModule, TuiPaginationModule } from '@taiga-ui/kit';
 
 @Component({
   selector: 'ann-carousel',
@@ -15,9 +16,8 @@ import {
     TuiButtonModule,
     TuiCarouselModule,
     TuiIconModule,
+    NgTemplateOutlet,
     TuiPaginationModule,
-    TuiIslandModule,
-    TuiMarkerIconModule,
     TuiLoaderModule,
   ],
   templateUrl: './carousel.component.html',
@@ -25,6 +25,17 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselComponent {
+  @Input() content: TemplateRef<unknown> | null = null;
+
+  items = [
+    'Danil Rodionov',
+    'Dmitriy Hek',
+    'Aleh True',
+    'Anya Ch',
+    'Mishel Bosmand',
+    'Michail Row',
+    'Kiril Lebidov',
+  ];
   index = 0;
 
   get background(): string {

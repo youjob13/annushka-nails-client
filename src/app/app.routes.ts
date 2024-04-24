@@ -37,14 +37,6 @@ export const routes: Routes = [
       ),
   },
   {
-    path: MainRoute.SocialMedia,
-    data: { animation: 'SocialMedia' },
-    loadComponent: () =>
-      import('./appereance/social-media/social-media.component').then(
-        (m) => m.SocialMediaComponent
-      ),
-  },
-  {
     path: MainRoute.Auth,
     data: { animation: 'Auth' },
     canActivate: [authorizationGuard],
@@ -60,6 +52,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./appereance/user-profile/user-profile.component').then(
         (m) => m.UserProfileComponent
+      ),
+  },
+
+  {
+    path: MainRoute.AdminProfile,
+    data: { animation: 'AdminProfile' },
+    canActivate: [userProfileGuard],
+    loadComponent: () =>
+      import('./appereance/admin-profile/admin-profile.component').then(
+        (m) => m.AdminProfileComponent
       ),
   },
   {

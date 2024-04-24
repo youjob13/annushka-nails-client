@@ -76,6 +76,32 @@
   }
 }
 
+.services {
+  display: flex;
+  position: relative;
+
+  .details {
+    overflow: hidden;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transition: 0.3s;
+    width: 160px;
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .elevated {
+      height: calc(100% - 30px);
+      box-shadow: none;
+    }
+  }
+}
+
 .date-time-control {
   display: flex;
 
@@ -186,7 +212,7 @@
 
 .control,
 .comment {
-  width: 600px;
+  width: 400px;
 }
 
 @keyframes rotating {

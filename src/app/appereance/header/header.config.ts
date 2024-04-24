@@ -2,6 +2,7 @@ import {
   TuiBadgeNotificationModule,
   TuiButtonModule,
   TuiIconModule,
+  TuiIconsModule,
   TuiNavigationModule,
 } from '@taiga-ui/experimental';
 import { TuiAvatarModule, TuiBadgeModule, TuiTabsModule } from '@taiga-ui/kit';
@@ -17,6 +18,7 @@ const TAIGA_UI_MODULES = [
   TuiAvatarModule,
   TuiTabsModule,
   TuiButtonModule,
+  TuiIconsModule,
 ];
 
 const BUILTIN_MODULES = [RouterModule, AsyncPipe];

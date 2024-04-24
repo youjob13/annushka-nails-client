@@ -3,7 +3,9 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   Output,
+  SimpleChanges,
   inject,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -57,7 +59,7 @@ const DATE_TIME_MAP = new Map([
   styleUrl: './service-application-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ServiceApplicationFormComponent {
+export class ServiceApplicationFormComponent implements OnChanges {
   @Input() requestInProgress: boolean = false;
   @Input() services: DTO.IService[] | null = [];
 
@@ -67,6 +69,7 @@ export class ServiceApplicationFormComponent {
 
   protected readonly loader = LOADER;
   protected readonly notifyVia = NOTIFY_VIA;
+  protected serviceDetails: Record<DTO.IService['id'], DTO.IService> = {};
   protected availableTimesForSelectedDay: string[] = [];
 
   protected selectedDay: TuiDay | null = null;
@@ -147,6 +150,17 @@ export class ServiceApplicationFormComponent {
     this.timeControl.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
       this.timeControl.markAsTouched();
     });
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['services'] && this.services) {
+      this.serviceDetails = this.services.reduce<
+        Record<DTO.IService['id'], DTO.IService>
+      >((acc, item) => {
+        console.log('item', item);
+        acc[item.id] = item;
+        return acc;
+      }, {});
+    }
   }
 
   public submit(): void {

@@ -12,16 +12,25 @@ import { LoginAuthData, RegistrationAuthData } from '../auth.models';
   providedIn: 'root',
 })
 export class AuthService {
+  private static readonly RolesMap = {
+    [Role.Admin]: MainRoute.AdminProfile,
+    [Role.User]: MainRoute.UserProfile,
+  };
+
   private readonly http = inject(HttpClient);
   private readonly authConfig = inject(AUTH_CONFIG);
   private readonly userService = inject(UserService);
   private readonly router = inject(Router);
 
   public login(authData: LoginAuthData) {
-    return this.http.post(`${this.authConfig}/login`, authData).pipe(
-      tap(() => this.userService.setRole(Role.User)),
-      switchMap(() => this.userService.isAuthorized$),
-      tap(() => this.router.navigateByUrl(MainRoute.UserProfile))
+    return this.http.post<Role>(`${this.authConfig}/login`, authData).pipe(
+      tap((role) => this.userService.setRole(role)),
+      tap((role) =>
+        this.router.navigateByUrl(
+          AuthService.RolesMap[role as keyof typeof AuthService.RolesMap]
+        )
+      ),
+      switchMap(() => this.userService.isAuthorized$)
     );
   }
 

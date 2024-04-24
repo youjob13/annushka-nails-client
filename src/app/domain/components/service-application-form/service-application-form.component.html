@@ -28,6 +28,24 @@
     </div>
   </tui-radio-block>
   }
+  <!--  -->
+  @if(serviceDetails[serviceControl.value]; as details) {
+  <div class="details" [ngClass]="{ active: !!serviceControl.value }">
+    <div class="elevated" tuiCardLarge tuiSurface="elevated">
+      <header tuiHeader>
+        <h2 tuiTitle>{{ details.name }}</h2>
+      </header>
+
+      <section>{{ details.description }}</section>
+
+      <footer>
+        <button appearance="secondary" size="m" tuiButton type="button">
+          Label
+        </button>
+      </footer>
+    </div>
+  </div>
+  }
 </div>
 
 <div class="section">
@@ -83,26 +101,17 @@
     </h2>
   </div>
 
-  <tui-badged-content
-    contentTop="tuiIconCheckCircleLarge"
-    [colorTop]="
-      usernameControlRef.valid
-        ? 'var(--tui-positive-night)'
-        : 'var(--tui-negative-night)'
-    "
+  <tui-input
+    #usernameControlRef
+    [required]="true"
+    [readOnly]="requestInProgress"
+    [disabled]="requestInProgress"
+    class="control"
+    [formControl]="userNameControl"
   >
-    <tui-input
-      #usernameControlRef
-      [required]="true"
-      [readOnly]="requestInProgress"
-      [disabled]="requestInProgress"
-      class="control"
-      [formControl]="userNameControl"
-    >
-      Type a name / email / IG
-      <input tuiTextfield type="email" />
-    </tui-input>
-  </tui-badged-content>
+    Type a name / email / IG
+    <input tuiTextfield type="email" />
+  </tui-input>
 
   <tui-input-phone-international
     [readOnly]="requestInProgress"
