@@ -1,4 +1,11 @@
-<div class="section">
+<div class="section services">
+  <div class="section-header">
+    <h2 class="section-title" tuiTitle="l">Select service</h2>
+    <h2 class="section-subtitle" tuiTitle="l">
+      Description about services. A couple of sentences about provided services.
+    </h2>
+  </div>
+
   @for(service of services; track service.name) {
   <tui-radio-block
     [formControl]="serviceControl"
@@ -24,6 +31,13 @@
 </div>
 
 <div class="section">
+  <div class="section-header">
+    <h2 class="section-title" tuiTitle="l">Select date</h2>
+    <h2 class="section-subtitle" tuiTitle="l">
+      Description about date. A couple of sentences about available dates.
+    </h2>
+  </div>
+
   <div class="date-time-control">
     <tui-calendar
       class="date-control"
@@ -44,7 +58,7 @@
         <h4 class="subtitle">Choose a time for service</h4>
       </div>
 
-      <div>
+      <tui-scrollbar class="box">
         @for(time of availableTimesForSelectedDay; track time) {
         <tui-radio-labeled
           [pseudoDisabled]="requestInProgress"
@@ -55,12 +69,20 @@
           {{ time }}
         </tui-radio-labeled>
         }
-      </div>
+      </tui-scrollbar>
     </div>
   </div>
 </div>
 
 <div class="section">
+  <div class="section-header">
+    <h2 class="section-title" tuiTitle="l">Type your contacts</h2>
+    <h2 class="section-subtitle" tuiTitle="l">
+      Description why you should give us your contacts. A couple of sentences
+      about why you should do it.
+    </h2>
+  </div>
+
   <tui-badged-content
     contentTop="tuiIconCheckCircleLarge"
     [colorTop]="
@@ -103,7 +125,6 @@
   </tui-textarea>
 </div>
 
-<!-- [collapsed]="true" -->
 <div tuiGroup class="group">
   @for(control of notifyViaControl.controls | keyvalue; track control.key) {
   <tui-checkbox-block

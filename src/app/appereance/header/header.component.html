@@ -1,14 +1,12 @@
 <header tuiNavigationHeader [style.position]="'sticky'">
   <span tuiNavigationLogo>
-    <!-- <tui-icon icon="tuiIconHome"></tui-icon> -->
     <span tuiFade>Annushka nails</span>
-    <!-- <tui-badge>Test</tui-badge> -->
   </span>
 
   <hr />
 
   <nav class="navigation" tuiNavigationNav [style.background]="'inherit'">
-    <tui-tabs tuiFade>
+    <tui-tabs tuiFade [activeItemIndex]="initialActiveTabItemIndex">
       @for(nav of headerService.navigationItems; track nav.title) {
       <button tuiTab [routerLink]="nav.link">{{ nav.title }}</button>
       }

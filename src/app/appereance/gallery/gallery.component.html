@@ -1,1 +1,9 @@
-<p>gallery works!</p>
+@for(item of data; track item.title) {
+<a class="thumb thumb-img" [style.background-image]="'url(' + item.src + ')'">
+  <img [src]="item.src" alt="" />
+  <div>
+    <span>{{ item.title }}</span>
+    <span>{{ item.text }}</span>
+  </div>
+</a>
+}

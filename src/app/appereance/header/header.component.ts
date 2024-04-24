@@ -1,10 +1,14 @@
+import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
 import { AuthRoute } from '../../domain/router.constants';
 import { IMPORTS } from './header.config';
-import { AUTH_BUTTON_CONTENT_BY_PATH } from './header.constants';
+import {
+  AUTH_BUTTON_CONTENT_BY_PATH,
+  MAIN_NAVIGATION_ITEMS,
+} from './header.constants';
 import { HeaderService } from './header.service';
 
 @Component({
@@ -17,7 +21,12 @@ import { HeaderService } from './header.service';
 })
 export class HeaderComponent {
   private readonly router = inject(Router);
+  private readonly document = inject(DOCUMENT);
   public readonly headerService = inject(HeaderService);
+  protected readonly initialActiveTabItemIndex =
+    Object.values(MAIN_NAVIGATION_ITEMS).findIndex((navItem) =>
+      this.document.location.pathname.includes(navItem.link)
+    ) || 0;
 
   protected readonly authButtonContent$$ = new BehaviorSubject<Record<
     'link' | 'title',

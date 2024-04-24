@@ -6,7 +6,7 @@ export enum MainRoute {
   Gallery = 'gallery',
   Home = 'home',
   Feedbacks = 'feedbacks',
-  SocialMedia = 'social-media',
+  SocialMedia = 'socialMedia',
 }
 
 export enum AuthRoute {

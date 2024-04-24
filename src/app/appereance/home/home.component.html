@@ -1,6 +1,32 @@
-<ann-service-application-form
-  [services]="servicesService.services$ | async"
-  [requestInProgress]="!!(servicesService.requestInProgress$ | async)"
-  (send)="applyForService($event)"
->
-</ann-service-application-form>
+<div tuiSurface class="video-container">
+  <video tuiSurfaceLayer autoplay muted loop id="myVideo">
+    <source src="assets/home-bg.mp4" type="video/mp4" />
+  </video>
+
+  <div class="content">
+    <h2 tuiTitle="l">Nails for you</h2>
+  </div>
+
+  <button
+    class="scroll-bottom animate"
+    appearance="none"
+    tuiIconButton
+    iconLeft="tuiIconChevronDown"
+    size="l"
+    tuiButton
+    (click)="scrollTo(applyForServiceRef)"
+  >
+    <!--  -->
+  </button>
+</div>
+
+<div class="section apply-for-service" #applyForServiceRef>
+  <h2 class="title" tuiTitle="l">Apply for service right now</h2>
+
+  <ann-service-application-form
+    [services]="servicesService.services$ | async"
+    [requestInProgress]="!!(servicesService.requestInProgress$ | async)"
+    (send)="applyForService($event)"
+  >
+  </ann-service-application-form>
+</div>

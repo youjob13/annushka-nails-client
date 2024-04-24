@@ -5,6 +5,7 @@ import {
   TuiCalendarModule,
   TuiGroupModule,
   TuiMaskAccessorModule,
+  TuiScrollbarModule,
   TuiSvgModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
@@ -30,6 +31,7 @@ import {
 } from '@taiga-ui/kit';
 
 export const IMPORTS = [
+  TuiScrollbarModule,
   NgClass,
   TuiCalendarModule,
   TuiRadioBlockModule,

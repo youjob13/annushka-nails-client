@@ -30,7 +30,23 @@ import { LOADER } from './service-application-form.constants';
 // todo: should be generated automatically
 const DATE_TIME_MAP = new Map([
   [3, ['11:00', '12:00', '13:00']],
-  [5, ['09:00', '11:30', '12:00', '13:00']],
+  [
+    5,
+    [
+      '09:00',
+      '09:30',
+      '10:00',
+      '11:30',
+      '12:00',
+      '12:30',
+      '13:00',
+      '04:00',
+      '14:30',
+      '15:00',
+      '15:30',
+      '17:00',
+    ],
+  ],
 ]);
 
 @Component({
@@ -86,12 +102,9 @@ export class ServiceApplicationFormComponent {
   protected get commentControl(): ContactsFormGroup['controls']['comment'] {
     return this.contactsGroup.controls.comment;
   }
-  public disabledItemHandler = ({ day }: TuiDay) => {
-    return !this.isDayAvailableForApplying(day);
-  };
-  public disabledAllItemsHandler = () => {
-    return true;
-  };
+  public disabledAllItemsHandler = () => true;
+  public disabledItemHandler = ({ day }: TuiDay) =>
+    !this.isDayAvailableForApplying(day);
 
   constructor() {
     this.formModel = this.fb.group<FormModel>({
