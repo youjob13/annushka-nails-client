@@ -26,6 +26,7 @@ import {
   FormModel,
 } from './service-application-form.models';
 
+import { ResponsiveDirective } from '../../../common/services/responsive.directive';
 import * as DTO from '../../../dto';
 import { LOADER } from './service-application-form.constants';
 
@@ -59,7 +60,10 @@ const DATE_TIME_MAP = new Map([
   styleUrl: './service-application-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ServiceApplicationFormComponent implements OnChanges {
+export class ServiceApplicationFormComponent
+  extends ResponsiveDirective
+  implements OnChanges
+{
   @Input() requestInProgress: boolean = false;
   @Input() services: DTO.IService[] | null = [];
 
@@ -110,6 +114,8 @@ export class ServiceApplicationFormComponent implements OnChanges {
     !this.isDayAvailableForApplying(day);
 
   constructor() {
+    super();
+
     this.formModel = this.fb.group<FormModel>({
       service: this.fb.control('', {
         nonNullable: true,
@@ -156,7 +162,6 @@ export class ServiceApplicationFormComponent implements OnChanges {
       this.serviceDetails = this.services.reduce<
         Record<DTO.IService['id'], DTO.IService>
       >((acc, item) => {
-        console.log('item', item);
         acc[item.id] = item;
         return acc;
       }, {});

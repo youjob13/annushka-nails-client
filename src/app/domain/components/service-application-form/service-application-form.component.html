@@ -29,7 +29,7 @@
   </tui-radio-block>
   }
   <!--  -->
-  @if(serviceDetails[serviceControl.value]; as details) {
+  @if(!isMobile() && serviceDetails[serviceControl.value]; as details) {
   <div class="details" [ngClass]="{ active: !!serviceControl.value }">
     <div class="elevated" tuiCardLarge tuiSurface="elevated">
       <header tuiHeader>
@@ -92,7 +92,7 @@
   </div>
 </div>
 
-<div class="section">
+<div class="section contacts">
   <div class="section-header">
     <h2 class="section-title" tuiTitle="l" i18n>Type your contacts</h2>
     <h2 class="section-subtitle" tuiTitle="l" i18n>

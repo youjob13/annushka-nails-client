@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, finalize, tap } from 'rxjs';
+import { BehaviorSubject, finalize, shareReplay, tap } from 'rxjs';
 import { ServicesHttpService } from './services-http.service';
 
 import * as DTO from '../../../dto';
@@ -17,15 +17,17 @@ export class ServicesService {
   public readonly requestInProgress$ = this.requestInProgress$$.asObservable();
 
   public getServices() {
-    if (this.services$$) {
-      return this.services$$.asObservable();
+    console.log(this.services$$);
+    if (!this.services$$) {
+      return this.servicesHttpService.getServices().pipe(
+        tap((services) => {
+          this.services$$ = new BehaviorSubject<DTO.IService[]>(services);
+        }),
+        shareReplay(1)
+      );
     }
 
-    return this.servicesHttpService.getServices().pipe(
-      tap((services) => {
-        this.services$$ = new BehaviorSubject<DTO.IService[]>(services);
-      })
-    );
+    return this.services$$;
   }
 
   public applyForService<T>(data: T) {

@@ -16,6 +16,7 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { of } from 'rxjs';
 import { slideInAnimation } from './animations/route.animations';
 import { HeaderComponent } from './appereance/header/header.component';
+import { ResponsiveService } from './common/services/responsive.service';
 
 @Component({
   selector: 'ann-root',
@@ -42,6 +43,11 @@ import { HeaderComponent } from './appereance/header/header.component';
 })
 export class AppComponent {
   private readonly contexts = inject(ChildrenOutletContexts);
+  private readonly responsiveService = inject(ResponsiveService);
+
+  constructor() {
+    this.responsiveService.init();
+  }
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.[
