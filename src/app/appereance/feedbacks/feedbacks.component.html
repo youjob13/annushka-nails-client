@@ -1,1 +1,50 @@
-<ann-carousel></ann-carousel>
+<ann-carousel class="feedback-list" [content]="cardRef"></ann-carousel>
+
+<div class="give-feedback">
+  <tui-input
+    [required]="true"
+    [readOnly]="false"
+    [disabled]="false"
+    class="control"
+    [formControl]="nameControl"
+  >
+    Type name
+    <input tuiTextfield type="email" />
+  </tui-input>
+
+  <tui-textarea
+    [required]="true"
+    [readOnly]="false"
+    [disabled]="false"
+    class="comment"
+    [formControl]="messageControl"
+    i18n
+  >
+    Give your feedback
+  </tui-textarea>
+
+  <button
+    [disabled]="formModel.invalid"
+    tuiButton
+    type="button"
+    (click)="sendFeedback()"
+  >
+    Send feedback
+  </button>
+</div>
+
+<ng-template #cardRef let-item="item">
+  <tui-island class="feedback-item tui-island_text-align_center">
+    <div class="header">
+      <tui-avatar size="m" [text]="item" [rounded]="true"></tui-avatar>
+      <h2 class="tui-island__title">{{ item }}</h2>
+    </div>
+    <tui-scrollbar class="box">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
+      excepturi, velit est magni nulla laudantium a, libero debitis cupiditate,
+      eius atque quas minima. Dignissimos voluptatem asperiores totam error
+      recusandae facilis?
+      <!-- {{ item }} -->
+    </tui-scrollbar>
+  </tui-island>
+</ng-template>

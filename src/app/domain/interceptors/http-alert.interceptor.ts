@@ -4,7 +4,7 @@ import { TuiAlertService } from '@taiga-ui/core';
 import { take, tap } from 'rxjs';
 import { mapHttpStatusToTuiStatus } from '../../common/utils';
 
-const ROUTES_TO_INTERCEPT = new Set(['/services', '/services/apply']);
+const ROUTES_TO_INTERCEPT = new Set(['/services/apply']);
 
 export const httpAlertInterceptor: HttpInterceptorFn = (req, next) => {
   if (!ROUTES_TO_INTERCEPT.has(req.url)) {

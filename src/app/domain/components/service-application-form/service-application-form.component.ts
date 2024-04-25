@@ -3,7 +3,9 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   Output,
+  SimpleChanges,
   inject,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -24,6 +26,7 @@ import {
   FormModel,
 } from './service-application-form.models';
 
+import { ResponsiveDirective } from '../../../common/services/responsive.directive';
 import * as DTO from '../../../dto';
 import { LOADER } from './service-application-form.constants';
 
@@ -57,7 +60,10 @@ const DATE_TIME_MAP = new Map([
   styleUrl: './service-application-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ServiceApplicationFormComponent {
+export class ServiceApplicationFormComponent
+  extends ResponsiveDirective
+  implements OnChanges
+{
   @Input() requestInProgress: boolean = false;
   @Input() services: DTO.IService[] | null = [];
 
@@ -67,6 +73,7 @@ export class ServiceApplicationFormComponent {
 
   protected readonly loader = LOADER;
   protected readonly notifyVia = NOTIFY_VIA;
+  protected serviceDetails: Record<DTO.IService['id'], DTO.IService> = {};
   protected availableTimesForSelectedDay: string[] = [];
 
   protected selectedDay: TuiDay | null = null;
@@ -107,6 +114,8 @@ export class ServiceApplicationFormComponent {
     !this.isDayAvailableForApplying(day);
 
   constructor() {
+    super();
+
     this.formModel = this.fb.group<FormModel>({
       service: this.fb.control('', {
         nonNullable: true,
@@ -147,6 +156,16 @@ export class ServiceApplicationFormComponent {
     this.timeControl.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
       this.timeControl.markAsTouched();
     });
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['services'] && this.services) {
+      this.serviceDetails = this.services.reduce<
+        Record<DTO.IService['id'], DTO.IService>
+      >((acc, item) => {
+        acc[item.id] = item;
+        return acc;
+      }, {});
+    }
   }
 
   public submit(): void {

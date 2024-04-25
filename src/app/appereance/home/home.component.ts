@@ -5,6 +5,8 @@ import {
   TuiSurfaceModule,
   TuiTitleModule,
 } from '@taiga-ui/experimental';
+import { ResponsiveDirective } from '../../common/services/responsive.directive';
+import { ResponsivePipe } from '../../common/services/responsive.pipe';
 import { ServiceApplicationFormComponent } from '../../domain/components/service-application-form/service-application-form.component';
 import { ServicesService } from '../../domain/services/services/services.service';
 
@@ -17,12 +19,13 @@ import { ServicesService } from '../../domain/services/services/services.service
     TuiTitleModule,
     TuiButtonModule,
     TuiSurfaceModule,
+    ResponsivePipe,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
+export class HomeComponent extends ResponsiveDirective {
   protected readonly servicesService = inject(ServicesService);
 
   public scrollTo(element: HTMLDivElement) {

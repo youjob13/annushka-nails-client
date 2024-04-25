@@ -1,7 +1,7 @@
 <div class="section services">
   <div class="section-header">
-    <h2 class="section-title" tuiTitle="l">Select service</h2>
-    <h2 class="section-subtitle" tuiTitle="l">
+    <h2 class="section-title" tuiTitle="l" i18n>Select service</h2>
+    <h2 class="section-subtitle" tuiTitle="l" i18n>
       Description about services. A couple of sentences about provided services.
     </h2>
   </div>
@@ -18,22 +18,40 @@
     [pseudoDisabled]="requestInProgress"
   >
     <div class="content">
-      <h3 class="title" tuiTitle="s">
+      <h3 class="title" tuiTitle="s" i18n>
         {{ service.name }}
       </h3>
-      <p class="subtitle" tuiSubtitle="s">
+      <p class="subtitle" tuiSubtitle="s" i18n>
         {{ service.description }} |
         <tui-badge class="price" [value]="service.price + '$'"></tui-badge>
       </p>
     </div>
   </tui-radio-block>
   }
+  <!--  -->
+  @if(!isMobile() && serviceDetails[serviceControl.value]; as details) {
+  <div class="details" [ngClass]="{ active: !!serviceControl.value }">
+    <div class="elevated" tuiCardLarge tuiSurface="elevated">
+      <header tuiHeader>
+        <h2 tuiTitle>{{ details.name }}</h2>
+      </header>
+
+      <section>{{ details.description }}</section>
+
+      <footer>
+        <button appearance="secondary" size="m" tuiButton type="button">
+          Label
+        </button>
+      </footer>
+    </div>
+  </div>
+  }
 </div>
 
 <div class="section">
   <div class="section-header">
-    <h2 class="section-title" tuiTitle="l">Select date</h2>
-    <h2 class="section-subtitle" tuiTitle="l">
+    <h2 class="section-title" tuiTitle="l" i18n>Select date</h2>
+    <h2 class="section-subtitle" tuiTitle="l" i18n>
       Description about date. A couple of sentences about available dates.
     </h2>
   </div>
@@ -54,8 +72,8 @@
       [ngClass]="{ visible: availableTimesForSelectedDay.length > 0 }"
     >
       <div class="header">
-        <h3 class="title">Available times</h3>
-        <h4 class="subtitle">Choose a time for service</h4>
+        <h3 class="title" i18n>Available times</h3>
+        <h4 class="subtitle" i18n>Choose a time for service</h4>
       </div>
 
       <tui-scrollbar class="box">
@@ -74,35 +92,26 @@
   </div>
 </div>
 
-<div class="section">
+<div class="section contacts">
   <div class="section-header">
-    <h2 class="section-title" tuiTitle="l">Type your contacts</h2>
-    <h2 class="section-subtitle" tuiTitle="l">
+    <h2 class="section-title" tuiTitle="l" i18n>Type your contacts</h2>
+    <h2 class="section-subtitle" tuiTitle="l" i18n>
       Description why you should give us your contacts. A couple of sentences
       about why you should do it.
     </h2>
   </div>
 
-  <tui-badged-content
-    contentTop="tuiIconCheckCircleLarge"
-    [colorTop]="
-      usernameControlRef.valid
-        ? 'var(--tui-positive-night)'
-        : 'var(--tui-negative-night)'
-    "
+  <tui-input
+    #usernameControlRef
+    [required]="true"
+    [readOnly]="requestInProgress"
+    [disabled]="requestInProgress"
+    class="control"
+    [formControl]="userNameControl"
   >
-    <tui-input
-      #usernameControlRef
-      [required]="true"
-      [readOnly]="requestInProgress"
-      [disabled]="requestInProgress"
-      class="control"
-      [formControl]="userNameControl"
-    >
-      Type a name / email / IG
-      <input tuiTextfield type="email" />
-    </tui-input>
-  </tui-badged-content>
+    Type a name / email / IG
+    <input tuiTextfield type="email" />
+  </tui-input>
 
   <tui-input-phone-international
     [readOnly]="requestInProgress"
@@ -111,6 +120,7 @@
     [formControl]="phoneControl"
     [countries]="(countries | tuiSortCountries | async) || []"
     [(countryIsoCode)]="countryIsoCode"
+    i18n
   >
     Type your number
   </tui-input-phone-international>
@@ -120,6 +130,7 @@
     [disabled]="requestInProgress"
     class="comment"
     [formControl]="commentControl"
+    i18n
   >
     Type a comment
   </tui-textarea>

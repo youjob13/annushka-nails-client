@@ -1,0 +1,22 @@
+.avatar-block {
+  width: max-content;
+
+  .title {
+    color: black;
+  }
+}
+
+.blur {
+  background-image: url("/assets/images/restaurant-2.jpg");
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  column-gap: 16px;
+
+  &:before {
+    backdrop-filter: blur(16px);
+  }
+}

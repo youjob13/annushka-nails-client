@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="1113173911761783121" datatype="html">
+        <source>Nails for you</source>
+        <target>Маникюр для тебя</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/appereance/home/home.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3124744675770368107" datatype="html">
+        <source>Apply for service right now</source>
+        <target>Запишись прямо сейчас</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/appereance/home/home.component.html</context>
+          <context context-type="linenumber">24,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8089519829328717240" datatype="html">
+        <source>Select service</source>
+        <target>Выбери услугу</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8232723563392794033" datatype="html">
+        <source> Description about services. A couple of sentences about provided services. </source>
+        <target>Описание улсуг. Добавить несколько предложений.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7708270344948043036" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ service.name }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">22,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8664364403071346560" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ service.description }}"/> | <x id="START_TAG_TUI_BADGE" ctype="x-tui_badge" equiv-text="&lt;tui-badge class=&quot;price&quot; [value]=&quot;service.price + &apos;$&apos;&quot;&gt;"/><x id="CLOSE_TAG_TUI_BADGE" ctype="x-tui_badge" equiv-text="&lt;/tui-badge&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">25,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2671643902824593326" datatype="html">
+        <source>Select date</source>
+        <target>Выбери дату</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8032394603280797191" datatype="html">
+        <source> Description about date. A couple of sentences about available dates. </source>
+        <target>Описание дат. Добавить несколько предложений.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5735019551585714706" datatype="html">
+        <source>Available times</source>
+        <target>Свободное время</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5306072211088206512" datatype="html">
+        <source>Choose a time for service</source>
+        <target>Выбери время для услуги</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">58,59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="223872376763520236" datatype="html">
+        <source>Type your contacts</source>
+        <target>Оставь свои контакты</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">79,80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7244354344568797673" datatype="html">
+        <source> Description why you should give us your contacts. A couple of sentences about why you should do it. </source>
+        <target>Чтобы мы могли связаться с тобой.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">81,82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="896013679254191529" datatype="html">
+        <source> Type your number </source>
+        <target>Введи номер телефона</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">116,117</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7942536357409213369" datatype="html">
+        <source> Type a comment </source>
+        <target>Добавь свои пожелания</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">126,127</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
