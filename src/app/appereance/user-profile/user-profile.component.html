@@ -1,8 +1,96 @@
-<div class="avatar-block">
-  <div tuiMode="onDark" tuiSurface class="blur">
-    <tui-avatar
-      src="https://avatars.githubusercontent.com/u/10106368"
-    ></tui-avatar>
-    <h3 tuiTitle="m" class="title">Alex Inkin</h3>
+<nav class="main-nav" [style.padding-left.px]="90" tuiNavigationNav>
+  <tui-tabs>
+    <button tuiTab>Info</button>
+    <button tuiTab>History</button>
+  </tui-tabs>
+  <hr />
+</nav>
+
+<div class="main">
+  <aside [tuiNavigationAside]="expanded">
+    <header>
+      <button iconLeft="tuiIconHome" tuiButton>
+        <span tuiFade>A very very long product name</span>
+      </button>
+    </header>
+    <button iconLeft="tuiIconSearch" tuiButton>Search</button>
+    <a
+      iconLeft="tuiIconUsers"
+      routerLink="/experimental/navigation"
+      routerLinkActive="active"
+      tuiAppearance="flat"
+      tuiButton
+    >
+      Groups
+    </a>
+    <tui-hosted-dropdown
+      [canOpen]="!expanded"
+      [content]="dropdown"
+      [sided]="true"
+      [(open)]="open"
+    >
+      <button
+        iconLeft="tuiIconSettings"
+        iconRight="tuiIconChevronDown"
+        tuiAppearance="flat"
+        tuiButton
+        [tuiAppearanceState]="open ? 'hover' : null"
+        (click)="submenu = expanded && !submenu"
+      >
+        Settings
+      </button>
+      <ng-template #dropdown>
+        <tui-data-list size="s">
+          <button tuiOption>Account</button>
+          <button tuiOption>Notifications</button>
+          <button tuiOption>Privacy</button>
+        </tui-data-list>
+      </ng-template>
+    </tui-hosted-dropdown>
+    <tui-expand [expanded]="expanded && submenu">
+      <button tuiButton>Account</button>
+      <button tuiButton>Notifications</button>
+      <button tuiButton>Privacy</button>
+    </tui-expand>
+    <button iconLeft="tuiIconHeart" tuiButton>
+      <span tuiFade>By default ellipsis is used but you can use fade too</span>
+    </button>
+    <hr />
+    <button iconLeft="tuiIconPlus" tuiButton>Add</button>
+    <footer>
+      <button iconLeft="tuiIconStar" tuiButton>Favorites</button>
+      <button
+        tuiButton
+        [iconLeft]="expanded ? 'tuiIconChevronLeft' : 'tuiIconChevronRight'"
+        (click)="expanded = !expanded"
+      >
+        Collapse
+      </button>
+    </footer>
+  </aside>
+
+  <div class="content">
+    <div tuiMode="onDark" tuiSurface class="blur">
+      <div class="avatar-control">
+        <tui-avatar [size]="'xxl'" [src]="avatarControl.value"></tui-avatar>
+        <div class="update-avatar">
+          <button (click)="filePicker.click()">+</button>
+          <input #filePicker type="file" (change)="loadAvatar($event)" />
+        </div>
+      </div>
+      @if(isMobile()) {
+      <h3 tuiTitle="m" class="title">Alex Inkin</h3>
+      }
+      <div class="user-data">
+        @if(!isMobile()) {
+        <h3 tuiTitle="m" class="title">Alex Inkin</h3>
+        }
+        <ann-user-data-form class="user-form"></ann-user-data-form>
+      </div>
+    </div>
+
+    <h3>Prefilled data</h3>
+
+    <h3>Favorite masters</h3>
   </div>
 </div>

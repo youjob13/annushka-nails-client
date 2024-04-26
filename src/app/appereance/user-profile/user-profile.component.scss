@@ -1,9 +1,42 @@
-.avatar-block {
+.content {
   width: max-content;
 
   .title {
     color: black;
   }
+
+  .avatar-control {
+    position: relative;
+
+    .update-avatar {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+
+      button {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+
+      input {
+        opacity: 0;
+        visibility: hidden;
+        width: 1px;
+        height: 1px;
+      }
+    }
+  }
+
+  .user-data {
+    .title {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.main {
+  display: flex;
 }
 
 .blur {
@@ -12,11 +45,75 @@
   padding: 16px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   z-index: 1;
-  column-gap: 16px;
+  column-gap: 20px;
 
   &:before {
     backdrop-filter: blur(16px);
+  }
+}
+
+.user-form {
+  display: block;
+  width: 600px;
+}
+
+// Mobile
+
+:host.mobile {
+  display: block;
+  height: 95vh;
+
+  .main-nav {
+    position: sticky;
+
+    &::before {
+      content: "";
+      background-color: black;
+      width: 48px;
+      height: 48px;
+      position: absolute;
+      left: 0;
+      transform: translateX(20px);
+      top: 0;
+      z-index: 11;
+    }
+  }
+
+  .blur {
+    display: grid;
+
+    grid-template-areas: "avatar name" "form form";
+    flex-direction: column;
+  }
+
+  .main {
+    height: 90vh;
+    overflow: hidden;
+  }
+
+  .content {
+    padding: 10px 20px;
+    width: 100%;
+  }
+
+  .avatar-control {
+    display: grid;
+    grid-area: avatar;
+  }
+
+  .title {
+    display: grid;
+    grid-area: name;
+  }
+
+  .user-data {
+    display: grid;
+    grid-area: form;
+  }
+
+  .user-form {
+    width: 100%;
   }
 }

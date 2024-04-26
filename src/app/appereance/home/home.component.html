@@ -21,16 +21,40 @@
     iconLeft="tuiIconChevronDown"
     size="l"
     tuiButton
-    (click)="scrollTo(applyForServiceRef)"
+    (click)="scrollTo(about)"
   >
     <!--  -->
   </button>
 </div>
 
-<div class="section apply-for-service" #applyForServiceRef>
+<div class="section about" #about>
   <h2
     class="title"
-    [style.font-size.px]="responsiveSettings.mainTitle.size"
+    [style.font-size.px]="responsiveSettings.secondaryTitle.size"
+    tuiTitle="l"
+    i18n
+  >
+    Who am I?
+  </h2>
+
+  <div class="description">
+    <p i18n [style.font-size.px]="responsiveSettings.text.size">
+      I am a professional nail technician with over 10 years of experience. I
+      provide a wide range of services, including manicure, pedicure, nail
+      extensions, and nail art. I use only high-quality products and tools to
+      ensure the best results. My goal is to make every client feel beautiful
+      and confident with their nails.
+    </p>
+    <a routerLink="/about" i18n>More</a>
+  </div>
+
+  <img class="subbg" ngSrc="assets/subbg.png" alt="" width="700" height="450" />
+</div>
+
+<div class="section apply-for-service">
+  <h2
+    class="title"
+    [style.font-size.px]="responsiveSettings.secondaryTitle.size"
     tuiTitle="l"
     i18n
   >
@@ -43,4 +67,8 @@
     (send)="applyForService($event)"
   >
   </ann-service-application-form>
+</div>
+
+<div class="section">
+  <h2 class="title">Install the app</h2>
 </div>
