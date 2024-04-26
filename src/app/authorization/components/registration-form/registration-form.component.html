@@ -3,6 +3,7 @@
 <form class="controls">
   <tui-input
     #usernameControlRef
+    [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
     class="b-form control username"
     autocomplete="current-password"
     [formControl]="usernameControl"
@@ -19,6 +20,7 @@
 
   <tui-input-password
     #passwordControlRef
+    [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
     autocomplete="current-password"
     class="b-form control"
     [pattern]="PasswordRegexp"
@@ -36,6 +38,7 @@
 
   <tui-input-password
     #repeatedPasswordControlRef
+    [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
     autocomplete="current-password"
     class="b-form control"
     [formControl]="repeatedPasswordControl"

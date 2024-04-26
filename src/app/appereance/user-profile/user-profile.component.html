@@ -1,13 +1,12 @@
-<nav class="main-nav" [style.padding-left.px]="90" tuiNavigationNav>
-  <tui-tabs>
+<nav class="main-nav" [style.width]="'100%'" tuiNavigationNav>
+  <tui-tabs [style.width]="'100%'">
     <button tuiTab>Info</button>
     <button tuiTab>History</button>
   </tui-tabs>
-  <hr />
 </nav>
 
 <div class="main">
-  <aside [tuiNavigationAside]="expanded">
+  <!-- <aside [tuiNavigationAside]="expanded">
     <header>
       <button iconLeft="tuiIconHome" tuiButton>
         <span tuiFade>A very very long product name</span>
@@ -67,14 +66,21 @@
         Collapse
       </button>
     </footer>
-  </aside>
+  </aside> -->
 
   <div class="content">
     <div tuiMode="onDark" tuiSurface class="blur">
       <div class="avatar-control">
         <tui-avatar [size]="'xxl'" [src]="avatarControl.value"></tui-avatar>
         <div class="update-avatar">
-          <button (click)="filePicker.click()">+</button>
+          <button
+            class="button-add"
+            (click)="filePicker.click()"
+            iconLeft="tuiIconPlus"
+            tuiButton
+          >
+            <!-- + -->
+          </button>
           <input #filePicker type="file" (change)="loadAvatar($event)" />
         </div>
       </div>
@@ -89,8 +95,14 @@
       </div>
     </div>
 
-    <h3>Prefilled data</h3>
+    <div class="section">
+      <h3>Prefilled data</h3>
+    </div>
 
-    <h3>Favorite masters</h3>
+    <div class="section">
+      <h3>Favorite masters</h3>
+
+      <ann-favorite-masters></ann-favorite-masters>
+    </div>
   </div>
 </div>

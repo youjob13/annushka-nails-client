@@ -21,6 +21,7 @@ import {
   TuiProgressModule,
 } from '@taiga-ui/kit';
 import { BehaviorSubject, finalize } from 'rxjs';
+import { ResponsiveDirective } from '../../../common/services/responsive.directive';
 import { PASSWORD_REGEXP } from '../../auth.constants';
 import { AuthService } from '../../services/auth.service';
 import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
@@ -47,7 +48,7 @@ import { LoginFormModel } from './login-form.models';
   styleUrl: '../../common.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginFormComponent {
+export class LoginFormComponent extends ResponsiveDirective {
   private readonly authService = inject(AuthService);
 
   protected formCompleteProgress = 0;
@@ -66,6 +67,8 @@ export class LoginFormComponent {
   }
 
   constructor() {
+    super();
+
     this.formModel = this.fb.group({
       username: this.fb.control('', {
         validators: [Validators.required, Validators.minLength(3)],

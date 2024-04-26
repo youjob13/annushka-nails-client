@@ -1,6 +1,6 @@
 <form class="b-form" [formGroup]="formModel">
   <tui-input
-    [style.width.px]="responsiveSettings.control.width"
+    [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
     [disabled]="!isEditable"
     [readOnly]="!isEditable"
     [required]="true"
@@ -12,8 +12,7 @@
   </tui-input>
 
   <tui-input-phone-international
-    [style.height.px]="30"
-    [style.width.px]="responsiveSettings.control.width"
+    [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
     class="control"
     [disabled]="!isEditable"
     [readOnly]="!isEditable"
@@ -24,6 +23,8 @@
   >
     Type your number
   </tui-input-phone-international>
-</form>
 
-<button (click)="toggle()">{{ isEditable ? "Save" : "Edit" }}</button>
+  <button tuiButton (click)="toggle()">
+    {{ isEditable ? "Save" : "Edit" }}
+  </button>
+</form>

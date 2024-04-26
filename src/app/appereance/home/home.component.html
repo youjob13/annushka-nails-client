@@ -48,7 +48,13 @@
     <a routerLink="/about" i18n>More</a>
   </div>
 
-  <img class="subbg" ngSrc="assets/subbg.png" alt="" width="700" height="450" />
+  <img
+    class="subbg"
+    ngSrc="assets/subbg.png"
+    alt=""
+    [width]="isMobile() ? 300 : 700"
+    [height]="isMobile() ? 200 : 450"
+  />
 </div>
 
 <div class="section apply-for-service">
@@ -69,6 +75,7 @@
   </ann-service-application-form>
 </div>
 
-<div class="section">
+<div class="section about-app">
   <h2 class="title">Install the app</h2>
+  <button tuiButton type="button" (click)="show()">See details</button>
 </div>

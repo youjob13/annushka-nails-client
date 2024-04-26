@@ -19,6 +19,7 @@ import {
 } from '@taiga-ui/experimental';
 import { TuiTabsModule } from '@taiga-ui/kit';
 import { ResponsiveDirective } from '../../common/services/responsive.directive';
+import { FavoriteMastersComponent } from './components/favorite-masters/favorite-masters.component';
 import { UserDataFormComponent } from './components/user-data-form/user-data-form.component';
 
 @Component({
@@ -41,6 +42,7 @@ import { UserDataFormComponent } from './components/user-data-form/user-data-for
     TuiDataListModule,
     TuiIconModule,
     TuiButtonModule,
+    FavoriteMastersComponent,
   ],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss',

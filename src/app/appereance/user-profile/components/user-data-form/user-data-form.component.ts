@@ -2,7 +2,11 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TuiAutoFocusModule } from '@taiga-ui/cdk';
-import { TuiButtonModule, TuiHostedDropdownModule } from '@taiga-ui/core';
+import {
+  TuiButtonModule,
+  TuiHostedDropdownModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
 import { TuiIconModule } from '@taiga-ui/experimental';
 import { TuiCountryIsoCode } from '@taiga-ui/i18n';
 import {
@@ -27,6 +31,7 @@ import { ResponsiveDirective } from '../../../../common/services/responsive.dire
     TuiSortCountriesPipeModule,
     AsyncPipe,
     TuiHostedDropdownModule,
+    TuiTextfieldControllerModule,
   ],
   templateUrl: './user-data-form.component.html',
   styleUrl: './user-data-form.component.scss',

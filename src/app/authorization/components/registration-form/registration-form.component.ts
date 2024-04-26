@@ -27,6 +27,7 @@ import {
   TuiInputPasswordModule,
   TuiProgressModule,
 } from '@taiga-ui/kit';
+import { ResponsiveDirective } from '../../../common/services/responsive.directive';
 import { PASSWORD_REGEXP } from '../../auth.constants';
 import { RegistrationAuthData } from '../../auth.models';
 import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
@@ -52,7 +53,7 @@ import { RegistrationFormModel } from './registration-form.models';
   styleUrl: '../../common.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegistrationFormComponent {
+export class RegistrationFormComponent extends ResponsiveDirective {
   @Output() send = new EventEmitter<RegistrationAuthData>();
 
   private readonly fb = inject(FormBuilder);
@@ -76,6 +77,8 @@ export class RegistrationFormComponent {
   }
 
   constructor() {
+    super();
+
     this.formModel = this.fb.group({
       username: this.fb.control('', {
         validators: [Validators.required, Validators.minLength(3)],
