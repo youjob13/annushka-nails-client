@@ -1,2 +1,0 @@
-import{Na as i,Wa as c,i as r,ja as o,ua as n,xa as s}from"./chunk-CODMWCX7.js";function a(t){t||(i(a),t=s(c));let u=new r(e=>t.onDestroy(e.next.bind(e)));return e=>e.pipe(o(u))}var d=new n("auth-config",{providedIn:"root",factory:()=>({baseEndpoint:"/auth"})}),l=new n("api-config",{providedIn:"root",factory:()=>({baseEndpoint:"/api"})});export{a,d as b,l as c};
-/**i18n:15532d68a152d1b02ceb639d7639ec309fa9c79309c98a8bae3fa72f0bf19670*/
