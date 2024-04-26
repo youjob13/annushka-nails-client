@@ -265,10 +265,25 @@
     }
   }
 
+  .section-title {
+    font-size: 18px;
+  }
+
+  .section-subtitle {
+    font-size: 15px;
+  }
+
   .option {
+    height: 60px;
+
     .content {
-      width: 350px;
+      width: 300px;
+      padding: 8px 0;
     }
+  }
+
+  .date-control::after {
+    content: none;
   }
 
   .date-time-control {
@@ -299,5 +314,10 @@
     .section-header {
       margin: 0 0 30px;
     }
+  }
+
+  .control,
+  .comment {
+    width: 255px;
   }
 }

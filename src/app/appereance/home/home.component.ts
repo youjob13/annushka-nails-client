@@ -1,5 +1,6 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   TuiButtonModule,
   TuiSurfaceModule,
@@ -20,6 +21,8 @@ import { ServicesService } from '../../domain/services/services/services.service
     TuiButtonModule,
     TuiSurfaceModule,
     ResponsivePipe,
+    NgOptimizedImage,
+    RouterLink,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

@@ -11,6 +11,12 @@ export type ResponsiveSettings = {
   secondaryText: {
     size: number;
   };
+  control: {
+    width: number;
+  };
+  textArea: {
+    height: number;
+  };
 };
 
 export type DisplayType = 'desktopLarge' | 'desktopSmall' | 'mobile';
@@ -29,6 +35,12 @@ export const MAPPER: Record<DisplayType, ResponsiveSettings> = {
     secondaryText: {
       size: 13,
     },
+    control: {
+      width: 500,
+    },
+    textArea: {
+      height: 87,
+    },
   },
   desktopSmall: {
     mainTitle: {
@@ -43,6 +55,12 @@ export const MAPPER: Record<DisplayType, ResponsiveSettings> = {
     secondaryText: {
       size: 13,
     },
+    control: {
+      width: 500,
+    },
+    textArea: {
+      height: 87,
+    },
   },
   mobile: {
     mainTitle: {
@@ -52,10 +70,16 @@ export const MAPPER: Record<DisplayType, ResponsiveSettings> = {
       size: 24,
     },
     text: {
-      size: 16,
+      size: 13,
     },
     secondaryText: {
-      size: 13,
+      size: 11,
+    },
+    control: {
+      width: 240,
+    },
+    textArea: {
+      height: 60,
     },
   },
 };

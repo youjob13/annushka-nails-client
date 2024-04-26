@@ -6,7 +6,7 @@ import { Role } from '../role.constants';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly userRole$$ = new BehaviorSubject(Role.Guest);
+  private readonly userRole$$ = new BehaviorSubject(Role.User);
   public readonly userRole$ = this.userRole$$.asObservable();
 
   public readonly isAuthorized$ = this.userRole$$.pipe(

@@ -18,12 +18,26 @@
     [pseudoDisabled]="requestInProgress"
   >
     <div class="content">
-      <h3 class="title" tuiTitle="s" i18n>
+      <h3
+        class="title"
+        tuiTitle="s"
+        i18n
+        [style.font-size.px]="responsiveSettings.text.size"
+      >
         {{ service.name }}
       </h3>
-      <p class="subtitle" tuiSubtitle="s" i18n>
+      <p
+        class="subtitle"
+        tuiSubtitle="s"
+        i18n
+        [style.font-size.px]="responsiveSettings.secondaryText.size"
+      >
         {{ service.description }} |
-        <tui-badge class="price" [value]="service.price + '$'"></tui-badge>
+        <tui-badge
+          [style.font-size.px]="responsiveSettings.secondaryText.size"
+          class="price"
+          [value]="service.price + '$'"
+        ></tui-badge>
       </p>
     </div>
   </tui-radio-block>
@@ -67,6 +81,7 @@
       (dayClick)="onDayClick($event)"
     ></tui-calendar>
 
+    @if(!isMobile()) {
     <div
       class="times-control"
       [ngClass]="{ visible: availableTimesForSelectedDay.length > 0 }"
@@ -89,6 +104,7 @@
         }
       </tui-scrollbar>
     </div>
+    }
   </div>
 </div>
 
@@ -103,6 +119,7 @@
 
   <tui-input
     #usernameControlRef
+    [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
     [required]="true"
     [readOnly]="requestInProgress"
     [disabled]="requestInProgress"
@@ -114,6 +131,7 @@
   </tui-input>
 
   <tui-input-phone-international
+    [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
     [readOnly]="requestInProgress"
     [disabled]="requestInProgress"
     class="control"
@@ -126,6 +144,8 @@
   </tui-input-phone-international>
 
   <tui-textarea
+    [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
+    [style.min-height.px]="responsiveSettings.textArea.height"
     [readOnly]="requestInProgress"
     [disabled]="requestInProgress"
     class="comment"
