@@ -1,2 +1,0 @@
-import{$b as a,Dc as c,Ea as o,_b as i,vc as r}from"./chunk-Q3LASK2U.js";var l=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=o({type:e,selectors:[["ng-component"]],standalone:!0,features:[c],decls:2,vars:0,template:function(n,p){n&1&&(i(0,"p"),r(1,"about works!"),a())},styles:["p[_ngcontent-%COMP%]{height:200vh}"],changeDetection:0});let t=e;return t})();export{l as AboutComponent};
-/**i18n:15532d68a152d1b02ceb639d7639ec309fa9c79309c98a8bae3fa72f0bf19670*/

@@ -1,2 +1,0 @@
-import{$b as a,Dc as c,Ea as i,_b as o,vc as r}from"./chunk-Q3LASK2U.js";var d=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=i({type:e,selectors:[["ann-admin-profile"]],standalone:!0,features:[c],decls:2,vars:0,template:function(n,m){n&1&&(o(0,"p"),r(1,"admin-profile works!"),a())},changeDetection:0});let t=e;return t})();export{d as AdminProfileComponent};
-/**i18n:15532d68a152d1b02ceb639d7639ec309fa9c79309c98a8bae3fa72f0bf19670*/
