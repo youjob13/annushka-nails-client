@@ -15,7 +15,7 @@ export class HeaderService {
   private readonly authService = inject(AuthService);
   private readonly userService = inject(UserService);
 
-  public readonly navigationItems = MAIN_NAVIGATION_ITEMS;
+  public readonly navigationItems = MAIN_NAVIGATION_ITEMS.slice(1);
   public readonly isAuthorized$$ = new BehaviorSubject(false);
 
   constructor() {

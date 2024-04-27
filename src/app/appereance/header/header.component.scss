@@ -1,5 +1,27 @@
-.navigation {
-  margin: 0;
+.header {
+  padding: 0;
+
+  .logo {
+    font-weight: 600;
+  }
+
+  .navigation {
+    width: 100%;
+    margin: 0;
+
+    .tabs {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .nav-items {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
 }
 
 .user-profile:not(.active) {
@@ -13,5 +35,13 @@
 
   &:active {
     background-color: var(--tui-text-03);
+  }
+}
+
+:host.mobile {
+  .header {
+    .navigation {
+      padding: 0 8px;
+    }
   }
 }

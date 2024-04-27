@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
-import { AuthRoute } from '../../domain/router.constants';
+import { ResponsiveDirective } from '../../common/services/responsive.directive';
+import { AuthRoute, MainRoute } from '../../domain/router.constants';
 import { IMPORTS } from './header.config';
 import {
   AUTH_BUTTON_CONTENT_BY_PATH,
@@ -19,7 +20,7 @@ import { HeaderService } from './header.service';
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
+export class HeaderComponent extends ResponsiveDirective {
   private readonly router = inject(Router);
   private readonly document = inject(DOCUMENT);
   public readonly headerService = inject(HeaderService);
@@ -28,12 +29,16 @@ export class HeaderComponent {
       this.document.location.pathname.includes(navItem.link)
     ) || 0;
 
+  protected readonly Logo = this.isMobile() ? 'Annushka' : 'Annushka nails';
+  protected readonly MainRoute = MainRoute;
   protected readonly authButtonContent$$ = new BehaviorSubject<Record<
     'link' | 'title',
     string
   > | null>(null);
 
   constructor() {
+    super();
+
     this.router.events
       .pipe(
         takeUntilDestroyed(),

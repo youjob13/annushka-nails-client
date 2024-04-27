@@ -1,39 +1,51 @@
-<header tuiNavigationHeader [style.position]="'sticky'">
-  <span tuiNavigationLogo>
-    <span tuiFade>Annushka nails</span>
-  </span>
-
-  <hr />
-
+<header class="header" tuiNavigationHeader [style.position]="'sticky'">
   <nav class="navigation" tuiNavigationNav [style.background]="'inherit'">
-    <tui-tabs tuiFade [activeItemIndex]="initialActiveTabItemIndex">
-      @for(nav of headerService.navigationItems; track nav.title) {
-      <button tuiTab [routerLink]="nav.link">{{ nav.title }}</button>
-      }
-    </tui-tabs>
-  </nav>
+    <tui-tabs
+      class="tabs"
+      [underline]="false"
+      tuiFade
+      [activeItemIndex]="initialActiveTabItemIndex"
+      [style.margin-inline-end.rem]="0"
+    >
+      <button class="logo" tuiTab [routerLink]="MainRoute.Home">
+        <span tuiFade>{{ Logo }}</span>
+      </button>
 
-  <!-- <button iconLeft="tuiIconBell" tuiIconButton>
+      @if(!isMobile()) {
+      <hr />
+      }
+
+      <div class="nav-items">
+        @for(nav of headerService.navigationItems; track nav.title) {
+        <button tuiTab [routerLink]="nav.link">
+          {{ nav.title }}
+        </button>
+        }
+      </div>
+
+      <!-- <button iconLeft="tuiIconBell" tuiIconButton>
     Notifications
     <tui-badge-notification></tui-badge-notification>
   </button> -->
 
-  @if(authButtonContent$$ | async; as authButtonContent ) {
-  @if(authButtonContent !== null) {
-  <button tuiButton [routerLink]="authButtonContent.link">
-    {{ authButtonContent.title }}
-  </button>
-  } } @else if(headerService.isAuthorized$$ | async) {
-  <button tuiButton (click)="logout()">Log out</button>
-  } @if(headerService.isAuthorized$$ | async) {
-  <tui-avatar
-    avatarUrl="tuiIconUser"
-    class="user-profile avatar"
-    routerLink="/user-profile"
-    routerLinkActive="active"
-    size="s"
-    src="AI"
-  ></tui-avatar>
-  }
-  <!-- [avatarUrl]="wrongUrl" -->
+      @if(authButtonContent$$ | async; as authButtonContent ) {
+      @if(authButtonContent !== null) {
+      <button tuiTab tuiButton [routerLink]="authButtonContent.link">
+        {{ authButtonContent.title }}
+      </button>
+      } } @else if(!isMobile() && (headerService.isAuthorized$$ | async)) {
+      <button tuiTab tuiButton (click)="logout()">Log out</button>
+      } @if(headerService.isAuthorized$$ | async) {
+      <button tuiTab>
+        <tui-avatar
+          avatarUrl="tuiIconUser"
+          class="user-profile avatar"
+          [routerLink]="MainRoute.UserProfile"
+          routerLinkActive="active"
+          size="s"
+        ></tui-avatar>
+      </button>
+      }
+    </tui-tabs>
+  </nav>
 </header>
