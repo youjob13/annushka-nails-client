@@ -1,0 +1,2 @@
+import{Fc as c,Ga as i,ac as o,bc as a,xc as r}from"./chunk-SROP66BU.js";var d=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=i({type:e,selectors:[["ann-admin-profile"]],standalone:!0,features:[c],decls:2,vars:0,template:function(n,m){n&1&&(o(0,"p"),r(1,"admin-profile works!"),a())},changeDetection:0});let t=e;return t})();export{d as AdminProfileComponent};
+/**i18n:f994e39d7e55425eb79f71f36a93b3e1be0e20e3e7b18c9ed2d3946a6fd8aef7*/
