@@ -18,11 +18,11 @@
     [pseudoDisabled]="requestInProgress"
   >
     <div class="content">
-      <h3 class="text" i18n>
+      <h3 class="text align-left" i18n>
         {{ service.name }}
       </h3>
-      <p class="secondary-text" i18n>
-        {{ service.description }} |
+      <p class="service-description secondary-text" i18n>
+        {{ service.description }}
         <tui-badge
           class="price secondary-text"
           [value]="service.price + '$'"

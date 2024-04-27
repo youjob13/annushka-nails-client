@@ -13,3 +13,26 @@
   width: 100px;
   margin: 0 auto;
 }
+
+.notify {
+  display: flex;
+  align-items: center;
+  column-gap: 30px;
+
+  .app {
+    position: relative;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: -15px;
+      top: 0;
+      height: 100%;
+      width: 1px;
+      background-color: rgb(180, 180, 180);
+    }
+  }
+}

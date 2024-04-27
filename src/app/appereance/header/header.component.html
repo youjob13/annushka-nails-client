@@ -11,15 +11,35 @@
         <span tuiFade>{{ Logo }}</span>
       </button>
 
-      @if(!isMobile()) {
       <hr />
-      }
 
       <div class="nav-items">
+        @if(isMobile() && !isPWA) {
+        <tui-hosted-dropdown #menu [content]="navs">
+          <button iconLeft="tuiIconMoreHorizontal" tuiIconButton>More</button>
+          <ng-template #navs>
+            <tui-data-list size="s">
+              @for(nav of headerService.navigationItems; track nav.title) {
+              <button
+                (click)="menu.close()"
+                [style.color]="'white'"
+                tuiTab
+                [routerLink]="nav.link"
+              >
+                {{ nav.title }}
+              </button>
+              }
+            </tui-data-list>
+          </ng-template>
+        </tui-hosted-dropdown>
+        } @else if (!isMobile()) {
+        <!--  -->
         @for(nav of headerService.navigationItems; track nav.title) {
         <button tuiTab [routerLink]="nav.link">
           {{ nav.title }}
         </button>
+        }
+        <!--  -->
         }
       </div>
 

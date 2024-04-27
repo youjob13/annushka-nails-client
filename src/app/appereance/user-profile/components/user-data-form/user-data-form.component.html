@@ -24,6 +24,62 @@
     Type your number
   </tui-input-phone-international>
 
+  <p class="text">Notify about appointment via:</p>
+
+  <div class="notify">
+    <tui-hosted-dropdown
+      tuiDropdownLimitWidth="fixed"
+      [content]="dropdown"
+      [(open)]="open"
+    >
+      <div tuiGroup>
+        <button
+          [disabled]="!isEditable"
+          [size]="isMobile() ? 's' : 'm'"
+          title="Menu"
+          tuiHostedDropdownHost
+          tuiButton
+          type="button"
+          appearance="whiteblock"
+        >
+          Telegram
+        </button>
+        <ng-template #icon>
+          <tui-svg
+            src="tuiIconChevronDown"
+            class="icon"
+            [class.icon_rotated]="open"
+          ></tui-svg>
+        </ng-template>
+      </div>
+    </tui-hosted-dropdown>
+
+    <ng-template #dropdown let-activeZone>
+      <tui-input
+        [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
+        [disabled]="!isEditable"
+        [readOnly]="!isEditable"
+        [required]="true"
+        class="control"
+        [formControl]="notifyViaAppControl"
+      >
+        Type your telegram username or link
+        <input tuiTextfield type="email" />
+      </tui-input>
+    </ng-template>
+
+    <div class="app">
+      <span class="text">App</span>
+      <tui-toggle
+        [disabled]="!isEditable"
+        [readOnly]="!isEditable"
+        [formControl]="notifyViaTelegramControl"
+        size="l"
+        [showIcons]="true"
+      ></tui-toggle>
+    </div>
+  </div>
+
   <button
     class="button medium"
     tuiButton

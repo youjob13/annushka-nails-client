@@ -82,6 +82,11 @@
 .services {
   display: flex;
   position: relative;
+
+  .service-description {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .option {

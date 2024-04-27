@@ -2,6 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../../authorization/services/auth.service';
+import { Platform } from '../../common/constants';
+import { PLATFORM } from '../../common/injection-tokens/platform';
 import { MainRoute } from '../../domain/router.constants';
 import { PermissionsService } from '../../domain/services/permissions.service';
 import { UserService } from '../../domain/services/user.service';
@@ -14,8 +16,10 @@ export class HeaderService {
   private readonly permissionsService = inject(PermissionsService);
   private readonly authService = inject(AuthService);
   private readonly userService = inject(UserService);
+  private readonly platform = inject(PLATFORM);
 
-  public readonly navigationItems = MAIN_NAVIGATION_ITEMS.slice(1);
+  public readonly navigationItems =
+    this.platform === Platform.Browser ? MAIN_NAVIGATION_ITEMS.slice(1) : [];
   public readonly isAuthorized$$ = new BehaviorSubject(false);
 
   constructor() {

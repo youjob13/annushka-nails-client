@@ -9,6 +9,7 @@ import { TuiAvatarModule, TuiBadgeModule, TuiTabsModule } from '@taiga-ui/kit';
 
 import { AsyncPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TuiDataListModule, TuiHostedDropdownModule } from '@taiga-ui/core';
 
 const TAIGA_UI_MODULES = [
   TuiNavigationModule,
@@ -19,6 +20,8 @@ const TAIGA_UI_MODULES = [
   TuiTabsModule,
   TuiButtonModule,
   TuiIconsModule,
+  TuiHostedDropdownModule,
+  TuiDataListModule,
 ];
 
 const BUILTIN_MODULES = [RouterModule, AsyncPipe];
