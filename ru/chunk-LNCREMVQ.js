@@ -1,0 +1,2 @@
+import{Bc as c,Ea as a,Yb as i,Zb as o,tc as r}from"./chunk-CODMWCX7.js";var p=(()=>{let e=class e{};e.\u0275fac=function(n){return new(n||e)},e.\u0275cmp=a({type:e,selectors:[["ann-admin"]],standalone:!0,features:[c],decls:2,vars:0,template:function(n,m){n&1&&(i(0,"p"),r(1,"admin works!"),o())},changeDetection:0});let t=e;return t})();export{p as AdminComponent};
+/**i18n:15532d68a152d1b02ceb639d7639ec309fa9c79309c98a8bae3fa72f0bf19670*/
