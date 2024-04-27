@@ -4,14 +4,7 @@
   </video>
 
   <div class="content">
-    <h2
-      class="main-title"
-      [style.font-size.px]="responsiveSettings.mainTitle.size"
-      tuiTitle="l"
-      i18n
-    >
-      Nails for you
-    </h2>
+    <h2 class="main-title" i18n>Nails for you</h2>
   </div>
 
   <button
@@ -28,22 +21,15 @@
 </div>
 
 <div class="section about" #about>
-  <h2
-    class="title"
-    [style.font-size.px]="responsiveSettings.secondaryTitle.size"
-    tuiTitle="l"
-    i18n
-  >
-    Who am I?
-  </h2>
+  <h2 class="title" i18n>Who am I?</h2>
 
   <div class="description">
-    <p i18n [style.font-size.px]="responsiveSettings.text.size">
+    <span class="text" i18n>
       I am a professional nail technician. I use only high-quality products and
       tools to ensure the best results. My goal is to make every client feel
       beautiful and confident with their nails.
-    </p>
-    <a routerLink="/about" tuiLink i18n>More about me...</a>
+    </span>
+    <a class="text" routerLink="/about" tuiLink i18n>More about me...</a>
   </div>
 
   <!-- <img
@@ -56,14 +42,7 @@
 </div>
 
 <div class="section apply-for-service">
-  <h2
-    class="title"
-    [style.font-size.px]="responsiveSettings.secondaryTitle.size"
-    tuiTitle="l"
-    i18n
-  >
-    Apply for service right now
-  </h2>
+  <h2 class="title" i18n>Apply for service right now</h2>
 
   <ann-service-application-form
     [services]="servicesService.services$ | async"
@@ -74,7 +53,7 @@
 </div>
 
 <div class="section about-app">
-  <strong class="title tui-text_body-xl">
+  <strong class="title">
     Get more experience with our application and telegram bot.
   </strong>
 
@@ -103,14 +82,7 @@
 </div>
 
 <div class="section map">
-  <h2
-    class="title"
-    [style.font-size.px]="responsiveSettings.secondaryTitle.size"
-    tuiTitle="l"
-    i18n
-  >
-    Find us
-  </h2>
-  <address>London, Cherry street, №17</address>
-  <ann-map> </ann-map>
+  <h2 class="title" i18n>Find us</h2>
+  <address class="text">London, Cherry street, №17</address>
+  <ann-map></ann-map>
 </div>

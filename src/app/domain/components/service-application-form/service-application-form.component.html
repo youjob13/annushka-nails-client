@@ -1,7 +1,7 @@
 <div class="section services">
   <div class="section-header">
-    <h2 class="section-title" tuiTitle="l" i18n>Select service</h2>
-    <h2 class="section-subtitle" tuiTitle="l" i18n>
+    <h2 class="title-2 align-left" i18n>Select service</h2>
+    <h2 class="subtitle" i18n>
       Description about services. A couple of sentences about provided services.
     </h2>
   </div>
@@ -18,54 +18,25 @@
     [pseudoDisabled]="requestInProgress"
   >
     <div class="content">
-      <h3
-        class="title"
-        tuiTitle="s"
-        i18n
-        [style.font-size.px]="responsiveSettings.text.size"
-      >
+      <h3 class="text" i18n>
         {{ service.name }}
       </h3>
-      <p
-        class="subtitle"
-        tuiSubtitle="s"
-        i18n
-        [style.font-size.px]="responsiveSettings.secondaryText.size"
-      >
+      <p class="secondary-text" i18n>
         {{ service.description }} |
         <tui-badge
-          [style.font-size.px]="responsiveSettings.secondaryText.size"
-          class="price"
+          class="price secondary-text"
           [value]="service.price + '$'"
         ></tui-badge>
       </p>
     </div>
   </tui-radio-block>
   }
-  <!--  -->
-  @if(!isMobile() && serviceDetails[serviceControl.value]; as details) {
-  <div class="details" [ngClass]="{ active: !!serviceControl.value }">
-    <div class="elevated" tuiCardLarge tuiSurface="elevated">
-      <header tuiHeader>
-        <h2 tuiTitle>{{ details.name }}</h2>
-      </header>
-
-      <section>{{ details.description }}</section>
-
-      <footer>
-        <button appearance="secondary" size="m" tuiButton type="button">
-          Label
-        </button>
-      </footer>
-    </div>
-  </div>
-  }
 </div>
 
 <div class="section">
   <div class="section-header">
-    <h2 class="section-title" tuiTitle="l" i18n>Select date</h2>
-    <h2 class="section-subtitle" tuiTitle="l" i18n>
+    <h2 class="title-2 align-left" i18n>Select date</h2>
+    <h2 class="subtitle" i18n>
       Description about date. A couple of sentences about available dates.
     </h2>
   </div>
@@ -85,8 +56,8 @@
     <ng-container *ngTemplateOutlet="timePickerRef"></ng-container>
     } @else if (timeControl.value) {
     <div class="selected-time-container">
-      <span class="selected-time" i18n>Selected time</span>
-      <span class="time-value" i18n>{{ timeControl.value | json }}</span>
+      <span class="text gray" i18n>Selected time</span>
+      <span class="text bold" i18n>{{ timeControl.value | json }}</span>
     </div>
     }
   </div>
@@ -94,8 +65,8 @@
 
 <div class="section contacts">
   <div class="section-header">
-    <h2 class="section-title" tuiTitle="l" i18n>Type your contacts</h2>
-    <h2 class="section-subtitle" tuiTitle="l" i18n>
+    <h2 class="title-2 align-left" i18n>Type your contacts</h2>
+    <h2 class="subtitle" i18n>
       Description why you should give us your contacts. A couple of sentences
       about why you should do it.
     </h2>
