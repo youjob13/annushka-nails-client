@@ -46,13 +46,13 @@
     <a routerLink="/about" tuiLink i18n>More about me...</a>
   </div>
 
-  <img
+  <!-- <img
     class="subbg"
     ngSrc="assets/subbg.png"
     alt=""
     [width]="isMobile() ? 300 : 700"
     [height]="isMobile() ? 200 : 450"
-  />
+  /> -->
 </div>
 
 <div class="section apply-for-service">
@@ -100,4 +100,17 @@
       </button>
     </div>
   </div>
+</div>
+
+<div class="section map">
+  <h2
+    class="title"
+    [style.font-size.px]="responsiveSettings.secondaryTitle.size"
+    tuiTitle="l"
+    i18n
+  >
+    Find us
+  </h2>
+  <address>London, Cherry street, №17</address>
+  <ann-map> </ann-map>
 </div>

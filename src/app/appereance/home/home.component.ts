@@ -11,6 +11,7 @@ import {
 import { WINDOW } from '../../common/injection-tokens/platform';
 import { ResponsiveDirective } from '../../common/services/responsive.directive';
 import { ResponsivePipe } from '../../common/services/responsive.pipe';
+import { MapComponent } from '../../domain/components/map/map.component';
 import { ServiceApplicationFormComponent } from '../../domain/components/service-application-form/service-application-form.component';
 import { ServicesService } from '../../domain/services/services/services.service';
 @Component({
@@ -27,6 +28,7 @@ import { ServicesService } from '../../domain/services/services/services.service
     RouterLink,
     TuiButtonModule,
     TuiLinkModule,
+    MapComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

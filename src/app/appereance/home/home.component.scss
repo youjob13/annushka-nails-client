@@ -92,6 +92,17 @@
   }
 }
 
+.section.map {
+  padding: 0;
+  height: 50vh;
+  width: 100vw;
+  text-align: center;
+
+  .title {
+    margin: 0;
+  }
+}
+
 // Mobile
 
 :host.mobile {
