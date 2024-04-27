@@ -80,9 +80,6 @@
 }
 
 .section.map {
-  padding: 0;
-  height: 50vh;
-  width: 100vw;
   text-align: center;
 }
 
@@ -141,5 +138,9 @@
       display: flex;
       column-gap: 40px;
     }
+  }
+
+  .map-content {
+    height: 50vh;
   }
 }

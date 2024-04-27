@@ -41,6 +41,10 @@
   font-weight: bold;
 }
 
+*.medium {
+  font-weight: 500;
+}
+
 // Mobile
 
 :host-context(.mobile) {

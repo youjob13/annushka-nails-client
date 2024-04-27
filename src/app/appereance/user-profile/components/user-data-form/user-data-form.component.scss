@@ -1,3 +1,5 @@
+@import "../../../../styles/buttons.scss";
+
 *:disabled {
   cursor: default;
 }
@@ -5,4 +7,9 @@
 .b-form {
   display: grid;
   row-gap: 10px;
+}
+
+.button {
+  width: 100px;
+  margin: 0 auto;
 }

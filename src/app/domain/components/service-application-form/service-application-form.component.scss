@@ -1,4 +1,5 @@
 @import "../../../styles/typography.scss";
+@import "../../../styles/controls.scss";
 
 :host {
   display: flex;
@@ -158,6 +159,18 @@
       opacity: 1;
       visibility: visible;
     }
+  }
+}
+
+// Notifications
+
+.notify {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .text {
+    margin-bottom: 15px;
   }
 }
 

@@ -24,7 +24,13 @@
     Type your number
   </tui-input-phone-international>
 
-  <button tuiButton (click)="toggle()">
+  <button
+    class="button medium"
+    tuiButton
+    [size]="isMobile() ? 's' : 'm'"
+    appearance="whiteblock"
+    (click)="toggle()"
+  >
     {{ isEditable ? "Save" : "Edit" }}
   </button>
 </form>

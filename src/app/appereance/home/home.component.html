@@ -61,21 +61,25 @@
     <div class="column">
       <button
         tuiButton
+        [style.background-color]="'white'"
+        appearance="whiteblock"
         [size]="isMobile() ? 's' : 'm'"
         type="button"
         (click)="show()"
       >
-        Install the app
+        <span class="medium">Install the app</span>
       </button>
     </div>
     <div class="column">
       <button
         tuiButton
+        appearance="whiteblock"
+        [style.background-color]="'white'"
         [size]="isMobile() ? 's' : 'm'"
         type="button"
         (click)="openTg()"
       >
-        Use telegram bot
+        <span class="medium">Use telegram bot</span>
       </button>
     </div>
   </div>
@@ -84,5 +88,5 @@
 <div class="section map">
   <h2 class="title" i18n>Find us</h2>
   <address class="text">London, Cherry street, №17</address>
-  <ann-map></ann-map>
+  <ann-map class="map-content"></ann-map>
 </div>

@@ -111,31 +111,50 @@
   </tui-textarea>
 </div>
 
-<div tuiGroup class="group">
-  @for(control of notifyViaControl.controls | keyvalue; track control.key) {
-  <tui-checkbox-block
-    [disabled]="requestInProgress"
-    [hideCheckbox]="true"
-    [readOnly]="requestInProgress"
-    [title]="control.key"
-    contentAlign="right"
-    [formControl]="control.value"
-    size="s"
-  >
-    {{ control.key }}
-  </tui-checkbox-block>
-  }
+@if(serviceControl.valid && dayControl.valid && timeControl.valid) {
+<div class="summary">
+  <p class="text bold">
+    Service:
+    <span class="gray">{{ serviceDetails[serviceControl.value].name }}</span>
+  </p>
+  <p class="text bold">
+    Date:
+    <span class="gray">{{ dayControl.value }} | {{ timeControl.value }}</span>
+  </p>
+</div>
+}
+
+<div class="notify">
+  <h5 class="text">Select notify options</h5>
+
+  <ul tuiGroup class="group options">
+    @for(control of notifyViaControl.controls | keyvalue; track control.key) {
+    <tui-checkbox-block
+      [disabled]="requestInProgress"
+      [hideCheckbox]="true"
+      [readOnly]="requestInProgress"
+      [title]="control.key"
+      contentAlign="right"
+      [formControl]="control.value"
+      size="s"
+    >
+      {{ control.key }}
+    </tui-checkbox-block>
+    }
+  </ul>
 </div>
 
 <button
   tuiButton
-  [size]="isMobile() ? 'm' : 'l'"
-  type="button"
   [disabled]="formModel.invalid || requestInProgress"
+  [appearance]="'whiteblock'"
+  [size]="isMobile() ? 'm' : 'l'"
+  [style.width.px]="160"
+  type="button"
   [icon]="requestInProgress ? loaderRef : null"
   (click)="submit()"
 >
-  Send
+  Submit
 </button>
 
 <ng-template #loaderRef>

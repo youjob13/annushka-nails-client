@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -22,10 +23,10 @@ import {
 } from '@taiga-ui/core';
 import { TuiIconModule } from '@taiga-ui/experimental';
 import {
-  TuiCheckboxModule,
   TuiInputModule,
   TuiInputPasswordModule,
   TuiProgressModule,
+  TuiToggleModule,
 } from '@taiga-ui/kit';
 import { ResponsiveDirective } from '../../../common/services/responsive.directive';
 import { PASSWORD_REGEXP } from '../../auth.constants';
@@ -38,7 +39,6 @@ import { RegistrationFormModel } from './registration-form.models';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    TuiCheckboxModule,
     TuiTextfieldControllerModule,
     TuiInputModule,
     TuiSvgModule,
@@ -48,6 +48,8 @@ import { RegistrationFormModel } from './registration-form.models';
     FormsModule,
     TuiProgressModule,
     ProgressBarComponent,
+    TuiToggleModule,
+    NgStyle,
   ],
   templateUrl: './registration-form.component.html',
   styleUrl: '../../common.scss',

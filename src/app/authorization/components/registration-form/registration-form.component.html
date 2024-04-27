@@ -53,18 +53,30 @@
     Repeat password
   </tui-input-password>
 
-  <tui-checkbox
-    [ngModelOptions]="{ standalone: true }"
-    [(ngModel)]="passwordControlRef.isPasswordHidden"
-    (ngModelChange)="repeatedPasswordControlRef.isPasswordHidden = $event"
-    class="tui-space_bottom-3"
-  ></tui-checkbox>
+  <span
+    [ngStyle]="{
+      display: 'flex',
+      alignItems: 'center',
+      columnGap: '8px',
+      justifyContent: 'center',
+      marginBottom: '10px'
+    }"
+  >
+    <tui-toggle
+      [ngModelOptions]="{ standalone: true }"
+      [(ngModel)]="passwordControlRef.isPasswordHidden"
+      (ngModelChange)="repeatedPasswordControlRef.isPasswordHidden = $event"
+      class="tui-space_right-1"
+      size="l"
+      [showIcons]="true"
+    ></tui-toggle>
+    Hide password</span
+  >
 
   <button
-    appearance="primary"
+    appearance="whiteblock"
     tuiButton
     type="button"
-    class="tui-space_right-3 tui-space_bottom-3"
     [disabled]="formModel.invalid"
     (click)="onSubmit()"
   >

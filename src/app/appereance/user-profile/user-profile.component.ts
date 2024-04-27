@@ -18,6 +18,7 @@ import {
   TuiTitleModule,
 } from '@taiga-ui/experimental';
 import { TuiTabsModule } from '@taiga-ui/kit';
+import { AuthService } from '../../authorization/services/auth.service';
 import { ResponsiveDirective } from '../../common/services/responsive.directive';
 import { FavoriteMastersComponent } from './components/favorite-masters/favorite-masters.component';
 import { UserDataFormComponent } from './components/user-data-form/user-data-form.component';
@@ -49,6 +50,8 @@ import { UserDataFormComponent } from './components/user-data-form/user-data-for
 })
 export class UserProfileComponent extends ResponsiveDirective {
   private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+
   protected readonly formModel = this.fb.group({
     avatar: this.fb.control(
       'https://avatars.githubusercontent.com/u/10106368',
@@ -76,5 +79,9 @@ export class UserProfileComponent extends ResponsiveDirective {
       );
     };
     reader.readAsDataURL(file);
+  }
+
+  public logout() {
+    this.authService.logout().subscribe();
   }
 }
