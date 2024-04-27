@@ -82,27 +82,11 @@
     ></tui-calendar>
 
     @if(!isMobile()) {
-    <div
-      class="times-control"
-      [ngClass]="{ visible: availableTimesForSelectedDay.length > 0 }"
-    >
-      <div class="header">
-        <h3 class="title" i18n>Available times</h3>
-        <h4 class="subtitle" i18n>Choose a time for service</h4>
-      </div>
-
-      <tui-scrollbar class="box">
-        @for(time of availableTimesForSelectedDay; track time) {
-        <tui-radio-labeled
-          [pseudoDisabled]="requestInProgress"
-          [formControl]="timeControl"
-          class="tui-space_bottom-3"
-          [item]="time"
-        >
-          {{ time }}
-        </tui-radio-labeled>
-        }
-      </tui-scrollbar>
+    <ng-container *ngTemplateOutlet="timePickerRef"></ng-container>
+    } @else if (timeControl.value) {
+    <div class="selected-time-container">
+      <span class="selected-time" i18n>Selected time</span>
+      <span class="time-value" i18n>{{ timeControl.value | json }}</span>
     </div>
     }
   </div>
@@ -174,6 +158,7 @@
 
 <button
   tuiButton
+  [size]="isMobile() ? 'm' : 'l'"
   type="button"
   [disabled]="formModel.invalid || requestInProgress"
   [icon]="requestInProgress ? loaderRef : null"
@@ -184,4 +169,39 @@
 
 <ng-template #loaderRef>
   <tui-svg class="loader" [src]="loader"></tui-svg>
+</ng-template>
+
+<ng-template #timePickerRef>
+  <div
+    class="times-control"
+    [ngClass]="{ visible: availableTimesForSelectedDay.length > 0 }"
+  >
+    @if(!isMobile()) {
+    <div class="header">
+      <h3 class="title" i18n>Available times</h3>
+      <h4 class="subtitle" i18n>Choose a time for service</h4>
+    </div>
+    }
+
+    <tui-scrollbar class="box">
+      @for(time of availableTimesForSelectedDay; track time) {
+      <tui-radio-labeled
+        [pseudoDisabled]="requestInProgress"
+        [formControl]="timeControl"
+        class="tui-space_bottom-3"
+        [item]="time"
+      >
+        {{ time }}
+      </tui-radio-labeled>
+      }
+    </tui-scrollbar>
+  </div>
+</ng-template>
+
+<ng-template
+  let-observer
+  [tuiDialogOptions]="{ label: 'Select time', size: 's' }"
+  [(tuiDialog)]="isTimePickerOpen"
+>
+  <ng-container *ngTemplateOutlet="timePickerRef"></ng-container>
 </ng-template>

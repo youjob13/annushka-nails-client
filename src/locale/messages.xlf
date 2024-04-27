@@ -2,18 +2,57 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="1113173911761783121" datatype="html">
-        <source>Nails for you</source>
+      <trans-unit id="7306410545024391171" datatype="html">
+        <source> Give your feedback </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/appereance/home/home.component.html</context>
-          <context context-type="linenumber">7,8</context>
+          <context context-type="sourcefile">src/app/appereance/feedbacks/feedbacks.component.html</context>
+          <context context-type="linenumber">23,24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3124744675770368107" datatype="html">
-        <source>Apply for service right now</source>
+      <trans-unit id="9143946287928622593" datatype="html">
+        <source> Nails for you </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/appereance/home/home.component.html</context>
-          <context context-type="linenumber">24,26</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4391194864505012347" datatype="html">
+        <source> Who am I? </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/appereance/home/home.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3693547406956916562" datatype="html">
+        <source> I am a professional nail technician. I use only high-quality products and tools to ensure the best results. My goal is to make every client feel beautiful and confident with their nails. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/appereance/home/home.component.html</context>
+          <context context-type="linenumber">42,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2643079048379380028" datatype="html">
+        <source>More about me...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/appereance/home/home.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4083865505177944514" datatype="html">
+        <source> Apply for service right now </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/appereance/home/home.component.html</context>
+          <context context-type="linenumber">65,66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="896013679254191529" datatype="html">
+        <source> Type your number </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/appereance/user-profile/components/user-data-form/user-data-form.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">127,128</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8089519829328717240" datatype="html">
@@ -34,70 +73,81 @@
         <source> <x id="INTERPOLATION" equiv-text="{{ service.name }}"/> </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
-          <context context-type="linenumber">22,24</context>
+          <context context-type="linenumber">27,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8664364403071346560" datatype="html">
-        <source> <x id="INTERPOLATION" equiv-text="{{ service.description }}"/> | <x id="START_TAG_TUI_BADGE" ctype="x-tui_badge" equiv-text="&lt;tui-badge class=&quot;price&quot; [value]=&quot;service.price + &apos;$&apos;&quot;&gt;"/><x id="CLOSE_TAG_TUI_BADGE" ctype="x-tui_badge" equiv-text="&lt;/tui-badge&gt;"/></source>
+        <source> <x id="INTERPOLATION" equiv-text="{{ service.description }}"/> | <x id="START_TAG_TUI_BADGE" ctype="x-tui_badge" equiv-text="&lt;tui-badge
+          [style.font-size.px]=&quot;responsiveSettings.secondaryText.size&quot;
+          class=&quot;price&quot;
+          [value]=&quot;service.price + &apos;$&apos;&quot;
+        &gt;"/><x id="CLOSE_TAG_TUI_BADGE" ctype="x-tui_badge" equiv-text="&lt;/tui-badge&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
-          <context context-type="linenumber">25,28</context>
+          <context context-type="linenumber">35,42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2671643902824593326" datatype="html">
         <source>Select date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
-          <context context-type="linenumber">35,36</context>
+          <context context-type="linenumber">67,68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8032394603280797191" datatype="html">
         <source> Description about date. A couple of sentences about available dates. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
-          <context context-type="linenumber">37,38</context>
+          <context context-type="linenumber">69,70</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5735019551585714706" datatype="html">
-        <source>Available times</source>
+      <trans-unit id="5394295239156480345" datatype="html">
+        <source>Selected time</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
-          <context context-type="linenumber">57,58</context>
+          <context context-type="linenumber">88,89</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5306072211088206512" datatype="html">
-        <source>Choose a time for service</source>
+      <trans-unit id="187187500641108332" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ timeControl.value | json }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
-          <context context-type="linenumber">58,59</context>
+          <context context-type="linenumber">89,90</context>
         </context-group>
       </trans-unit>
       <trans-unit id="223872376763520236" datatype="html">
         <source>Type your contacts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
-          <context context-type="linenumber">79,80</context>
+          <context context-type="linenumber">97,98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7244354344568797673" datatype="html">
         <source> Description why you should give us your contacts. A couple of sentences about why you should do it. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
-          <context context-type="linenumber">81,82</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="896013679254191529" datatype="html">
-        <source> Type your number </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
-          <context context-type="linenumber">116,117</context>
+          <context context-type="linenumber">99,100</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7942536357409213369" datatype="html">
         <source> Type a comment </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
-          <context context-type="linenumber">126,127</context>
+          <context context-type="linenumber">139,140</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5735019551585714706" datatype="html">
+        <source>Available times</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">181,182</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5306072211088206512" datatype="html">
+        <source>Choose a time for service</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/domain/components/service-application-form/service-application-form.component.html</context>
+          <context context-type="linenumber">182,183</context>
         </context-group>
       </trans-unit>
     </body>

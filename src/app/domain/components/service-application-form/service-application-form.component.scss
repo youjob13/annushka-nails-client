@@ -131,15 +131,7 @@
     }
 
     &.selected::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 20%;
-      transform: translateY(-15%);
-      height: 85%;
-      width: 1px;
       opacity: 1;
-      background-color: rgb(200, 200, 200);
     }
   }
 
@@ -287,6 +279,8 @@
   }
 
   .date-time-control {
+    flex-direction: column;
+
     .times-control {
       .header {
         margin-bottom: 7px;
@@ -310,14 +304,27 @@
 
   .section.contacts {
     row-gap: 10px;
-
-    .section-header {
-      margin: 0 0 30px;
-    }
   }
 
   .control,
   .comment {
     width: 255px;
+  }
+
+  .selected-time-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+
+    .selected-time {
+      color: gray;
+      font-weight: 600;
+    }
+
+    .time-value {
+      font-weight: 600;
+      color: black;
+    }
   }
 }

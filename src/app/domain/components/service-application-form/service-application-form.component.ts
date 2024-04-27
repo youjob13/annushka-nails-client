@@ -77,6 +77,7 @@ export class ServiceApplicationFormComponent
   protected availableTimesForSelectedDay: string[] = [];
 
   protected selectedDay: TuiDay | null = null;
+  protected isTimePickerOpen = false;
 
   protected readonly countries = Object.values(TuiCountryIsoCode);
   protected countryIsoCode = TuiCountryIsoCode.DE;
@@ -123,12 +124,10 @@ export class ServiceApplicationFormComponent
       }),
       date: this.fb.group(
         {
-          day: this.fb.control({
-            value: null,
+          day: this.fb.control(null, {
             validators: Validators.required,
           }),
-          time: this.fb.control({
-            value: null,
+          time: this.fb.control(null, {
             validators: Validators.required,
           }),
         },
@@ -154,6 +153,7 @@ export class ServiceApplicationFormComponent
     });
 
     this.timeControl.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
+      this.isTimePickerOpen = false;
       this.timeControl.markAsTouched();
     });
   }
@@ -179,6 +179,10 @@ export class ServiceApplicationFormComponent
     this.availableTimesForSelectedDay = this.getTimesForSelectedDay(day.day);
     if (this.clarifyTimeForDate(this.timeControl)) {
       this.timeControl.setValue(null);
+    }
+
+    if (this.isMobile()) {
+      this.isTimePickerOpen = !this.isTimePickerOpen;
     }
   }
 

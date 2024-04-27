@@ -39,13 +39,11 @@
 
   <div class="description">
     <p i18n [style.font-size.px]="responsiveSettings.text.size">
-      I am a professional nail technician with over 10 years of experience. I
-      provide a wide range of services, including manicure, pedicure, nail
-      extensions, and nail art. I use only high-quality products and tools to
-      ensure the best results. My goal is to make every client feel beautiful
-      and confident with their nails.
+      I am a professional nail technician. I use only high-quality products and
+      tools to ensure the best results. My goal is to make every client feel
+      beautiful and confident with their nails.
     </p>
-    <a routerLink="/about" i18n>More</a>
+    <a routerLink="/about" tuiLink i18n>More about me...</a>
   </div>
 
   <img
@@ -76,6 +74,30 @@
 </div>
 
 <div class="section about-app">
-  <h2 class="title">Install the app</h2>
-  <button tuiButton type="button" (click)="show()">See details</button>
+  <strong class="title tui-text_body-xl">
+    Get more experience with our application and telegram bot.
+  </strong>
+
+  <div class="row">
+    <div class="column">
+      <button
+        tuiButton
+        [size]="isMobile() ? 's' : 'm'"
+        type="button"
+        (click)="show()"
+      >
+        Install the app
+      </button>
+    </div>
+    <div class="column">
+      <button
+        tuiButton
+        [size]="isMobile() ? 's' : 'm'"
+        type="button"
+        (click)="openTg()"
+      >
+        Use telegram bot
+      </button>
+    </div>
+  </div>
 </div>

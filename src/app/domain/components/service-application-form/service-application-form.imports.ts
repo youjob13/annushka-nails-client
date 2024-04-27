@@ -1,8 +1,15 @@
-import { AsyncPipe, KeyValuePipe, NgClass } from '@angular/common';
+import {
+  AsyncPipe,
+  JsonPipe,
+  KeyValuePipe,
+  NgClass,
+  NgTemplateOutlet,
+} from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   TuiButtonModule,
   TuiCalendarModule,
+  TuiDialogModule,
   TuiGroupModule,
   TuiMaskAccessorModule,
   TuiScrollbarModule,
@@ -32,12 +39,15 @@ import {
 
 export const IMPORTS = [
   TuiScrollbarModule,
+  TuiDialogModule,
+  JsonPipe,
   NgClass,
   TuiCalendarModule,
   TuiRadioBlockModule,
   TuiRadioLabeledModule,
   ReactiveFormsModule,
   TuiTextfieldControllerModule,
+  NgTemplateOutlet,
   FormsModule,
   AsyncPipe,
   TuiInputModule,

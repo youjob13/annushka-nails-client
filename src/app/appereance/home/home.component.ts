@@ -2,12 +2,13 @@ import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TUI_IS_IOS } from '@taiga-ui/cdk';
-import { TuiAlertService, TuiDialogService } from '@taiga-ui/core';
+import { TuiDialogService, TuiLinkModule } from '@taiga-ui/core';
 import {
   TuiButtonModule,
   TuiSurfaceModule,
   TuiTitleModule,
 } from '@taiga-ui/experimental';
+import { WINDOW } from '../../common/injection-tokens/platform';
 import { ResponsiveDirective } from '../../common/services/responsive.directive';
 import { ResponsivePipe } from '../../common/services/responsive.pipe';
 import { ServiceApplicationFormComponent } from '../../domain/components/service-application-form/service-application-form.component';
@@ -25,6 +26,7 @@ import { ServicesService } from '../../domain/services/services/services.service
     NgOptimizedImage,
     RouterLink,
     TuiButtonModule,
+    TuiLinkModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -38,7 +40,7 @@ import { ServicesService } from '../../domain/services/services/services.service
 })
 export class HomeComponent extends ResponsiveDirective {
   private readonly dialogs = inject(TuiDialogService);
-  private readonly alerts = inject(TuiAlertService);
+  private readonly window = inject(WINDOW);
   protected readonly servicesService = inject(ServicesService);
 
   public scrollTo(element: HTMLDivElement) {
@@ -56,9 +58,16 @@ export class HomeComponent extends ResponsiveDirective {
   public show(): void {
     this.dialogs
       .open('Apply for service in one click!', {
-        label: 'Download our app to get the best experience!',
+        label: 'Download our app and enjoy it',
         // header: 'Download our app to get the best experience!',
       })
       .subscribe();
+  }
+
+  public openTg() {
+    this.window.open(
+      'https://web.telegram.org/k/#@annushka_nails_bot',
+      '_blank'
+    );
   }
 }
