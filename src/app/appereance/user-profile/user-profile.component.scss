@@ -1,9 +1,7 @@
+@import "../../styles/typography.scss";
+
 .content {
   width: max-content;
-
-  .title {
-    color: black;
-  }
 
   .avatar-control {
     position: relative;
@@ -26,12 +24,6 @@
         width: 1px;
         height: 1px;
       }
-    }
-  }
-
-  .user-data {
-    .title {
-      margin-bottom: 15px;
     }
   }
 }
@@ -63,25 +55,9 @@
 // Mobile
 
 :host.mobile {
-  display: block;
-  height: 95vh;
-
   .main-nav {
     position: sticky;
-    padding: 0 20px;
     left: 0;
-
-    // &::before {
-    //   content: "";
-    //   background-color: black;
-    //   width: 48px;
-    //   height: 48px;
-    //   position: absolute;
-    //   left: 0;
-    //   transform: translateX(20px);
-    //   top: 0;
-    //   z-index: 11;
-    // }
   }
 
   .blur {
@@ -89,13 +65,8 @@
 
     grid-template-areas: "avatar name" "form form";
     grid-template-columns: max-content 1fr;
-    row-gap: 15px;
+    row-gap: 30px;
     align-items: center;
-  }
-
-  .main {
-    height: 90vh;
-    overflow: hidden;
   }
 
   .content {
@@ -119,6 +90,7 @@
   }
 
   .user-form {
+    margin-top: 20px;
     width: 100%;
   }
 }
