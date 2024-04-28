@@ -3,7 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewChild,
+  effect,
   inject,
+  input,
+  untracked,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -33,6 +36,7 @@ import {
 } from '@taiga-ui/kit';
 import { ResponsiveDirective } from '../../../../common/services/responsive.directive';
 import { NOTIFY_VIA } from '../../../../domain/constants';
+import * as DTO from '../../../../dto';
 
 @Component({
   selector: 'ann-user-data-form',
@@ -63,13 +67,14 @@ import { NOTIFY_VIA } from '../../../../domain/constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserDataFormComponent extends ResponsiveDirective {
+  public userData = input.required<DTO.IUserInfo>();
+
   protected readonly notifyVia = NOTIFY_VIA;
 
   private readonly fb = inject(FormBuilder);
   protected readonly formModel = this.fb.group({
-    email: this.fb.control('danil.rodionow13@gmail.com', { nonNullable: true }),
+    email: this.fb.control('', { nonNullable: true }),
     phone: this.fb.control('', { nonNullable: true }),
-    password: this.fb.control('', { nonNullable: true }),
     notifyVia: this.fb.group({
       ...this.notifyVia.reduce<Record<string, FormControl<string | null>>>(
         (acc, item) => {
@@ -88,9 +93,6 @@ export class UserDataFormComponent extends ResponsiveDirective {
   protected get phoneControl() {
     return this.formModel.controls.phone;
   }
-  protected get passwordControl() {
-    return this.formModel.controls.password;
-  }
   protected get notifyViaAppControl() {
     return this.formModel.controls.notifyVia.controls['App'];
   }
@@ -101,6 +103,17 @@ export class UserDataFormComponent extends ResponsiveDirective {
   protected readonly countries = Object.values(TuiCountryIsoCode);
   protected countryIsoCode = TuiCountryIsoCode.DE;
   protected isEditable = false;
+
+  constructor() {
+    super();
+
+    effect(() => {
+      untracked(() => {
+        const userData = this.userData();
+        userData.email && this.emailControl.setValue(userData.email);
+      });
+    });
+  }
 
   toggle(): void {
     if (this.isEditable) {

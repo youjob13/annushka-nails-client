@@ -1,0 +1,32 @@
+@for(appointment of appointments(); track appointment) {
+<div class="appointment" tuiCardLarge tuiHeader tuiSurface="elevated">
+  <div class="appointment-info">
+    <span tuiTitle class="subtitle black">
+      {{ appointment.service.name }}
+      <div class="details">
+        <span tuiSubtitle class="text black">{{
+          appointment.service.price | tuiAmount : "EUR" | async
+        }}</span>
+        <div class="date">
+          <span tuiSubtitle class="text date">{{
+            appointment.timestamp | date
+          }}</span>
+        </div>
+      </div>
+    </span>
+  </div>
+
+  <div class="appointment-master">
+    <tui-avatar
+      [size]="'m'"
+      [avatarUrl]="appointment.master.avatar || ''"
+    ></tui-avatar>
+    <span class="text name medium">{{ appointment.master.name }}</span>
+  </div>
+</div>
+} @empty {
+<div class="empty">
+  <tui-icon icon="tuiIconCalendar" size="l"></tui-icon>
+  <span class="text">You don't have any appointments yet</span>
+</div>
+}

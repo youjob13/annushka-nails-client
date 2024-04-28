@@ -1,0 +1,40 @@
+@import "../../../../styles/typography.scss";
+
+:host {
+  display: grid;
+  row-gap: 14px;
+}
+
+.appointment {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+
+  &[tuiCardLarge][data-space][tuiHeader] {
+    padding: 10px 14px;
+  }
+
+  &-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: max-content;
+
+    .details {
+      display: flex;
+      column-gap: 10px;
+
+      .date {
+        display: flex;
+        column-gap: 5px;
+      }
+    }
+  }
+
+  &-master {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
