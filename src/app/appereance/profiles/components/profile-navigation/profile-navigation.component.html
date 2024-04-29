@@ -1,0 +1,10 @@
+<nav class="main-nav" [style.width]="'100%'" tuiNavigationNav>
+  <tui-tabs [style.width]="'100%'">
+    <button tuiTab>Info</button>
+    <button tuiTab>History</button>
+  </tui-tabs>
+
+  <hr />
+
+  <button tuiTab (click)="logout.emit()">Log out</button>
+</nav>

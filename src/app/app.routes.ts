@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { adminGuard } from './admin/admin.guard';
-import { userProfileGuard } from './appereance/user-profile/user-profile.guard';
+import { userProfileGuard } from './appereance/profiles/user-profile/user-profile.guard';
 import { authorizationGuard } from './authorization/services/authorization.guard';
 import { MainRoute } from './domain/router.constants';
 
@@ -49,7 +49,7 @@ const routes: Routes = [
     data: { animation: 'UserProfile' },
     canActivate: [userProfileGuard],
     loadComponent: () =>
-      import('./appereance/user-profile/user-profile.component').then(
+      import('./appereance/profiles/user-profile/user-profile.component').then(
         (m) => m.UserProfileComponent
       ),
   },
@@ -59,9 +59,9 @@ const routes: Routes = [
     data: { animation: 'AdminProfile' },
     canActivate: [userProfileGuard],
     loadComponent: () =>
-      import('./appereance/admin-profile/admin-profile.component').then(
-        (m) => m.AdminProfileComponent
-      ),
+      import(
+        './appereance/profiles/admin-profile/admin-profile.component'
+      ).then((m) => m.AdminProfileComponent),
   },
   {
     path: MainRoute.Admin,

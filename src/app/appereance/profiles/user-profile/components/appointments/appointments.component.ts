@@ -1,8 +1,15 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import { TuiMaskAccessorModule } from '@taiga-ui/core';
 import {
   TuiAmountPipeModule,
+  TuiButtonCloseModule,
+  TuiButtonModule,
   TuiCardModule,
   TuiHeaderModule,
   TuiIconModule,
@@ -10,7 +17,7 @@ import {
   TuiTitleModule,
 } from '@taiga-ui/experimental';
 import { TuiAvatarModule } from '@taiga-ui/kit';
-import * as DTO from '../../../../dto';
+import * as DTO from '../../../../../dto';
 
 @Component({
   selector: 'ann-appointments',
@@ -26,11 +33,14 @@ import * as DTO from '../../../../dto';
     TuiAmountPipeModule,
     AsyncPipe,
     DatePipe,
+    TuiButtonModule,
+    TuiButtonCloseModule,
   ],
   templateUrl: './appointments.component.html',
   styleUrl: './appointments.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppointmentsComponent {
-  public appointments = input.required<DTO.IAppointment[]>();
+  appointments = input.required<DTO.IAppointment[]>();
+  decline = output<DTO.IAppointment['id']>();
 }
