@@ -1,0 +1,53 @@
+@import "../../../styles/typography.scss";
+
+.content {
+  width: max-content;
+}
+
+.main {
+  display: flex;
+  position: relative;
+  z-index: 0;
+}
+
+.user-form {
+  display: block;
+  width: 600px;
+}
+
+.section {
+  display: block;
+  margin-bottom: 25px;
+
+  &-title {
+    margin-bottom: 10px;
+  }
+}
+
+.confirm {
+  margin: 0 auto;
+  display: block;
+}
+
+.confirm-content {
+  margin-bottom: 15px;
+}
+
+// Mobile
+
+:host.mobile {
+  .content {
+    padding: 10px 20px;
+    width: 100%;
+  }
+
+  .title {
+    display: grid;
+    grid-area: name;
+  }
+
+  .user-form {
+    margin-top: 10px;
+    width: 100%;
+  }
+}

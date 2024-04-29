@@ -1,8 +1,7 @@
 export enum MainRoute {
-  Admin = 'admin',
-  AdminProfile = 'admin-profile',
   Auth = 'auth',
   UserProfile = 'user-profile',
+  AdminProfile = 'admin-profile',
   About = 'about',
   Gallery = 'gallery',
   Home = 'home',

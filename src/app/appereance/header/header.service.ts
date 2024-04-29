@@ -34,7 +34,7 @@ export class HeaderService {
           if (isAdmin) {
             this.navigationItems.push({
               title: 'Admin',
-              link: MainRoute.Admin,
+              link: MainRoute.AdminProfile,
             });
           }
         },

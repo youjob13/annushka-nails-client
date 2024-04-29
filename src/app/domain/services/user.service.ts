@@ -17,7 +17,7 @@ export class UserService {
   });
   public readonly userData = toSignal(this.userData$$, { requireSync: true });
   // todo: extract role from user data
-  private readonly userRole$$ = new BehaviorSubject(Role.User);
+  private readonly userRole$$ = new BehaviorSubject(Role.Admin);
   public readonly userRole$ = this.userRole$$.asObservable();
 
   public readonly isAuthorized$ = this.userRole$$.pipe(

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { adminGuard } from './admin/admin.guard';
+import { adminProfileGuard } from './appereance/profiles/admin-profile/admin-profile.guard';
 import { userProfileGuard } from './appereance/profiles/user-profile/user-profile.guard';
 import { authorizationGuard } from './authorization/services/authorization.guard';
 import { MainRoute } from './domain/router.constants';
@@ -46,29 +46,19 @@ const routes: Routes = [
   },
   {
     path: MainRoute.UserProfile,
-    data: { animation: 'UserProfile' },
     canActivate: [userProfileGuard],
     loadComponent: () =>
       import('./appereance/profiles/user-profile/user-profile.component').then(
         (m) => m.UserProfileComponent
       ),
   },
-
   {
     path: MainRoute.AdminProfile,
-    data: { animation: 'AdminProfile' },
-    canActivate: [userProfileGuard],
+    canActivate: [adminProfileGuard],
     loadComponent: () =>
       import(
         './appereance/profiles/admin-profile/admin-profile.component'
       ).then((m) => m.AdminProfileComponent),
-  },
-  {
-    path: MainRoute.Admin,
-    data: { animation: 'Admin' },
-    canActivate: [adminGuard],
-    loadComponent: () =>
-      import('./admin/admin.component').then((m) => m.AdminComponent),
   },
 ];
 
