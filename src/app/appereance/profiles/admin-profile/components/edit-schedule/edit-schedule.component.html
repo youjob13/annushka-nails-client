@@ -1,0 +1,55 @@
+<tui-calendar
+  [value]="calendarDates"
+  (dayClick)="onDayClick($event)"
+></tui-calendar>
+
+<div class="selected-dates">
+  @for(calendarDate of calendarDates; track calendarDate) {
+  <div class="preadded-date">
+    <span class="date">{{ calendarDate }}</span>
+
+    <tui-hosted-dropdown
+      [tuiTextfieldSize]="isMobile() ? 's' : 'm'"
+      [content]="dropdown"
+      [(open)]="isTimeDropdownOpen[calendarDate.toString()]"
+      (click)="currentCalendarDate = calendarDate"
+    >
+      <tui-input-tag
+        class="multi-select-control"
+        tuiButton
+        [formControl]="timesPerDayControl.controls[calendarDate.toString()]"
+        [expandable]="false"
+        tuiTextfieldSize="s"
+        [tuiTextfieldCleaner]="true"
+        [tuiTextfieldLabelOutside]="true"
+        (click)="isTimeDropdownOpen[calendarDate.toString()] = true"
+      >
+        Select times
+      </tui-input-tag>
+    </tui-hosted-dropdown>
+  </div>
+  }
+</div>
+
+<ng-template #dropdown>
+  @if(currentCalendarDate) {
+  <tui-data-list-wrapper
+    tuiMultiSelectGroup
+    [formControl]="timesPerDayControl.controls[currentCalendarDate.toString()]"
+    [items]="timePeriods"
+  ></tui-data-list-wrapper>
+  }
+</ng-template>
+
+<ng-template #cleaner>
+  <button
+    appearance="icon"
+    icon="tuiIconClose"
+    size="xs"
+    tuiIconButton
+    tuiPreventDefault="mousedown"
+    type="reset"
+  >
+    <!--  -->
+  </button>
+</ng-template>

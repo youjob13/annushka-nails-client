@@ -10,6 +10,7 @@ import { ProfileNavigationComponent } from '../components/profile-navigation/pro
 import { AppointmentsComponent } from '../user-profile/components/appointments/appointments.component';
 import { FavoriteMastersComponent } from '../user-profile/components/favorite-masters/favorite-masters.component';
 import { UserDataFormComponent } from '../user-profile/components/user-data-form/user-data-form.component';
+import { EditScheduleComponent } from './components/edit-schedule/edit-schedule.component';
 
 @Component({
   selector: 'ann-admin-profile',
@@ -26,6 +27,7 @@ import { UserDataFormComponent } from '../user-profile/components/user-data-form
     ProfileMainComponent,
     TuiButtonModule,
     DatePipe,
+    EditScheduleComponent,
   ],
   templateUrl: './admin-profile.component.html',
   styleUrl: './admin-profile.component.scss',

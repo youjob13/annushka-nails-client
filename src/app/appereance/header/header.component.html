@@ -48,14 +48,22 @@
     <tui-badge-notification></tui-badge-notification>
   </button> -->
 
+      @if(headerService.isAuthorized$$ | async) {
+      <p class="admin-v text white">Admin version</p>
+      }
+      <!--  -->
       @if(authButtonContent$$ | async; as authButtonContent ) {
       @if(authButtonContent !== null) {
       <button tuiTab tuiButton [routerLink]="authButtonContent.link">
         {{ authButtonContent.title }}
       </button>
-      } } @else if(!isMobile() && (headerService.isAuthorized$$ | async)) {
+      }
+      <!--  -->
+      } @else if(!isMobile() && (headerService.isAuthorized$$ | async)) {
       <button tuiTab tuiButton (click)="logout()">Log out</button>
-      } @if(headerService.isAuthorized$$ | async) {
+      }
+      <!--  -->
+      @if(headerService.isAuthorized$$ | async) {
       <button tuiTab>
         <tui-avatar
           avatarUrl="tuiIconUser"

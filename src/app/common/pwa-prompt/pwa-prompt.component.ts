@@ -37,7 +37,7 @@ export class PWAPromptComponent implements OnInit {
       this.pwaPromptService.initPwaPrompt(this.templateRef);
     }
   }
-
+  // remove this component after closing popup
   public download() {
     console.log('asddsa');
   }

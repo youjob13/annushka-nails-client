@@ -1,8 +1,14 @@
+@import "../../styles/typography.scss";
+
 .header {
   padding: 0;
 
   .logo {
     font-weight: 600;
+  }
+
+  .admin-v {
+    margin-left: 15px;
   }
 
   .navigation {

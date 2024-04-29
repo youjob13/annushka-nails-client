@@ -1,0 +1,18 @@
+@import "../../../../../styles/typography.scss";
+
+.selected-dates {
+  display: grid;
+  row-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.preadded-date {
+  display: grid;
+  grid-template-columns: max-content auto;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.multi-select-control {
+  width: 66vw;
+}
