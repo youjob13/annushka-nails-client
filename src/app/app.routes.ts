@@ -4,16 +4,7 @@ import { userProfileGuard } from './appereance/user-profile/user-profile.guard';
 import { authorizationGuard } from './authorization/services/authorization.guard';
 import { MainRoute } from './domain/router.constants';
 
-let redirectTo: MainRoute;
-
-if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-  redirectTo = MainRoute.UserProfile;
-} else {
-  redirectTo = MainRoute.Home;
-}
-
-export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo },
+const routes: Routes = [
   {
     path: MainRoute.Home,
     data: { animation: 'Home' },
@@ -79,4 +70,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./admin/admin.component').then((m) => m.AdminComponent),
   },
+];
+
+export const installedMobileRoutes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: MainRoute.UserProfile },
+  ...routes,
+];
+
+export const browserRoutes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: MainRoute.Home },
+  ...routes,
 ];

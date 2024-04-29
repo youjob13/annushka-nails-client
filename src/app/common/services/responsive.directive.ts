@@ -1,5 +1,4 @@
 import { Directive, HostBinding, computed, inject } from '@angular/core';
-import { Platform } from '../constants';
 import { PLATFORM } from '../injection-tokens/platform';
 import { ResponsiveService } from './responsive.service';
 
@@ -10,7 +9,7 @@ export abstract class ResponsiveDirective {
   protected readonly isMobile = computed(
     () => this.responsiveService.displayType() === 'mobile'
   );
-  protected readonly isPWA = inject(PLATFORM) === Platform.PWA;
+  protected readonly isMobilePlatform = inject(PLATFORM).isMobile;
 
   @HostBinding('class') get getClass() {
     return this.responsiveService.displayType();

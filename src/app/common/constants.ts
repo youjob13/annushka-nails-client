@@ -1,4 +1,4 @@
-export enum Platform {
+export enum AppType {
   PWA = 'pwa',
   Browser = 'browser',
 }

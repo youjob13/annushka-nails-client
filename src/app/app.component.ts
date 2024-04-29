@@ -16,6 +16,7 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { of } from 'rxjs';
 import { slideInAnimation } from './animations/route.animations';
 import { HeaderComponent } from './appereance/header/header.component';
+import { PWAPromptComponent } from './common/pwa-prompt/pwa-prompt.component';
 import { ResponsiveService } from './common/services/responsive.service';
 
 @Component({
@@ -29,6 +30,7 @@ import { ResponsiveService } from './common/services/responsive.service';
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
+    PWAPromptComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

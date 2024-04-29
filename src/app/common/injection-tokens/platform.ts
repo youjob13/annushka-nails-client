@@ -1,25 +1,17 @@
+import { Platform as CdkPlatform } from '@angular/cdk/platform';
 import { InjectionToken, inject } from '@angular/core';
-import { Platform } from '../constants';
+import detectPlatform, { Platform } from '../detect-platform';
 
 export const WINDOW = new InjectionToken<Window>('Window', {
   providedIn: 'root',
   factory: () => window,
 });
 
-export const PLATFORM = new InjectionToken('platform', {
+export const PLATFORM = new InjectionToken<Platform>('platform', {
   providedIn: 'root',
   factory: () => {
     const window = inject(WINDOW);
-    let platform: Platform;
-
-    if (
-      'serviceWorker' in window.navigator &&
-      window.navigator.serviceWorker.controller
-    ) {
-      platform = Platform.PWA;
-    } else {
-      platform = Platform.Browser;
-    }
-    return platform;
+    const platform = inject(CdkPlatform);
+    return detectPlatform(window, platform);
   },
 });

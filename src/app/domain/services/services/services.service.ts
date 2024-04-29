@@ -17,7 +17,6 @@ export class ServicesService {
   public readonly requestInProgress$ = this.requestInProgress$$.asObservable();
 
   public getServices() {
-    console.log(this.services$$);
     if (!this.services$$) {
       return this.servicesHttpService.getServices().pipe(
         tap((services) => {
