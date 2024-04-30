@@ -55,10 +55,10 @@ const routes: Routes = [
   {
     path: MainRoute.AdminProfile,
     canActivate: [adminProfileGuard],
-    loadComponent: () =>
+    loadChildren: () =>
       import(
-        './appereance/profiles/admin-profile/admin-profile.component'
-      ).then((m) => m.AdminProfileComponent),
+        './appereance/profiles/admin-profile/admin-profile.module.routing'
+      ).then((m) => m.AdminProfileModuleRouting),
   },
 ];
 

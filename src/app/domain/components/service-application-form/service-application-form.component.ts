@@ -28,6 +28,7 @@ import {
 
 import { ResponsiveDirective } from '../../../common/services/responsive.directive';
 import * as DTO from '../../../dto';
+import { isDayAvailableForApplying } from '../../utils';
 import { LOADER } from './service-application-form.constants';
 
 // todo: should be generated automatically
@@ -112,7 +113,7 @@ export class ServiceApplicationFormComponent
   }
   public disabledAllItemsHandler = () => true;
   public disabledItemHandler = ({ day }: TuiDay) =>
-    !this.isDayAvailableForApplying(day);
+    !isDayAvailableForApplying(DATE_TIME_MAP, day);
 
   constructor() {
     super();
@@ -195,10 +196,6 @@ export class ServiceApplicationFormComponent
 
   private getTimesForSelectedDay(day: TuiDay['day']): string[] {
     return DATE_TIME_MAP.get(day) ?? [];
-  }
-
-  private isDayAvailableForApplying(day: TuiDay['day']): boolean {
-    return DATE_TIME_MAP.has(day);
   }
 }
 

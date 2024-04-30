@@ -1,5 +1,8 @@
 <tui-calendar
   [value]="calendarDates"
+  [disabledItemHandler]="
+    !isEditable ? disabledAllItemsHandler : disabledItemHandler
+  "
   (dayClick)="onDayClick($event)"
 ></tui-calendar>
 
@@ -31,10 +34,22 @@
   }
 </div>
 
+<button
+  class="button medium"
+  [size]="isMobile() ? 's' : 'm'"
+  tuiButton
+  appearance="whiteblock"
+  (click)="isEditable = !isEditable"
+>
+  {{ isEditable ? "Save" : "Edit" }}
+</button>
+
 <ng-template #dropdown>
   @if(currentCalendarDate) {
   <tui-data-list-wrapper
     tuiMultiSelectGroup
+    [tuiTextfieldSize]="isMobile() ? 's' : 'm'"
+    [size]="isMobile() ? 's' : 'm'"
     [formControl]="timesPerDayControl.controls[currentCalendarDate.toString()]"
     [items]="timePeriods"
   ></tui-data-list-wrapper>

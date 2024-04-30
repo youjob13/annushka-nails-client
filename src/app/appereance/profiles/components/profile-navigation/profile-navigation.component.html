@@ -1,7 +1,8 @@
 <nav class="main-nav" [style.width]="'100%'" tuiNavigationNav>
   <tui-tabs [style.width]="'100%'">
-    <button tuiTab>Info</button>
-    <button tuiTab>History</button>
+    @for(route of navItems(); track route.title) {
+    <button [routerLink]="route.link" tuiTab>{{ route.title }}</button>
+    }
   </tui-tabs>
 
   <hr />

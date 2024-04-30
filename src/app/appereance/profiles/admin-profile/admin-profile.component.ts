@@ -1,37 +1,32 @@
-import { AsyncPipe, DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { TuiButtonModule } from '@taiga-ui/core';
-import { TuiAppearanceModule, TuiTitleModule } from '@taiga-ui/experimental';
+import { RouterOutlet } from '@angular/router';
 import { TuiDialogFormService } from '@taiga-ui/kit';
+import { IRoute } from '../../../common/models';
 import { BaseProfileComponent } from '../components/base-profile.component';
-import { ProfileMainComponent } from '../components/profile-main/profile-main.component';
 import { ProfileNavigationComponent } from '../components/profile-navigation/profile-navigation.component';
-import { AppointmentsComponent } from '../user-profile/components/appointments/appointments.component';
-import { FavoriteMastersComponent } from '../user-profile/components/favorite-masters/favorite-masters.component';
-import { UserDataFormComponent } from '../user-profile/components/user-data-form/user-data-form.component';
-import { EditScheduleComponent } from './components/edit-schedule/edit-schedule.component';
 
 @Component({
   selector: 'ann-admin-profile',
   standalone: true,
-  imports: [
-    AsyncPipe,
-    TuiTitleModule,
-    UserDataFormComponent,
-    ReactiveFormsModule,
-    TuiAppearanceModule,
-    FavoriteMastersComponent,
-    AppointmentsComponent,
-    ProfileNavigationComponent,
-    ProfileMainComponent,
-    TuiButtonModule,
-    DatePipe,
-    EditScheduleComponent,
-  ],
+  imports: [ProfileNavigationComponent, RouterOutlet],
   templateUrl: './admin-profile.component.html',
   styleUrl: './admin-profile.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TuiDialogFormService],
 })
-export class AdminProfileComponent extends BaseProfileComponent {}
+export class AdminProfileComponent extends BaseProfileComponent {
+  protected readonly navItems: IRoute[] = [
+    {
+      link: '/admin-profile',
+      title: 'Info',
+    },
+    {
+      link: '/admin-profile/history',
+      title: 'Requests',
+    },
+    {
+      link: '/admin-profile/history',
+      title: 'History',
+    },
+  ];
+}

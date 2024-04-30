@@ -20,6 +20,7 @@ import {
   tuiInputTimeOptionsProvider,
 } from '@taiga-ui/kit';
 import { ResponsiveDirective } from '../../../../../common';
+import { isDayAvailableForApplying } from '../../../../../domain/utils';
 
 @Component({
   selector: 'ann-edit-schedule',
@@ -52,9 +53,13 @@ export class EditScheduleComponent extends ResponsiveDirective {
     Record<string, FormControl<TuiTime[] | null>>
   >({});
 
+  public disabledAllItemsHandler = () => true;
+  public disabledItemHandler = ({ day }: TuiDay) =>
+    !isDayAvailableForApplying(new Map(), day);
   protected isTimeDropdownOpen: Record<string, boolean> = {};
   protected calendarDates: readonly TuiDay[] = [];
   protected timePeriods = tuiCreateTimePeriods();
+  protected isEditable = false;
 
   // temporary solution !!!
   protected currentCalendarDate: TuiDay | null = null;

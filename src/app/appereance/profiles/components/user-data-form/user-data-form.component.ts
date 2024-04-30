@@ -34,9 +34,9 @@ import {
   TuiSortCountriesPipeModule,
   TuiToggleModule,
 } from '@taiga-ui/kit';
-import { ResponsiveDirective } from '../../../../../common/services/responsive.directive';
-import { NOTIFY_VIA } from '../../../../../domain/constants';
-import * as DTO from '../../../../../dto';
+import { ResponsiveDirective } from '../../../../common/services/responsive.directive';
+import { NOTIFY_VIA } from '../../../../domain/constants';
+import * as DTO from '../../../../dto';
 
 @Component({
   selector: 'ann-user-data-form',

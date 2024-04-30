@@ -40,9 +40,7 @@ export class AuthService {
 
   public logout() {
     this.userService.setRole(Role.Guest);
-    if (this.router.url.includes(MainRoute.UserProfile)) {
-      this.router.navigateByUrl(`${MainRoute.Auth}/${AuthRoute.Login}`);
-    }
+    this.router.navigateByUrl(`${MainRoute.Auth}/${AuthRoute.Login}`);
 
     return this.http.post(`${this.authConfig}/logout`, {}).pipe(
       tap(() => {

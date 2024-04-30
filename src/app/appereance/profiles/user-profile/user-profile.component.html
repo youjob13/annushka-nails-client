@@ -1,56 +1,10 @@
-<ann-profile-navigation (logout)="logout()"></ann-profile-navigation>
+<ann-profile-navigation
+  [navItems]="navItems"
+  (logout)="logout()"
+></ann-profile-navigation>
 
 <div class="main">
   <div class="content">
-    <ann-profile-main class="section" [userData]="userData()">
-      <ann-user-data-form
-        [userData]="userData()"
-        class="user-form"
-      ></ann-user-data-form>
-    </ann-profile-main>
-
-    <div class="section appointments">
-      <h3 class="section-title subtitle black">Booked appointments</h3>
-      <ann-appointments
-        [appointments]="appointments"
-        (decline)="onDeclineAppointment($event, declineAppointmentRef)"
-      ></ann-appointments>
-    </div>
-
-    <div class="section">
-      <h3 class="section-title subtitle black">
-        Favorite masters (in-develop)
-      </h3>
-      <p class="text">You can add your favorite masters</p>
-
-      <ann-favorite-masters
-        (loadAvatar)="loadAvatar($any($event))"
-      ></ann-favorite-masters>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>
-
-<ng-template #declineAppointmentRef let-context>
-  @if(appointmentToDecline) {
-  <div class="confirm-content">
-    <p class="text medium">
-      Service:
-      <span class="text gray">{{ appointmentToDecline.service.name }}</span>
-    </p>
-    <p class="text medium">
-      Date:
-      <span class="text gray">{{ appointmentToDecline.timestamp | date }}</span>
-    </p>
-  </div>
-  }
-
-  <button
-    class="confirm"
-    appearance="whiteblock"
-    [size]="isMobile() ? 's' : 'm'"
-    tuiButton
-    (click)="context.complete()"
-  >
-    Confirm
-  </button>
-</ng-template>
