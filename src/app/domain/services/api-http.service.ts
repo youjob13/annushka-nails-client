@@ -9,7 +9,7 @@ export class ApiHttpService {
   private readonly apiConfig = inject(API_CONFIG);
   private readonly httpClient = inject(HttpClient);
 
-  private readonly baseEndpoint = ''; // todo: temporary comment due to problems with json-server this.apiConfig.baseEndpoint;
+  private readonly baseEndpoint = this.apiConfig.baseEndpoint;
 
   public get<T>(url: string) {
     return this.httpClient.get<T>(`${this.baseEndpoint}${url}`);

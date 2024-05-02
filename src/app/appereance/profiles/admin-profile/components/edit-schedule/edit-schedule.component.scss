@@ -1,5 +1,9 @@
 @import "../../../../../styles/typography.scss";
 
+.calendar {
+  margin: 0 auto;
+}
+
 .selected-dates {
   display: grid;
   row-gap: 10px;

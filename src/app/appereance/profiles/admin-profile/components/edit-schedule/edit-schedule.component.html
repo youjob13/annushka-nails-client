@@ -1,35 +1,38 @@
 <tui-calendar
+  class="calendar"
   [value]="calendarDates"
   [disabledItemHandler]="
     !isEditable ? disabledAllItemsHandler : disabledItemHandler
   "
+  [markerHandler]="markerHandler"
   (dayClick)="onDayClick($event)"
 ></tui-calendar>
 
 <div class="selected-dates">
-  @for(calendarDate of calendarDates; track calendarDate) {
+  @for(calendarDate of calendarDates; track calendarDate.toString()) {
   <div class="preadded-date">
     <span class="date">{{ calendarDate }}</span>
 
-    <tui-hosted-dropdown
+    <tui-multi-select
+      [ngStyle]="!isEditable ? { opacity: 0.5 } : { opacity: 1 }"
+      [editable]="false"
+      [expandable]="false"
       [tuiTextfieldSize]="isMobile() ? 's' : 'm'"
-      [content]="dropdown"
-      [(open)]="isTimeDropdownOpen[calendarDate.toString()]"
-      (click)="currentCalendarDate = calendarDate"
+      [tuiTextfieldLabelOutside]="true"
+      [formControl]="timesPerDayControl.controls[calendarDate.toString()]"
+      [readOnly]="!isEditable"
     >
-      <tui-input-tag
-        class="multi-select-control"
-        tuiButton
-        [formControl]="timesPerDayControl.controls[calendarDate.toString()]"
-        [expandable]="false"
-        tuiTextfieldSize="s"
-        [tuiTextfieldCleaner]="true"
-        [tuiTextfieldLabelOutside]="true"
-        (click)="isTimeDropdownOpen[calendarDate.toString()] = true"
-      >
-        Select times
-      </tui-input-tag>
-    </tui-hosted-dropdown>
+      <tui-data-list *tuiDataList>
+        <tui-opt-group tuiMultiSelectGroup>
+          @for(time of timePeriods; track time) {
+          <button tuiOption [value]="time">
+            {{ time }}
+          </button>
+          }
+        </tui-opt-group>
+        <tui-opt-group label="Sith"> </tui-opt-group>
+      </tui-data-list>
+    </tui-multi-select>
   </div>
   }
 </div>
@@ -43,28 +46,3 @@
 >
   {{ isEditable ? "Save" : "Edit" }}
 </button>
-
-<ng-template #dropdown>
-  @if(currentCalendarDate) {
-  <tui-data-list-wrapper
-    tuiMultiSelectGroup
-    [tuiTextfieldSize]="isMobile() ? 's' : 'm'"
-    [size]="isMobile() ? 's' : 'm'"
-    [formControl]="timesPerDayControl.controls[currentCalendarDate.toString()]"
-    [items]="timePeriods"
-  ></tui-data-list-wrapper>
-  }
-</ng-template>
-
-<ng-template #cleaner>
-  <button
-    appearance="icon"
-    icon="tuiIconClose"
-    size="xs"
-    tuiIconButton
-    tuiPreventDefault="mousedown"
-    type="reset"
-  >
-    <!--  -->
-  </button>
-</ng-template>
