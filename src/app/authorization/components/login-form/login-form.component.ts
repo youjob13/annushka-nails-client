@@ -23,7 +23,9 @@ import {
 import { BehaviorSubject, finalize } from 'rxjs';
 import { ResponsiveDirective } from '../../../common/services/responsive.directive';
 import { PASSWORD_REGEXP } from '../../auth.constants';
+import { AuthType } from '../../auth.models';
 import { AuthService } from '../../services/auth.service';
+import { LoginVariantsComponent } from '../login-variants/login-variants.component';
 import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
 import { LoginFormModel } from './login-form.models';
 
@@ -43,6 +45,7 @@ import { LoginFormModel } from './login-form.models';
     AsyncPipe,
     TuiProgressModule,
     ProgressBarComponent,
+    LoginVariantsComponent,
   ],
   templateUrl: './login-form.component.html',
   styleUrl: '../../common.scss',
@@ -52,6 +55,8 @@ export class LoginFormComponent extends ResponsiveDirective {
   private readonly authService = inject(AuthService);
 
   protected formCompleteProgress = 0;
+
+  protected readonly AuthType = AuthType;
 
   private readonly fb = inject(FormBuilder);
   protected readonly formModel: FormGroup<LoginFormModel>;
@@ -87,14 +92,23 @@ export class LoginFormComponent extends ResponsiveDirective {
     });
   }
 
-  public onSubmit(): void {
+  public onLogin(authType: AuthType): void {
     this.isLoading$$.next(true);
+
+    if (authType === AuthType.Instagram) {
+      this.loginInstagram();
+      return;
+    }
 
     this.authService
       .login(this.formModel.getRawValue())
       .pipe(finalize(() => this.isLoading$$.next(false)))
       .subscribe();
     this.resetForm();
+  }
+
+  private loginInstagram(): void {
+    this.authService.loginInstagram().subscribe();
   }
 
   public onReset(): void {

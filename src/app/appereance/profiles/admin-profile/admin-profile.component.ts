@@ -25,6 +25,10 @@ export class AdminProfileComponent extends BaseProfileComponent {
       title: 'Requests',
     },
     {
+      link: '/admin-profile/service-list',
+      title: 'Service list',
+    },
+    {
       link: '/admin-profile/history',
       title: 'History',
     },

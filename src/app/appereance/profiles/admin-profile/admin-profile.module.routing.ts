@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { AdminProfileComponent } from './admin-profile.component';
 import { InfoComponent } from './components/info/info.component';
 import { RequestsComponent } from './components/requests/requests.component';
+import { ServiceListComponent } from './components/service-list/service-list.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,10 @@ import { RequestsComponent } from './components/requests/requests.component';
           {
             path: 'requests',
             component: RequestsComponent,
+          },
+          {
+            path: 'service-list',
+            component: ServiceListComponent,
           },
           {
             path: 'history',

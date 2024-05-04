@@ -36,6 +36,7 @@ import {
   TuiTextareaModule,
   TuiValueAccessorModule,
 } from '@taiga-ui/kit';
+import { ServiceItemComponent } from '../service-item/service-item.component';
 
 export const IMPORTS = [
   TuiScrollbarModule,
@@ -69,4 +70,5 @@ export const IMPORTS = [
   TuiBadgedContentModule,
   TuiButtonModule,
   TuiIconModule,
+  ServiceItemComponent,
 ];

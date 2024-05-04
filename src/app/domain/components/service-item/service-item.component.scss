@@ -1,0 +1,90 @@
+@import "../../../styles/typography.scss";
+@import "../../../styles/controls.scss";
+
+.service-description {
+  display: flex;
+  justify-content: space-between;
+}
+
+.option {
+  height: auto;
+
+  .content {
+    display: flex;
+    width: 400px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+
+  label {
+    column-gap: 10px;
+  }
+
+  &:hover {
+    transform: none;
+  }
+}
+
+.editable-services {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+.editable-service {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    "name name price"
+    "description description description";
+  gap: 10px !important;
+  grid-template-columns: 1fr;
+  overflow: visible;
+
+  .remove-service {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    color: white;
+  }
+
+  .name {
+    grid-area: name;
+  }
+
+  .price {
+    grid-area: price;
+    width: 70px;
+  }
+
+  .description {
+    grid-area: description;
+  }
+}
+
+.add-service {
+  display: block;
+  margin: 0 auto;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 5px 0;
+  background-color: rgb(253, 253, 253);
+  border-top: 1px solid rgb(221, 221, 221);
+}
+
+// Mobile
+:host.mobile {
+  .option {
+    .content {
+      width: 300px;
+      padding: 8px 0;
+    }
+  }
+}

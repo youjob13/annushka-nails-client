@@ -11,6 +11,7 @@ export const adminProfileGuard: CanActivateFn = () => {
 
   return userService.userRole$.pipe(
     map((role) => {
+      console.log(role);
       switch (role) {
         case Role.Guest:
           return router.parseUrl(`${MainRoute.Auth}/${AuthRoute.Login}`);

@@ -1,0 +1,117 @@
+<ng-container
+  *ngTemplateOutlet="editable() ? editableRef : selectableRef"
+></ng-container>
+
+<ng-template #editableRef>
+  <div class="editable-services">
+    @for(serviceControl of editableServicesControl.controls; track
+    serviceControl.value.id) {
+    <div tuiCardLarge tuiSurface="elevated" class="editable-service">
+      <tui-input
+        class="name"
+        [formControl]="serviceControl.controls.name"
+        [tuiTextfieldSize]="isMobile() ? 's' : 'm'"
+        [tuiTextfieldCleaner]="true"
+      >
+        Name
+        <input tuiTextfield />
+      </tui-input>
+      <tui-input
+        class="price"
+        [formControl]="serviceControl.controls.price"
+        [tuiTextfieldSize]="isMobile() ? 's' : 'm'"
+        [tuiTextfieldCleaner]="true"
+      >
+        Price
+        <input tuiTextfield />
+      </tui-input>
+      <tui-input
+        class="description"
+        [formControl]="serviceControl.controls.description"
+        [tuiTextfieldSize]="isMobile() ? 's' : 'm'"
+        [tuiTextfieldCleaner]="true"
+      >
+        Description
+        <input tuiTextfield />
+      </tui-input>
+      <button
+        class="remove-service"
+        appearance="glass"
+        size="xs"
+        tuiButtonClose
+        tuiIconButton
+        (click)="removeService($index)"
+      >
+        Close
+      </button>
+    </div>
+    } @empty {
+    <p class="text" i18n>No services, add new one</p>
+    }
+  </div>
+  <div class="footer">
+    <button
+      class="add-service"
+      [size]="isMobile() ? 's' : 'm'"
+      appearance="whiteblock"
+      tuiButton
+      (click)="addService()"
+    >
+      Add service
+    </button>
+  </div>
+</ng-template>
+
+<ng-template
+  let-observer
+  [tuiDialogOptions]="{ label: 'Declarative directive', size: 's' }"
+  [(tuiDialog)]="isAddServiceOpen"
+>
+  <form [formGroup]="addServiceControl" (ngSubmit)="observer.complete()">
+    <p>This abstracts away service and subscription</p>
+    <tui-input formControlName="name" tuiAutoFocus>
+      Write service name
+    </tui-input>
+    <tui-input formControlName="price" tuiAutoFocus>
+      Write service price
+    </tui-input>
+    <tui-input formControlName="description" tuiAutoFocus>
+      Write service description
+    </tui-input>
+    <p>
+      <button tuiButton (click)="$event.preventDefault(); createNewService()">
+        Ok
+      </button>
+    </p>
+  </form>
+</ng-template>
+
+<ng-template #selectableRef>
+  @for(service of services; track service.name) {
+  <tui-radio-block
+    [formControl]="servicesControl"
+    class="option tui-space_bottom-3"
+    [item]="service.id"
+    size="m"
+    [hideRadio]="true"
+    tuiHeader
+    tuiSurface="elevated"
+    [pseudoDisabled]="!!disabled()"
+  >
+    <div class="content">
+      <h3 class="text align-left" i18n>
+        {{ service.name }}
+      </h3>
+      <p class="service-description secondary-text" i18n>
+        {{ service.description }}
+        <tui-badge
+          class="price secondary-text"
+          [value]="service.price + '$'"
+        ></tui-badge>
+      </p>
+    </div>
+  </tui-radio-block>
+  } @empty {
+  <p class="text" i18n>No services available</p>
+  }
+</ng-template>

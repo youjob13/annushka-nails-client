@@ -9,7 +9,7 @@ import { Role } from '../role.constants';
 })
 export class UserService {
   private readonly userData$$ = new BehaviorSubject<DTO.IUserInfo>({
-    role: Role.User,
+    role: Role.Admin,
     name: 'Danil Rodionov',
     email: 'danil.rodionow13@gmail.com',
     avatar: 'https://avatars.githubusercontent.com/u/10106368',

@@ -13,3 +13,10 @@ export enum AuthAction {
   Login = 'login',
   Registration = 'registration',
 }
+
+export enum AuthType {
+  Manual = 'manual',
+  Instagram = 'instagram',
+  Facebook = 'facebook',
+  Google = 'google',
+}

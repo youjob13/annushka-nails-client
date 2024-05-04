@@ -47,12 +47,14 @@
       tuiButton
       type="button"
       [disabled]="formModel.invalid"
-      (click)="onSubmit()"
+      (click)="onLogin(AuthType.Manual)"
     >
       Sign In
     </button>
   </form>
 </tui-loader>
+
+<ann-login-variants (loginOn)="onLogin($event)"></ann-login-variants>
 
 <ng-template #success>
   <tui-svg src="tuiIconCheck" class="success tui-space_left-3"></tui-svg>
