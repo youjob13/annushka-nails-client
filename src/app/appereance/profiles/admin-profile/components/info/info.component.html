@@ -16,7 +16,7 @@
 <div class="section appointments">
   <h3 class="section-title subtitle black">Booked appointments</h3>
   <ann-appointments
-    [appointments]="appointments"
+    [appointments]="(appointmentService.getAppointments('1') | async) || []"
     (decline)="onDeclineAppointment($event, declineAppointmentRef)"
   ></ann-appointments>
 </div>
@@ -40,7 +40,9 @@
     appearance="whiteblock"
     [size]="isMobile() ? 's' : 'm'"
     tuiButton
-    (click)="context.complete()"
+    (click)="
+      context.complete(); declineAppointment(appointmentToDecline?.id || '')
+    "
   >
     Confirm
   </button>

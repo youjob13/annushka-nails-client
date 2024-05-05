@@ -116,12 +116,6 @@ export class ServiceItemComponent
         this.onChange(service);
       }
     });
-
-    this.editableServicesControl.valueChanges.subscribe((service) => {
-      if (service) {
-        this.onChange(service);
-      }
-    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -136,6 +130,10 @@ export class ServiceItemComponent
     }
   }
 
+  public saveChanges() {
+    this.onChange(this.editableServicesControl.value);
+  }
+
   public removeService(index: number) {
     this.editableServicesControl.removeAt(index);
   }
@@ -143,6 +141,7 @@ export class ServiceItemComponent
   public createNewService() {
     this.isAddServiceOpen = false;
     this.editableServicesControl.push(this.addServiceControl);
+    this.editableServicesControl.markAsDirty();
     this.addServiceControl = this.newService(null);
   }
 

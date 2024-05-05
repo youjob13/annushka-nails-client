@@ -51,6 +51,7 @@
   </div>
   <div class="footer">
     <button
+      [class.dirty]="editableServicesControl.dirty"
       class="add-service"
       [size]="isMobile() ? 's' : 'm'"
       appearance="whiteblock"
@@ -58,6 +59,17 @@
       (click)="addService()"
     >
       Add service
+    </button>
+    <button
+      [class.dirty]="editableServicesControl.dirty"
+      class="save-changes"
+      [disabled]="!editableServicesControl.dirty"
+      [size]="isMobile() ? 's' : 'm'"
+      appearance="whiteblock"
+      tuiButton
+      (click)="saveChanges()"
+    >
+      Save changes
     </button>
   </div>
 </ng-template>

@@ -13,6 +13,12 @@ export class ServicesHttpService {
     return this.apiHttpService.get<DTO.IService[]>('/services');
   }
 
+  public saveServices(updatedServices: DTO.IService[]) {
+    return this.apiHttpService.post<DTO.IService[]>(
+      '/services/save-changes',
+      updatedServices
+    );
+  }
   public applyForService<T>(data: T) {
     return this.apiHttpService.post('/services/apply', data);
   }

@@ -37,7 +37,7 @@
   <h2 class="title" i18n>Apply for service right now</h2>
 
   <ann-service-application-form
-    [services]="servicesService.services$ | async"
+    [services]="servicesService.getServices() | async"
     [requestInProgress]="!!(servicesService.requestInProgress$ | async)"
     (send)="applyForService($event)"
   >
