@@ -1,92 +1,108 @@
-<form class="b-form" [formGroup]="formModel">
-  <tui-input
-    [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
-    [disabled]="!isEditable"
-    [readOnly]="!isEditable"
-    [required]="true"
-    class="control"
-    [formControl]="emailControl"
-  >
-    Email
-    <input tuiTextfield type="email" />
-  </tui-input>
+<button
+  class="button medium"
+  tuiButton
+  [size]="isMobile() ? 's' : 'm'"
+  appearance="whiteblock"
+  (click)="toggle()"
+>
+  Edit
+</button>
 
-  <tui-input-phone-international
-    [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
-    class="control"
-    [disabled]="!isEditable"
-    [readOnly]="!isEditable"
-    [formControl]="phoneControl"
-    [countries]="(countries | tuiSortCountries | async) || []"
-    [(countryIsoCode)]="countryIsoCode"
-    i18n
-  >
-    Type your number
-  </tui-input-phone-international>
-
-  <p class="text">Notify about appointment via:</p>
-
-  <div class="notify">
-    <tui-hosted-dropdown
-      tuiDropdownLimitWidth="fixed"
-      [content]="dropdown"
-      [(open)]="open"
+<ng-template
+  let-observer
+  [tuiDialogOptions]="{ label: 'Edit your data', size: 's' }"
+  [(tuiDialog)]="isFormOpen"
+>
+  <form class="b-form" [formGroup]="formModel">
+    <tui-input
+      [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
+      [disabled]="!isFormOpen"
+      [readOnly]="!isFormOpen"
+      [required]="true"
+      class="control"
+      [formControl]="emailControl"
     >
-      <div tuiGroup>
-        <button
-          [disabled]="!isEditable"
-          [size]="isMobile() ? 's' : 'm'"
-          title="Menu"
-          tuiHostedDropdownHost
-          tuiButton
-          type="button"
-          appearance="whiteblock"
-        >
-          Telegram
-        </button>
-        <ng-template #icon>
-          <tui-svg
-            src="tuiIconChevronDown"
-            class="icon"
-            [class.icon_rotated]="open"
-          ></tui-svg>
-        </ng-template>
-      </div>
-    </tui-hosted-dropdown>
+      Email
+      <input tuiTextfield type="email" />
+    </tui-input>
 
-    <ng-template #dropdown let-activeZone>
-      <tui-input
-        [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
-        [disabled]="!isEditable"
-        [readOnly]="!isEditable"
-        [required]="true"
-        class="control"
-        [formControl]="notifyViaAppControl"
+    <tui-input-phone-international
+      [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
+      class="control"
+      [disabled]="!isFormOpen"
+      [readOnly]="!isFormOpen"
+      [formControl]="phoneControl"
+      [countries]="(countries | tuiSortCountries | async) || []"
+      [(countryIsoCode)]="countryIsoCode"
+      i18n
+    >
+      Type your number
+    </tui-input-phone-international>
+
+    <p class="text">Notify about appointment via:</p>
+
+    <div class="notify">
+      <tui-hosted-dropdown
+        tuiDropdownLimitWidth="fixed"
+        [content]="dropdown"
+        [(open)]="open"
       >
-        Type your telegram username or link
-        <input tuiTextfield type="email" />
-      </tui-input>
-    </ng-template>
+        <div tuiGroup>
+          <button
+            [disabled]="!isFormOpen"
+            [size]="isMobile() ? 's' : 'm'"
+            title="Menu"
+            tuiHostedDropdownHost
+            tuiButton
+            type="button"
+            appearance="whiteblock"
+          >
+            Telegram
+          </button>
+          <ng-template #icon>
+            <tui-svg
+              src="tuiIconChevronDown"
+              class="icon"
+              [class.icon_rotated]="open"
+            ></tui-svg>
+          </ng-template>
+        </div>
+      </tui-hosted-dropdown>
 
-    <div class="app">
-      <span class="text">App</span>
-      <tui-toggle
-        [disabled]="!isEditable"
-        [readOnly]="!isEditable"
-        [formControl]="notifyViaTelegramControl"
-        size="l"
-        [showIcons]="true"
-      ></tui-toggle>
+      <ng-template #dropdown let-activeZone>
+        <tui-input
+          [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
+          [disabled]="!isFormOpen"
+          [readOnly]="!isFormOpen"
+          [required]="true"
+          class="control"
+          [formControl]="notifyViaAppControl"
+        >
+          Type your telegram username or link
+          <input tuiTextfield type="email" />
+        </tui-input>
+      </ng-template>
+
+      <div class="app">
+        <span class="text">App</span>
+        <tui-toggle
+          [disabled]="!isFormOpen"
+          [readOnly]="!isFormOpen"
+          [formControl]="notifyViaTelegramControl"
+          size="l"
+          [showIcons]="true"
+        ></tui-toggle>
+      </div>
     </div>
-  </div>
 
-  <button
-    class="button medium"
-    tuiButton
-    [size]="isMobile() ? 's' : 'm'"
-    appearance="whiteblock"
-    (click)="toggle()"
-  >
-    {{ isEditable ? "Save" : "Edit" }}
-  </button>
-</form>
+    <button
+      class="button medium"
+      tuiButton
+      [size]="isMobile() ? 's' : 'm'"
+      appearance="whiteblock"
+      (click)="$event.preventDefault(); toggle()"
+    >
+      Save
+    </button>
+  </form>
+</ng-template>

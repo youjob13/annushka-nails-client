@@ -13,8 +13,7 @@ export class ServicesService {
   private services$$ = new BehaviorSubject<DTO.IService[]>([]);
   public services$: Observable<DTO.IService[]> | null = null;
 
-  private readonly requestInProgress$$ = new BehaviorSubject<boolean>(false);
-  public readonly requestInProgress$ = this.requestInProgress$$.asObservable();
+  public readonly requestInProgress$$ = new BehaviorSubject<boolean>(true);
 
   public getServices() {
     if (!this.services$) {
@@ -24,6 +23,9 @@ export class ServicesService {
         .pipe(
           tap((services) => {
             this.services$$.next(services);
+          }),
+          finalize(() => {
+            this.requestInProgress$$.next(false);
           })
         )
         .subscribe();

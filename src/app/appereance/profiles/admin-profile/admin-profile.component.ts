@@ -21,16 +21,16 @@ export class AdminProfileComponent extends BaseProfileComponent {
       title: 'Info',
     },
     {
-      link: '/admin-profile/history',
+      link: '/admin-profile/requests',
       title: 'Requests',
     },
     {
       link: '/admin-profile/service-list',
       title: 'Service list',
     },
-    {
-      link: '/admin-profile/history',
-      title: 'History',
-    },
+    // {
+    //   link: '/admin-profile/history',
+    //   title: 'History',
+    // },
   ];
 }

@@ -4,7 +4,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TuiNavigationModule } from '@taiga-ui/experimental';
 import { TuiTabsModule } from '@taiga-ui/kit';
 import { IRoute } from '../../../../common/models';
@@ -12,7 +12,7 @@ import { IRoute } from '../../../../common/models';
 @Component({
   selector: 'ann-profile-navigation',
   standalone: true,
-  imports: [TuiNavigationModule, TuiTabsModule, RouterLink],
+  imports: [TuiNavigationModule, TuiTabsModule, RouterLink, RouterLinkActive],
   templateUrl: './profile-navigation.component.html',
   styleUrl: './profile-navigation.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

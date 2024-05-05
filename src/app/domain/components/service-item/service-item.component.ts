@@ -20,12 +20,13 @@ import {
   Validators,
 } from '@angular/forms';
 import {
-  TuiButtonModule,
   TuiDialogModule,
+  TuiLoaderModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import {
   TuiButtonCloseModule,
+  TuiButtonModule,
   TuiCardModule,
   TuiHeaderModule,
   TuiIconModule,
@@ -65,6 +66,7 @@ type EditableFormGroup = Record<
     TuiCardModule,
     TuiButtonCloseModule,
     TuiIconModule,
+    TuiLoaderModule,
   ],
   templateUrl: './service-item.component.html',
   styleUrl: './service-item.component.scss',
@@ -82,7 +84,8 @@ export class ServiceItemComponent
   implements ControlValueAccessor, OnInit, OnChanges
 {
   @Input() services: DTO.IService[] | null = [];
-  disabled = input<boolean>();
+  @Input() isLoading: boolean | null = false;
+  disabled = input<boolean>(false);
   editable = input<boolean>(false);
 
   protected isAddServiceOpen = false;
@@ -105,7 +108,6 @@ export class ServiceItemComponent
       description: new FormControl(service?.description || '', {
         nonNullable: true,
       }),
-      // todo: omit id
       id: new FormControl(service?.id || '', { nonNullable: true }),
     });
   }

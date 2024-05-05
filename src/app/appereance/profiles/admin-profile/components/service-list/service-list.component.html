@@ -1,19 +1,8 @@
 <h3 class="title">Modify services</h3>
 
-@if((servicesService.getServices() | async); as services) {
 <ann-service-item
-  [disabled]="!!(servicesService.requestInProgress$ | async)"
-  [services]="services"
+  [isLoading]="servicesService.requestInProgress$$ | async"
+  [services]="servicesService.getServices() | async"
   [editable]="true"
   [formControl]="servicesControl"
 ></ann-service-item>
-} @else {
-<tui-loader
-  class="title loader"
-  [inheritColor]="true"
-  [overlay]="true"
-  [showLoader]="true"
-  [textContent]="'Loading'"
->
-</tui-loader>
-}

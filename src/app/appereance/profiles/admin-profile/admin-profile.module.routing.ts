@@ -25,10 +25,10 @@ import { ServiceListComponent } from './components/service-list/service-list.com
             path: 'service-list',
             component: ServiceListComponent,
           },
-          {
-            path: 'history',
-            component: RequestsComponent,
-          },
+          // {
+          //   path: 'history',
+          //   component: History,
+          // },
         ],
       },
     ]),

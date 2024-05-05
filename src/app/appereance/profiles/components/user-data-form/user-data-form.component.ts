@@ -18,6 +18,7 @@ import { TuiActiveZoneModule, TuiAutoFocusModule } from '@taiga-ui/cdk';
 import {
   TuiButtonModule,
   TuiDataListModule,
+  TuiDialogModule,
   TuiDropdownModule,
   TuiHostedDropdownComponent,
   TuiHostedDropdownModule,
@@ -61,6 +62,7 @@ import * as DTO from '../../../../dto';
     TuiSvgModule,
     KeyValuePipe,
     TuiToggleModule,
+    TuiDialogModule,
   ],
   templateUrl: './user-data-form.component.html',
   styleUrl: './user-data-form.component.scss',
@@ -68,6 +70,8 @@ import * as DTO from '../../../../dto';
 })
 export class UserDataFormComponent extends ResponsiveDirective {
   public userData = input.required<DTO.IUserInfo>();
+
+  protected isFormOpen = false;
 
   protected readonly notifyVia = NOTIFY_VIA;
 
@@ -102,7 +106,6 @@ export class UserDataFormComponent extends ResponsiveDirective {
 
   protected readonly countries = Object.values(TuiCountryIsoCode);
   protected countryIsoCode = TuiCountryIsoCode.DE;
-  protected isEditable = false;
 
   constructor() {
     super();
@@ -116,15 +119,15 @@ export class UserDataFormComponent extends ResponsiveDirective {
   }
 
   toggle(): void {
-    if (this.isEditable) {
+    if (this.isFormOpen) {
       console.log(this.formModel.value);
     }
-    this.isEditable = !this.isEditable;
+    this.isFormOpen = !this.isFormOpen;
   }
 
   onFocusedChange(focused: boolean): void {
     if (!focused) {
-      this.isEditable = false;
+      this.isFormOpen = false;
     }
   }
 

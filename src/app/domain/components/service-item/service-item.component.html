@@ -4,8 +4,10 @@
 
 <ng-template #editableRef>
   <div class="editable-services">
+    @if(!isLoading) {
+    <!--  -->
     @for(serviceControl of editableServicesControl.controls; track
-    serviceControl.value.id) {
+    serviceControl.value.name) {
     <div tuiCardLarge tuiSurface="elevated" class="editable-service">
       <tui-input
         class="name"
@@ -46,7 +48,18 @@
       </button>
     </div>
     } @empty {
-    <p class="text" i18n>No services, add new one</p>
+    <p class="text align-center" i18n>No services, add new one</p>
+    }
+    <!--  -->
+    } @else {
+    <tui-loader
+      class="title loader"
+      [inheritColor]="true"
+      [overlay]="true"
+      [showLoader]="true"
+      [textContent]="'Loading'"
+    >
+    </tui-loader>
     }
   </div>
   <div class="footer">

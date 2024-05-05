@@ -1,7 +1,9 @@
 <nav class="main-nav" [style.width]="'100%'" tuiNavigationNav>
   <tui-tabs [style.width]="'100%'">
     @for(route of navItems(); track route.title) {
-    <button [routerLink]="route.link" tuiTab>{{ route.title }}</button>
+    <button [routerLink]="route.link" tuiTab [routerLinkActive]="'active'">
+      {{ route.title }}
+    </button>
     }
   </tui-tabs>
 

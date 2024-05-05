@@ -5,6 +5,13 @@
   row-gap: 14px;
 }
 
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 15px;
+}
+
 .appointment {
   position: relative;
   overflow: visible;

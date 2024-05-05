@@ -38,7 +38,7 @@
 
   <ann-service-application-form
     [services]="servicesService.getServices() | async"
-    [requestInProgress]="!!(servicesService.requestInProgress$ | async)"
+    [requestInProgress]="!!(servicesService.requestInProgress$$ | async)"
     (send)="applyForService($event)"
   >
   </ann-service-application-form>

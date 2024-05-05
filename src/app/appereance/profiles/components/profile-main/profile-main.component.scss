@@ -57,10 +57,16 @@
   .main-info {
     display: grid;
 
-    grid-template-areas: "avatar name" "form form";
+    grid-template-areas:
+      "avatar name"
+      "avatar form";
     grid-template-columns: max-content 1fr;
     row-gap: 15px;
     align-items: center;
+  }
+
+  .user-name {
+    margin: 0;
   }
 
   .avatar-control {
@@ -71,5 +77,6 @@
   .user-data {
     display: grid;
     grid-area: form;
+    margin: 0 auto;
   }
 }
