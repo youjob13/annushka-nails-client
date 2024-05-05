@@ -84,6 +84,11 @@
   position: relative;
 }
 
+.service-item {
+  display: flex;
+  flex-direction: column;
+}
+
 // Calendar
 
 .date-time-control {

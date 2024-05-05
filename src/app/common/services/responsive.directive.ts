@@ -10,6 +10,7 @@ export abstract class ResponsiveDirective {
     () => this.responsiveService.displayType() === 'mobile'
   );
   protected readonly isMobilePlatform = inject(PLATFORM).isMobile;
+  protected readonly installed = inject(PLATFORM).installed;
 
   @HostBinding('class') get getClass() {
     return this.responsiveService.displayType();

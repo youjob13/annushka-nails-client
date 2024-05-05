@@ -9,6 +9,13 @@
     >
       <button class="logo" tuiTab [routerLink]="MainRoute.Home">
         <span tuiFade>{{ Logo }}</span>
+        <img
+          class="logo-image"
+          width="16"
+          height="16"
+          ngSrc="assets/home.svg"
+          alt="home"
+        />
       </button>
 
       <hr />
@@ -59,8 +66,6 @@
       </button>
       }
       <!--  -->
-      } @else if(!isMobile() && (headerService.isAuthorized$$ | async)) {
-      <button tuiTab tuiButton (click)="logout()">Log out</button>
       }
       <!--  -->
       @if(headerService.isAuthorized$$ | async) {

@@ -10,7 +10,8 @@ import * as DTO from '../../../dto';
 
 @Directive()
 export class BaseInfoComponent extends ResponsiveDirective {
-  protected readonly userData = inject(UserService).userData;
+  protected readonly userService = inject(UserService);
+  protected readonly userData = this.userService.userData;
   private readonly dialogForm = inject(TuiDialogFormService);
   private readonly dialogs = inject(TuiDialogService);
   protected readonly appointmentService = inject(AppointmentService);

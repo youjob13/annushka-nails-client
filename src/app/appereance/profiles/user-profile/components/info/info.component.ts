@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TuiButtonModule } from '@taiga-ui/core';
@@ -21,6 +21,7 @@ import { FavoriteMastersComponent } from '../favorite-masters/favorite-masters.c
     DatePipe,
     FavoriteMastersComponent,
     ReactiveFormsModule,
+    AsyncPipe,
   ],
   templateUrl: './info.component.html',
   styleUrl: './info.component.scss',

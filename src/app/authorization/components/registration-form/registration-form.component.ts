@@ -1,11 +1,5 @@
 import { NgStyle } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Output,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   AbstractControl,
@@ -28,9 +22,10 @@ import {
   TuiProgressModule,
   TuiToggleModule,
 } from '@taiga-ui/kit';
+import { finalize } from 'rxjs';
 import { ResponsiveDirective } from '../../../common/services/responsive.directive';
 import { PASSWORD_REGEXP } from '../../auth.constants';
-import { RegistrationAuthData } from '../../auth.models';
+import { AuthService } from '../../services/auth.service';
 import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
 import { RegistrationFormModel } from './registration-form.models';
 
@@ -56,7 +51,7 @@ import { RegistrationFormModel } from './registration-form.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationFormComponent extends ResponsiveDirective {
-  @Output() send = new EventEmitter<RegistrationAuthData>();
+  private readonly authService = inject(AuthService);
 
   private readonly fb = inject(FormBuilder);
   protected readonly formModel: FormGroup<RegistrationFormModel>;
@@ -117,8 +112,15 @@ export class RegistrationFormComponent extends ResponsiveDirective {
   }
 
   public onSubmit(): void {
-    this.send.emit(this.formModel.getRawValue());
-    this.resetForm();
+    const { username, password } = this.formModel.getRawValue();
+    this.authService
+      .signUp({ username, password })
+      .pipe(
+        finalize(() => {
+          this.resetForm();
+        })
+      )
+      .subscribe();
   }
 
   public onReset(): void {

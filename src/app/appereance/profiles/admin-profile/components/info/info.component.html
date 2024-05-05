@@ -1,6 +1,7 @@
-<ann-profile-main class="section" [userData]="userData()">
+<ann-profile-main class="section" [userData]="userData()!">
   <ann-user-data-form
-    [userData]="userData()"
+    [userData]="userData()!"
+    (update)="userService.updateUserData($event)"
     class="user-form"
   ></ann-user-data-form>
 </ann-profile-main>

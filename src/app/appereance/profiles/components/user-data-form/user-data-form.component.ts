@@ -6,6 +6,7 @@ import {
   effect,
   inject,
   input,
+  output,
   untracked,
 } from '@angular/core';
 import {
@@ -70,6 +71,7 @@ import * as DTO from '../../../../dto';
 })
 export class UserDataFormComponent extends ResponsiveDirective {
   public userData = input.required<DTO.IUserInfo>();
+  update = output<DTO.IUserInfo>();
 
   protected isFormOpen = false;
 
@@ -120,7 +122,15 @@ export class UserDataFormComponent extends ResponsiveDirective {
 
   toggle(): void {
     if (this.isFormOpen) {
-      console.log(this.formModel.value);
+      const updatedUserData = {
+        ...this.userData(),
+        ...this.formModel.value,
+        notifyVia: convertNotifyViaControlToValue(
+          this.formModel.value.notifyVia
+        ),
+      };
+      console.log(updatedUserData);
+      this.update.emit(updatedUserData);
     }
     this.isFormOpen = !this.isFormOpen;
   }
@@ -146,4 +156,21 @@ export class UserDataFormComponent extends ResponsiveDirective {
     this.open = false;
     this.component?.nativeFocusableElement?.focus();
   }
+}
+
+function convertNotifyViaControlToValue(
+  notifyVia?:
+    | Partial<{
+        [x: string]: string | null;
+      }>
+    | undefined
+): string[] {
+  return notifyVia
+    ? Object.entries(notifyVia).reduce<string[]>((acc, [key, value]) => {
+        if (value) {
+          acc.push(key);
+        }
+        return acc;
+      }, [])
+    : [];
 }

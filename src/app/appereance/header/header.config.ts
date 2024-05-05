@@ -7,7 +7,7 @@ import {
 } from '@taiga-ui/experimental';
 import { TuiAvatarModule, TuiBadgeModule, TuiTabsModule } from '@taiga-ui/kit';
 
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TuiDataListModule, TuiHostedDropdownModule } from '@taiga-ui/core';
 
@@ -22,6 +22,7 @@ const TAIGA_UI_MODULES = [
   TuiIconsModule,
   TuiHostedDropdownModule,
   TuiDataListModule,
+  NgOptimizedImage,
 ];
 
 const BUILTIN_MODULES = [RouterModule, AsyncPipe];

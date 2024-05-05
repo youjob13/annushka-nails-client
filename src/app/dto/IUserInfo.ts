@@ -1,7 +1,8 @@
 export interface IUserInfo {
   role: string;
-  name: string;
+  username?: string;
   email?: string | null;
   avatar?: string | null;
   phone?: string | null;
+  notifyVia?: string[];
 }

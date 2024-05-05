@@ -16,6 +16,7 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { of } from 'rxjs';
 import { slideInAnimation } from './animations/route.animations';
 import { HeaderComponent } from './appereance/header/header.component';
+import { AuthService } from './authorization/services/auth.service';
 import { PWAPromptComponent } from './common/pwa-prompt/pwa-prompt.component';
 import { ResponsiveService } from './common/services/responsive.service';
 
@@ -46,9 +47,11 @@ import { ResponsiveService } from './common/services/responsive.service';
 export class AppComponent {
   private readonly contexts = inject(ChildrenOutletContexts);
   private readonly responsiveService = inject(ResponsiveService);
+  private readonly authService = inject(AuthService);
 
   constructor() {
     this.responsiveService.init();
+    this.authService.authCheck();
   }
 
   getRouteAnimationData() {

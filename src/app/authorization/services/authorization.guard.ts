@@ -1,16 +1,20 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { map } from 'rxjs';
-import { MainRoute } from '../../domain/router.constants';
+import { Role } from '../../domain/role.constants';
 import { UserService } from '../../domain/services/user.service';
+import { AuthService } from './auth.service';
 
 export const authorizationGuard: CanActivateFn = () => {
   const userService = inject(UserService);
   const router = inject(Router);
 
-  return userService.isAuthorized$.pipe(
-    map(
-      (isAuthorized) => !isAuthorized || router.parseUrl(MainRoute.UserProfile)
-    )
+  const userData = userService.userData();
+
+  if (!userData || userData.role === Role.Guest) {
+    return true;
+  }
+
+  return router.parseUrl(
+    AuthService.RolesMap[userData.role as keyof typeof AuthService.RolesMap]
   );
 };

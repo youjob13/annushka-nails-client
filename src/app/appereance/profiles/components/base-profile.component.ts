@@ -7,6 +7,6 @@ export abstract class BaseProfileComponent extends ResponsiveDirective {
   private readonly authService = inject(AuthService);
 
   public logout() {
-    this.authService.logout();
+    this.authService.logout().subscribe();
   }
 }

@@ -1,18 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { switchMap, tap } from 'rxjs';
+import { Observable, catchError, switchMap, tap, throwError } from 'rxjs';
 import { API_CONFIG } from '../../../config';
 import { Role } from '../../domain/role.constants';
 import { AuthRoute, MainRoute } from '../../domain/router.constants';
 import { UserService } from '../../domain/services/user.service';
+import { IUserInfo } from '../../dto';
 import { LoginAuthData, RegistrationAuthData } from '../auth.models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private static readonly RolesMap = {
+  public static readonly RolesMap = {
     [Role.Admin]: MainRoute.AdminProfile,
     [Role.User]: MainRoute.UserProfile,
   };
@@ -22,20 +23,18 @@ export class AuthService {
   private readonly userService = inject(UserService);
   private readonly router = inject(Router);
 
+  public authCheck() {
+    return this.http
+      .get<{ role: Role }>(`${this.baseUrl}/auth/check`)
+      .pipe(navigateAuthorizedUser(this.router, this.userService, true))
+      .subscribe();
+  }
+
   public login(authData: LoginAuthData) {
     return this.http
-      .get<Role>(`${this.baseUrl}/login`, {
-        headers: {
-          Authorization: `Bearer ${authData.username}:${authData.password}`,
-        },
-      })
+      .post<{ role: Role }>(`${this.baseUrl}/login`, authData)
       .pipe(
-        tap((role) => this.userService.setRole(role)),
-        tap((role) =>
-          this.router.navigateByUrl(
-            AuthService.RolesMap[role as keyof typeof AuthService.RolesMap]
-          )
-        ),
+        navigateAuthorizedUser(this.router, this.userService),
         switchMap(() => this.userService.isAuthorized$)
       );
   }
@@ -44,18 +43,62 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/auth/instagram`);
   }
 
-  public signUp(authData: RegistrationAuthData) {
-    return this.http.post(`${this.baseUrl}/signUp`, authData);
-  }
-
-  public logout() {
-    this.userService.setRole(Role.Guest);
-    this.router.navigateByUrl(`${MainRoute.Auth}/${AuthRoute.Login}`);
-
-    return this.http.post(`${this.baseUrl}/logout`, {}).pipe(
-      tap(() => {
-        console.log('Logout');
+  public signUp(authData: Omit<RegistrationAuthData, 'repeatedPassword'>) {
+    return this.http.post<IUserInfo>(`${this.baseUrl}/signUp`, authData).pipe(
+      switchMap((userInfo) => this.userService.setUserData(userInfo)),
+      switchMap(() => this.userService.userRole$),
+      tap((role) =>
+        this.router.navigateByUrl(
+          AuthService.RolesMap[role as keyof typeof AuthService.RolesMap]
+        )
+      ),
+      catchError((error) => {
+        console.log(error);
+        return throwError(error);
       })
     );
   }
+
+  public logout() {
+    this.userService.setUserData({ role: Role.Guest });
+    this.router.navigateByUrl(`${MainRoute.Auth}/${AuthRoute.Login}`);
+
+    return this.http.get(`${this.baseUrl}/logout`);
+  }
+}
+
+function navigateAuthorizedUser(
+  router: Router,
+  userService: UserService,
+  skipNavigation = false
+) {
+  return (userInfo$: Observable<IUserInfo>) => {
+    const observable = userInfo$.pipe(
+      tap((userInfo) => userService.setUserData(userInfo)),
+      catchError((error) => {
+        if (error.status === 401) {
+          userService.setUserData({ role: Role.Guest });
+        }
+        return throwError(error);
+      })
+    );
+
+    if (skipNavigation) {
+      return observable;
+    }
+
+    return observable.pipe(
+      tap(({ role }) =>
+        router.navigateByUrl(
+          AuthService.RolesMap[role as keyof typeof AuthService.RolesMap]
+        )
+      ),
+      catchError((error) => {
+        if (error.status === 401) {
+          router.navigateByUrl(`${MainRoute.Auth}/${AuthRoute.Login}`);
+        }
+        return throwError(error);
+      })
+    );
+  };
 }

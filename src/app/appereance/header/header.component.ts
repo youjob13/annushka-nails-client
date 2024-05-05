@@ -53,10 +53,6 @@ export class HeaderComponent extends ResponsiveDirective {
       });
   }
 
-  public logout() {
-    this.headerService.logout();
-  }
-
   private getAuthButtonContent(url: string) {
     if (url.includes(AuthRoute.Login)) {
       return AUTH_BUTTON_CONTENT_BY_PATH[AuthRoute.Registration];

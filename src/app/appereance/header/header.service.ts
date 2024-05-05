@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BehaviorSubject } from 'rxjs';
-import { AuthService } from '../../authorization/services/auth.service';
 import { PLATFORM } from '../../common/injection-tokens/platform';
 import { MainRoute } from '../../domain/router.constants';
 import { PermissionsService } from '../../domain/services/permissions.service';
@@ -13,7 +12,6 @@ import { MAIN_NAVIGATION_ITEMS } from './header.constants';
 })
 export class HeaderService {
   private readonly permissionsService = inject(PermissionsService);
-  private readonly authService = inject(AuthService);
   private readonly userService = inject(UserService);
   private readonly isMobile = inject(PLATFORM).isMobile;
 
@@ -39,9 +37,5 @@ export class HeaderService {
           }
         },
       });
-  }
-
-  public logout() {
-    this.authService.logout().subscribe();
   }
 }

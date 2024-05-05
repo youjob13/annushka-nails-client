@@ -1,6 +1,11 @@
 <div tuiMode="onDark" tuiSurface class="main-info blur">
   <div class="avatar-control">
-    <tui-avatar [size]="'xxl'" [src]="userData().avatar || ''"></tui-avatar>
+    <tui-avatar
+      [size]="'xxl'"
+      [src]="
+        userData().avatar || 'https://avatars.githubusercontent.com/u/10106368'
+      "
+    ></tui-avatar>
     <div class="update-avatar">
       <button
         class="button-add"
@@ -14,11 +19,11 @@
     </div>
   </div>
   @if(isMobile()) {
-  <h3 class="title user-name">{{ userData().name }}</h3>
+  <h3 class="title user-name">{{ userData().username }}</h3>
   }
   <div class="user-data">
     @if(!isMobile()) {
-    <h3 class="title">{{ userData().name }}</h3>
+    <h3 class="title">{{ userData().username }}</h3>
     }
 
     <ng-content></ng-content>
