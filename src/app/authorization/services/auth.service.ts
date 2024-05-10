@@ -43,6 +43,24 @@ export class AuthService {
     return this.http.get(`${this.baseUrl}/auth/instagram`);
   }
 
+  public loginGoogle() {
+    return this.http.get(
+      'https://accounts.google.com/o/oauth2/v2/auth?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A4000%2Fapi%2Fauth%2Fcallback&scope=profile&client_id=964723558332-f58v3221dm0l4jq3q1arjqiu8kdkur2i.apps.googleusercontent.com'
+    );
+    // return this.http
+    // .get(`${this.baseUrl}/auth/google`, {
+    // headers: {
+    // 'Access-Control-Allow-Origin': '*',
+    // },
+    // })
+    // .pipe(
+    // tap(
+    // (a) => console.log(a),
+    // (er) => console.log(er)
+    // )
+    // );
+  }
+
   public signUp(authData: Omit<RegistrationAuthData, 'repeatedPassword'>) {
     return this.http.post<IUserInfo>(`${this.baseUrl}/signUp`, authData).pipe(
       switchMap((userInfo) => this.userService.setUserData(userInfo)),

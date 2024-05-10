@@ -100,6 +100,11 @@ export class LoginFormComponent extends ResponsiveDirective {
       return;
     }
 
+    if (authType === AuthType.Google) {
+      this.loginGoogle();
+      return;
+    }
+
     this.authService
       .login(this.formModel.getRawValue())
       .pipe(finalize(() => this.isLoading$$.next(false)))
@@ -109,6 +114,10 @@ export class LoginFormComponent extends ResponsiveDirective {
 
   private loginInstagram(): void {
     this.authService.loginInstagram().subscribe();
+  }
+
+  private loginGoogle(): void {
+    this.authService.loginGoogle().subscribe();
   }
 
   public onReset(): void {
