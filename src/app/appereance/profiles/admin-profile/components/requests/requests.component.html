@@ -1,1 +1,57 @@
-<p>requests works!</p>
+<tui-input
+  class="control"
+  [readOnly]="false"
+  [disabled]="false"
+  [formControl]="searchControl"
+  [tuiTextfieldSize]="isMobile() ? 'm' : 'l'"
+>
+  Type name
+  <input tuiTextfield type="text" />
+</tui-input>
+
+<section class="appointments">
+  <h3 class="section-title subtitle black">New requests</h3>
+
+  <ann-appointments
+    [highlight]="searchControl.value"
+    [appointments]="(appointmentService.getAppointments('1') | async) || []"
+    (decline)="onDeclineAppointment($event, declineAppointmentRef)"
+  ></ann-appointments>
+</section>
+
+<section class="appointments">
+  <h3 class="section-title subtitle black">Booked appointments</h3>
+
+  <ann-appointments
+    [highlight]="searchControl.value"
+    [appointments]="(appointmentService.getAppointments('1') | async) || []"
+    (decline)="onDeclineAppointment($event, declineAppointmentRef)"
+  ></ann-appointments>
+</section>
+
+<ng-template #declineAppointmentRef let-context>
+  @if(appointmentToDecline) {
+  <div class="confirm-content">
+    <p class="text medium">
+      Service:
+      <span class="text gray">{{ appointmentToDecline.service.name }}</span>
+    </p>
+    <p class="text medium">
+      Date:
+      <span class="text gray">{{ appointmentToDecline.timestamp | date }}</span>
+    </p>
+  </div>
+  }
+
+  <button
+    class="confirm"
+    appearance="whiteblock"
+    [size]="isMobile() ? 's' : 'm'"
+    tuiButton
+    (click)="
+      context.complete(); declineAppointment(appointmentToDecline?.id || '')
+    "
+  >
+    Confirm
+  </button>
+</ng-template>

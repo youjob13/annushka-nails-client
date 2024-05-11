@@ -21,7 +21,12 @@
       [size]="'m'"
       [avatarUrl]="appointment.master.avatar || ''"
     ></tui-avatar>
-    <span class="text name medium">{{ appointment.master.name }}</span>
+    <span
+      class="text name medium"
+      [tuiHighlight]="highlight() || ''"
+      [tuiHighlightColor]="'#e5de00'"
+      >{{ appointment.master.name }}</span
+    >
   </div>
 
   <button

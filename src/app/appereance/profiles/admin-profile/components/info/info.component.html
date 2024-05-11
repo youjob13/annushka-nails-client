@@ -13,38 +13,3 @@
     [bookedDates]="scheduleService.bookedDates$ | async"
   ></ann-edit-schedule>
 </div>
-
-<div class="section appointments">
-  <h3 class="section-title subtitle black">Booked appointments</h3>
-  <ann-appointments
-    [appointments]="(appointmentService.getAppointments('1') | async) || []"
-    (decline)="onDeclineAppointment($event, declineAppointmentRef)"
-  ></ann-appointments>
-</div>
-
-<ng-template #declineAppointmentRef let-context>
-  @if(appointmentToDecline) {
-  <div class="confirm-content">
-    <p class="text medium">
-      Service:
-      <span class="text gray">{{ appointmentToDecline.service.name }}</span>
-    </p>
-    <p class="text medium">
-      Date:
-      <span class="text gray">{{ appointmentToDecline.timestamp | date }}</span>
-    </p>
-  </div>
-  }
-
-  <button
-    class="confirm"
-    appearance="whiteblock"
-    [size]="isMobile() ? 's' : 'm'"
-    tuiButton
-    (click)="
-      context.complete(); declineAppointment(appointmentToDecline?.id || '')
-    "
-  >
-    Confirm
-  </button>
-</ng-template>

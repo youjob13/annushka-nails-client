@@ -1,5 +1,15 @@
 import { Injectable, inject } from '@angular/core';
-import { EMPTY, ReplaySubject, filter, map, switchMap, take, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  EMPTY,
+  ReplaySubject,
+  combineLatest,
+  filter,
+  map,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 import { IAppointment } from '../../../dto';
 import { AppointmentHttpService } from './appointment-http.service';
 
@@ -10,6 +20,12 @@ export class AppointmentService {
   private readonly appointmentHttp = inject(AppointmentHttpService);
   public appointments$: ReplaySubject<IAppointment[]> | null = null;
 
+  private search$$ = new BehaviorSubject<string>('');
+
+  public search(search: string) {
+    this.search$$.next(search);
+  }
+
   public getAppointments(masterId: string) {
     if (!this.appointments$) {
       this.appointments$ = new ReplaySubject<IAppointment[]>(1);
@@ -18,7 +34,13 @@ export class AppointmentService {
         .pipe(tap((appointments) => this.appointments$?.next(appointments)))
         .subscribe();
     }
-    return this.appointments$.asObservable();
+    return combineLatest([this.appointments$, this.search$$]).pipe(
+      map(([appointments, search]) =>
+        appointments.filter(({ master }) =>
+          master.name.toLowerCase().includes(search.trim().toLowerCase())
+        )
+      )
+    );
   }
 
   public getAppointment(appointmentId: IAppointment['id']) {

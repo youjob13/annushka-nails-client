@@ -1,0 +1,23 @@
+@import "../../../../../styles/typography.scss";
+
+:host {
+  position: relative;
+}
+
+.control {
+  margin-bottom: 15px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.appointments {
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.section-title {
+  margin-bottom: 8px;
+}

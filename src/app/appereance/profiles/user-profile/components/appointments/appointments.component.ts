@@ -16,7 +16,7 @@ import {
   TuiSurfaceModule,
   TuiTitleModule,
 } from '@taiga-ui/experimental';
-import { TuiAvatarModule } from '@taiga-ui/kit';
+import { TuiAvatarModule, TuiHighlightModule } from '@taiga-ui/kit';
 import * as DTO from '../../../../../dto';
 
 @Component({
@@ -35,6 +35,7 @@ import * as DTO from '../../../../../dto';
     DatePipe,
     TuiButtonModule,
     TuiButtonCloseModule,
+    TuiHighlightModule,
   ],
   templateUrl: './appointments.component.html',
   styleUrl: './appointments.component.scss',
@@ -42,5 +43,7 @@ import * as DTO from '../../../../../dto';
 })
 export class AppointmentsComponent {
   appointments = input.required<DTO.IAppointment[]>();
+  highlight = input<string>();
+
   decline = output<DTO.IAppointment['id']>();
 }
