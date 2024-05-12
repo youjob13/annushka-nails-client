@@ -1,4 +1,9 @@
-import { JsonPipe, NgStyle, NgTemplateOutlet } from '@angular/common';
+import {
+  JsonPipe,
+  KeyValuePipe,
+  NgStyle,
+  NgTemplateOutlet,
+} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +15,7 @@ import {
 import {
   FormBuilder,
   FormControl,
-  FormsModule,
+  FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { TuiDay, TuiTime } from '@taiga-ui/cdk';
@@ -31,6 +36,9 @@ import {
 import { ResponsiveDirective } from '../../../../../common';
 import { AdoptedSchedule } from '../../../../../domain/services/schedule/schedule.models';
 import { isDayBooked } from '../../../../../domain/utils';
+import { CompareTimesPipe } from './compare-times.pipe';
+
+type TimeGroup = Record<string, FormControl<TuiTime[] | null>>;
 
 @Component({
   selector: 'ann-edit-schedule',
@@ -39,7 +47,6 @@ import { isDayBooked } from '../../../../../domain/utils';
     TuiCalendarModule,
     ReactiveFormsModule,
     TuiTextfieldControllerModule,
-    FormsModule,
     TuiInputTagModule,
     TuiHostedDropdownModule,
     TuiButtonModule,
@@ -49,6 +56,8 @@ import { isDayBooked } from '../../../../../domain/utils';
     NgTemplateOutlet,
     TuiDataListModule,
     NgStyle,
+    KeyValuePipe,
+    CompareTimesPipe,
   ],
   templateUrl: './edit-schedule.component.html',
   styleUrl: './edit-schedule.component.scss',
@@ -69,21 +78,19 @@ export class EditScheduleComponent
   @Input() bookedDates: Map<TuiDay, TuiTime[]> | null = new Map();
 
   private fb = inject(FormBuilder);
-  protected timesPerDayControl = this.fb.group<
-    Record<string, FormControl<TuiTime[] | null>>
-  >({});
 
-  // todo: refactor
+  protected selectedTimesPerDayControl = this.fb.array<FormGroup<TimeGroup>>(
+    []
+  );
+
   protected bookedDatesString: Map<string, TuiTime[]> = new Map();
-  protected isTimeDropdownOpen: Record<string, boolean> = {};
   protected calendarDates: readonly TuiDay[] = [];
   protected timePeriods = tuiCreateTimePeriods();
   protected isEditable = false;
-  // temporary solution !!!
-  protected currentCalendarDate: TuiDay | null = null;
-  //
 
   public disabledAllItemsHandler = () => true;
+  // todo: disable booked dates
+  // get rid of bookedDatesString and simplify solution
   public disabledItemHandler = (tuiDay: TuiDay) => {
     const now = new Date();
     const tuiNow = new TuiDay(now.getFullYear(), now.getMonth(), now.getDate());
@@ -92,18 +99,20 @@ export class EditScheduleComponent
       isDayBooked(this.bookedDatesString, tuiDay.toString())
     );
   };
+  // todo: highlight booked dates
   public markerHandler = (tuiDay: TuiDay): [string] | [] =>
     this.bookedDates?.has(tuiDay) ? ['var(--tui-success-fill)'] : [];
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['bookedDates'] && this.bookedDates) {
-      const times = Object.fromEntries(
-        Array.from(this.bookedDates.entries()).map(([key, time]) => [
-          key.toString(),
-          this.fb.control<TuiTime[] | null>(time),
-        ])
-      );
-      this.timesPerDayControl = this.fb.group(times);
+      for (const [date, times] of this.bookedDates) {
+        this.selectedTimesPerDayControl.push(
+          this.fb.group<TimeGroup>({
+            [date.toString()]: this.fb.control(times),
+          })
+        );
+      }
+
       this.bookedDatesString = new Map(
         Array.from(this.bookedDates.entries()).map(([key, value]) => [
           key.toString(),
@@ -114,18 +123,37 @@ export class EditScheduleComponent
     }
   }
 
+  public toggleTime(
+    control: FormControl<TuiTime[] | null>,
+    toAdd: boolean,
+    time: TuiTime
+  ): void {
+    const times = control.value || [];
+
+    if (!toAdd) {
+      control.setValue(
+        times.filter((item) => item.toString() !== time.toString())
+      );
+    } else {
+      control.setValue([...times, time]);
+    }
+  }
+
   public onDayClick(day: TuiDay): void {
     const editableCalendarDate = this.calendarDates.find((item) =>
       item.daySame(day)
     );
 
     if (!editableCalendarDate) {
-      this.timesPerDayControl.addControl(
-        day.toString(),
-        this.fb.control<TuiTime[] | null>(null)
+      this.selectedTimesPerDayControl.push(
+        this.fb.group<TimeGroup>({
+          [day.toString()]: this.fb.control(null),
+        })
       );
       this.calendarDates = this.calendarDates.concat(day);
     } else {
+      // todo: remove selected times for the day to exclude it from the list
+      // this.selectedTimesPerDayControl.removeAt()
       this.calendarDates = this.calendarDates.filter(
         (item) => !item.daySame(day)
       );

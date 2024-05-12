@@ -9,9 +9,10 @@
 ></tui-calendar>
 
 <div class="selected-dates">
-  @for(calendarDate of calendarDates; track calendarDate.toString()) {
+  @for(control of selectedTimesPerDayControl.controls; track control) {
+  @for(formControl of control.controls | keyvalue; track formControl.key) {
   <div class="preadded-date">
-    <span class="date">{{ calendarDate }}</span>
+    <span class="date">{{ formControl.key }}</span>
 
     <tui-multi-select
       [ngStyle]="!isEditable ? { opacity: 0.5 } : { opacity: 1 }"
@@ -19,21 +20,27 @@
       [expandable]="false"
       [tuiTextfieldSize]="isMobile() ? 's' : 'm'"
       [tuiTextfieldLabelOutside]="true"
-      [formControl]="timesPerDayControl.controls[calendarDate.toString()]"
+      [formControl]="formControl.value"
       [readOnly]="!isEditable"
+      [style.width.px]="265"
     >
       <tui-data-list *tuiDataList>
-        <tui-opt-group tuiMultiSelectGroup>
+        <tui-opt-group tuiMultiSelectGroup [style.width.px]="265">
           @for(time of timePeriods; track time) {
-          <button tuiOption [value]="time">
-            {{ time }}
-          </button>
+          <input
+            #checkboxRef
+            type="checkbox"
+            [checked]="time | annCompareTimes : formControl.value"
+            (click)="toggleTime(formControl.value, checkboxRef.checked, time)"
+          />
+          {{ time }}
           }
         </tui-opt-group>
-        <tui-opt-group label="Sith"> </tui-opt-group>
       </tui-data-list>
     </tui-multi-select>
   </div>
+  }
+  <!--  -->
   }
 </div>
 
