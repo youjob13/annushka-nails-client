@@ -19,7 +19,6 @@ export class UserService {
   public setUserData(userData: DTO.IUserInfo) {
     this.userRole$$.next(userData.role);
     this.userData$$.next(userData);
-    this.userData$$.next({ username: 'Danila', role: 'user' });
     return this.userData;
   }
 

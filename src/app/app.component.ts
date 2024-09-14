@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import {
@@ -31,6 +32,7 @@ import { TelegramService } from './domain/services/telegram/telegram.service';
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
+    JsonPipe,
   ],
   templateUrl: './app.component.html',
   animations: [slideInAnimation],
@@ -48,10 +50,12 @@ export class AppComponent {
   private readonly authService = inject(AuthService);
   private readonly telegram = inject(TelegramService);
 
+  user: any;
   constructor() {
     this.responsiveService.init();
     this.authService.authCheck();
     this.telegram.ready();
+    this.user = this.telegram.user;
   }
 
   getRouteAnimationData() {

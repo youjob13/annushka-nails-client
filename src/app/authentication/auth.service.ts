@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, of, tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { API_CONFIG } from '../../config';
 import { Role } from '../domain/role.constants';
 import { MainRoute } from '../domain/router.constants';
@@ -23,17 +23,12 @@ export class AuthService {
   readonly isAdmin = toSignal(this.isAdmin$$, { initialValue: false });
 
   public authCheck() {
-    return (
-      // this.http
-      // .get<{ role: Role }>(`${this.baseUrl}/auth/check`)
-      of(1)
-        .pipe(tap(() => this.userService.setUserData({ role: Role.User })))
-        .pipe(
-          tap((role) =>
-            this.isAdmin$$.next((role as unknown as Role) === Role.Admin)
-          )
-        )
-        .subscribe()
-    );
+    return this.http
+      .get<{ role: Role }>(`${this.baseUrl}/auth/934785648`)
+      .pipe(tap((userData) => this.userService.setUserData(userData)))
+      .pipe(
+        tap((userData) => this.isAdmin$$.next(userData.role === Role.Admin))
+      )
+      .subscribe();
   }
 }

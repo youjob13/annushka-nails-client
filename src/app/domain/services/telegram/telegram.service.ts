@@ -19,12 +19,15 @@ type WindowWithTelegram = Window & { Telegram: { WebApp: any } };
   providedIn: 'root',
 })
 export class TelegramService {
-  private window;
+  private window: WindowWithTelegram;
   readonly tg;
+  readonly user: any;
 
   constructor(@Inject(DOCUMENT) private document: Document) {
-    this.window = this.document.defaultView;
+    this.window = this.document.defaultView as unknown as WindowWithTelegram;
     this.tg = (this.window as unknown as WindowWithTelegram).Telegram.WebApp;
+    this.user = this.window.Telegram.WebApp.initDataUnsafe.user;
+    console.log('this.tg.initDataUnsafe', this.window.Telegram.WebApp);
   }
 
   get MainButton(): TgButton {

@@ -1,5 +1,6 @@
 <tui-root>
   <ann-header></ann-header>
+  User: {{ user | json }}
   <div [@routeAnimations]="getRouteAnimationData()">
     <router-outlet></router-outlet>
   </div>
