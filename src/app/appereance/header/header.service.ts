@@ -1,14 +1,14 @@
 import { Injectable, inject } from '@angular/core';
-import { AuthService } from '../../authentication/auth.service';
 import { PLATFORM } from '../../common/injection-tokens/platform';
 import { MainRoute } from '../../domain/router.constants';
+import { UserService } from '../../domain/services/user.service';
 import { MAIN_NAVIGATION_ITEMS } from './header.constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeaderService {
-  private readonly authenticationService = inject(AuthService);
+  private readonly userService = inject(UserService);
   private readonly isMobile = inject(PLATFORM).isMobile;
 
   public readonly navigationItems = this.isMobile
@@ -16,7 +16,7 @@ export class HeaderService {
     : [];
 
   constructor() {
-    const isAdmin = this.authenticationService.isAdmin();
+    const isAdmin = this.userService.isAdmin();
     if (isAdmin) {
       this.navigationItems.push({
         title: 'Admin',

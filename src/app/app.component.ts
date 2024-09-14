@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import {
@@ -17,9 +16,9 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { of } from 'rxjs';
 import { slideInAnimation } from './animations/route.animations';
 import { HeaderComponent } from './appereance/header/header.component';
-import { AuthService } from './authentication/auth.service';
 import { ResponsiveService } from './common/services/responsive.service';
 import { TelegramService } from './domain/services/telegram/telegram.service';
+import { UserService } from './domain/services/user.service';
 
 @Component({
   selector: 'ann-root',
@@ -32,7 +31,6 @@ import { TelegramService } from './domain/services/telegram/telegram.service';
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
-    JsonPipe,
   ],
   templateUrl: './app.component.html',
   animations: [slideInAnimation],
@@ -47,15 +45,13 @@ import { TelegramService } from './domain/services/telegram/telegram.service';
 export class AppComponent {
   private readonly contexts = inject(ChildrenOutletContexts);
   private readonly responsiveService = inject(ResponsiveService);
-  private readonly authService = inject(AuthService);
+  private readonly userService = inject(UserService);
   private readonly telegram = inject(TelegramService);
 
-  user: unknown;
   constructor() {
     this.responsiveService.init();
-    this.authService.authCheck();
-    this.telegram.ready();
-    this.user = this.telegram.user;
+    const userData = this.telegram.ready();
+    this.userService.setUserData(userData);
   }
 
   getRouteAnimationData() {

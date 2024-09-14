@@ -38,11 +38,16 @@ export class TelegramService {
     return this.tg.BackButton;
   }
 
+  get userData() {
+    return this.tg.initDataUnsafe.user;
+  }
+
   sendData(data: object) {
     this.tg.sendData(JSON.stringify(data));
   }
 
   ready() {
     this.tg.ready();
+    return this.userData;
   }
 }
