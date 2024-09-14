@@ -4,7 +4,6 @@ import {
   Provider,
   importProvidersFrom,
   inject,
-  isDevMode,
 } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { Router, provideRouter } from '@angular/router';
@@ -12,7 +11,7 @@ import { TuiRootModule } from '@taiga-ui/core';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideServiceWorker } from '@angular/service-worker';
+// import { provideServiceWorker } from '@angular/service-worker';
 import { browserRoutes, installedMobileRoutes } from './app.routes';
 import { PLATFORM } from './common';
 import { httpAlertInterceptor } from './domain/interceptors/http-alert.interceptor';
@@ -44,9 +43,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter([]),
     customProvideRouter(),
     importProvidersFrom(TuiRootModule),
-    provideServiceWorker('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      registrationStrategy: 'registerImmediately',
-    }),
+    // provideServiceWorker('ngsw-worker.js', {
+    //   enabled: !isDevMode(),
+    //   registrationStrategy: 'registerImmediately',
+    // }),
   ],
 };
