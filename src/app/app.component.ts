@@ -50,7 +50,7 @@ export class AppComponent {
   private readonly authService = inject(AuthService);
   private readonly telegram = inject(TelegramService);
 
-  user: any;
+  user: unknown;
   constructor() {
     this.responsiveService.init();
     this.authService.authCheck();

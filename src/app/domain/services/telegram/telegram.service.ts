@@ -21,7 +21,7 @@ type WindowWithTelegram = Window & { Telegram: { WebApp: any } };
 export class TelegramService {
   private window: WindowWithTelegram;
   readonly tg;
-  readonly user: any;
+  readonly user: unknown;
 
   constructor(@Inject(DOCUMENT) private document: Document) {
     this.window = this.document.defaultView as unknown as WindowWithTelegram;
