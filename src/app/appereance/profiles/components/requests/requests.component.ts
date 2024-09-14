@@ -10,10 +10,10 @@ import {
 import { TuiDialogFormService, TuiInputModule } from '@taiga-ui/kit';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { switchMap, tap } from 'rxjs';
-import { ResponsiveDirective } from '../../../../../common';
-import { AppointmentService } from '../../../../../domain/services/appointment/appointment.service';
-import { IAppointment } from '../../../../../dto';
-import { AppointmentsComponent } from '../../../user-profile/components/appointments/appointments.component';
+import { ResponsiveDirective } from '../../../../common';
+import { AppointmentService } from '../../../../domain/services/appointment/appointment.service';
+import { IAppointment } from '../../../../dto';
+import { AppointmentsComponent } from '../appointments/appointments.component';
 
 @Component({
   selector: 'ann-requests',

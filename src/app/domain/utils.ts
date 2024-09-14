@@ -14,6 +14,5 @@ export const isDayBooked = (
   if (!dateTimeMap) {
     return false;
   }
-  console.log(dateTimeMap, day, dateTimeMap.has(day));
   return dateTimeMap.has(day);
 };

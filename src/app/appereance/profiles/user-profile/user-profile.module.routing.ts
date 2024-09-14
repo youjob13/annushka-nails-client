@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RequestsComponent } from '../components/requests/requests.component';
-import { AdminProfileComponent } from './admin-profile.component';
 import { InfoComponent } from './components/info/info.component';
-import { ServiceListComponent } from './components/service-list/service-list.component';
+import { UserProfileComponent } from './user-profile.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
         path: '',
-        component: AdminProfileComponent,
+        component: UserProfileComponent,
         children: [
           {
             path: '',
@@ -21,13 +20,9 @@ import { ServiceListComponent } from './components/service-list/service-list.com
             path: 'requests',
             component: RequestsComponent,
           },
-          {
-            path: 'service-list',
-            component: ServiceListComponent,
-          },
           // {
-          //   path: 'history',
-          //   component: History,
+          //   path: 'service-list',
+          //   component: ServiceListComponent,
           // },
         ],
       },
@@ -35,4 +30,4 @@ import { ServiceListComponent } from './components/service-list/service-list.com
   ],
   exports: [RouterModule],
 })
-export class AdminProfileModuleRouting {}
+export class UserProfileModuleRouting {}

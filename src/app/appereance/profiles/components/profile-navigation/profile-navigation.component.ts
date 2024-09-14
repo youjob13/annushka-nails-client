@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TuiNavigationModule } from '@taiga-ui/experimental';
 import { TuiTabsModule } from '@taiga-ui/kit';
@@ -19,5 +14,4 @@ import { IRoute } from '../../../../common/models';
 })
 export class ProfileNavigationComponent {
   navItems = input.required<IRoute[]>();
-  logout = output();
 }

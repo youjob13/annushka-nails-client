@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TuiDialogFormService } from '@taiga-ui/kit';
 import { IRoute } from '../../../common/models';
 import { BaseProfileComponent } from '../components/base-profile.component';
 import { ProfileNavigationComponent } from '../components/profile-navigation/profile-navigation.component';
@@ -12,7 +11,6 @@ import { ProfileNavigationComponent } from '../components/profile-navigation/pro
   templateUrl: './admin-profile.component.html',
   styleUrl: './admin-profile.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [TuiDialogFormService],
 })
 export class AdminProfileComponent extends BaseProfileComponent {
   protected readonly navItems: IRoute[] = [

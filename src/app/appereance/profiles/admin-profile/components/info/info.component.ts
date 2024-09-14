@@ -2,10 +2,10 @@ import { AsyncPipe, DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TuiButtonModule } from '@taiga-ui/core';
 import { ScheduleService } from '../../../../../domain/services/schedule/schedule.service';
+import { AppointmentsComponent } from '../../../components/appointments/appointments.component';
 import { BaseInfoComponent } from '../../../components/base-info.component';
 import { ProfileMainComponent } from '../../../components/profile-main/profile-main.component';
 import { UserDataFormComponent } from '../../../components/user-data-form/user-data-form.component';
-import { AppointmentsComponent } from '../../../user-profile/components/appointments/appointments.component';
 import { EditScheduleComponent } from '../edit-schedule/edit-schedule.component';
 
 @Component({

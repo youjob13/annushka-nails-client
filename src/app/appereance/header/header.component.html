@@ -55,20 +55,10 @@
     <tui-badge-notification></tui-badge-notification>
   </button> -->
 
-      @if(headerService.isAuthorized$$ | async) {
+      @if(isAdmin() ) {
       <p class="admin-v text white">Admin version</p>
       }
       <!--  -->
-      @if(authButtonContent$$ | async; as authButtonContent ) {
-      @if(authButtonContent !== null) {
-      <button tuiTab tuiButton [routerLink]="authButtonContent.link">
-        {{ authButtonContent.title }}
-      </button>
-      }
-      <!--  -->
-      }
-      <!--  -->
-      @if(headerService.isAuthorized$$ | async) {
       <button tuiTab>
         <tui-avatar
           avatarUrl="tuiIconUser"
@@ -78,7 +68,6 @@
           size="s"
         ></tui-avatar>
       </button>
-      }
     </tui-tabs>
   </nav>
 </header>

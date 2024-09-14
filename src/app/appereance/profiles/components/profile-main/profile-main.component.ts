@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import {
   TuiAvatarModule,
   TuiButtonModule,
@@ -22,14 +17,4 @@ import * as DTO from '../../../../dto';
 })
 export class ProfileMainComponent extends ResponsiveDirective {
   userData = input.required<DTO.IUserInfo>();
-  loadAvatar = output<string | undefined>();
-
-  public onLoadAvatar(event: Event) {
-    const file = (event.target as HTMLInputElement).files![0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.loadAvatar.emit(reader.result?.toString());
-    };
-    reader.readAsDataURL(file);
-  }
 }

@@ -1,12 +1,5 @@
-import { Directive, inject } from '@angular/core';
-import { AuthService } from '../../../authorization/services/auth.service';
+import { Directive } from '@angular/core';
 import { ResponsiveDirective } from '../../../common';
 
 @Directive({})
-export abstract class BaseProfileComponent extends ResponsiveDirective {
-  private readonly authService = inject(AuthService);
-
-  public logout() {
-    this.authService.logout().subscribe();
-  }
-}
+export abstract class BaseProfileComponent extends ResponsiveDirective {}

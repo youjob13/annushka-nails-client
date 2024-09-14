@@ -7,8 +7,4 @@ export const NOTIFY_VIA = [
     id: 'telegram',
     name: 'Telegram',
   },
-  {
-    id: 'app',
-    name: 'App',
-  },
 ] as const;

@@ -35,54 +35,6 @@
   </div>
 </div>
 
-@if (!installed) {
-<div class="section apply-for-service">
-  <h2 class="title" i18n>Apply for service right now</h2>
-
-  <ann-service-application-form
-    [services]="servicesService.getServices() | async"
-    [requestInProgress]="!!(servicesService.requestInProgress$$ | async)"
-    (send)="applyForService($event)"
-  >
-  </ann-service-application-form>
-</div>
-}
-
-<div class="section about-app">
-  <strong class="title">
-    Get more experience with our application and telegram bot.
-  </strong>
-
-  <div class="row">
-    @if(!installed) {
-    <div class="column">
-      <button
-        tuiButton
-        [style.background-color]="'white'"
-        appearance="whiteblock"
-        [size]="isMobile() ? 's' : 'm'"
-        type="button"
-        (click)="show()"
-      >
-        <span class="medium">Install the app</span>
-      </button>
-    </div>
-    }
-    <div class="column">
-      <button
-        tuiButton
-        appearance="whiteblock"
-        [style.background-color]="'white'"
-        [size]="isMobile() ? 's' : 'm'"
-        type="button"
-        (click)="openTg()"
-      >
-        <span class="medium">Use telegram bot</span>
-      </button>
-    </div>
-  </div>
-</div>
-
 <div class="section map">
   <h2 class="title" i18n>Find us</h2>
   <address class="text">London, Cherry street, №17</address>

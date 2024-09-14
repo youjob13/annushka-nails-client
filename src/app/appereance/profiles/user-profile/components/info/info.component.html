@@ -5,11 +5,13 @@
   ></ann-user-data-form>
 </ann-profile-main>
 
-<div class="section">
-  <h3 class="section-title subtitle black">Favorite masters (in-develop)</h3>
-  <p class="text">You can add your favorite masters</p>
+<div class="section apply-for-service">
+  <h2 class="title" i18n>Apply for service right now</h2>
 
-  <ann-favorite-masters
-    (loadAvatar)="loadAvatar($any($event))"
-  ></ann-favorite-masters>
+  <ann-service-application-form
+    [services]="servicesService.getServices() | async"
+    [requestInProgress]="!!(servicesService.requestInProgress$$ | async)"
+    (send)="applyForService($event)"
+  >
+  </ann-service-application-form>
 </div>

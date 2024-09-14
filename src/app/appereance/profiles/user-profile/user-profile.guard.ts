@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { Role } from '../../../domain/role.constants';
-import { AuthRoute, MainRoute } from '../../../domain/router.constants';
+import { MainRoute } from '../../../domain/router.constants';
 import { UserService } from '../../../domain/services/user.service';
 
 export const userProfileGuard: CanActivateFn = () => {
@@ -12,14 +12,11 @@ export const userProfileGuard: CanActivateFn = () => {
   return userService.userRole$.pipe(
     map((role) => {
       switch (role) {
-        case Role.Guest:
-          return router.parseUrl(`${MainRoute.Auth}/${AuthRoute.Login}`);
         case Role.Admin:
           return router.parseUrl(MainRoute.AdminProfile);
         case Role.User:
-          return true;
         default:
-          return router.parseUrl(`${MainRoute.Auth}/${AuthRoute.Login}`);
+          return true;
       }
     })
   );

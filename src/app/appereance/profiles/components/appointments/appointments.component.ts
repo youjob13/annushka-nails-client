@@ -17,7 +17,7 @@ import {
   TuiTitleModule,
 } from '@taiga-ui/experimental';
 import { TuiAvatarModule, TuiHighlightModule } from '@taiga-ui/kit';
-import * as DTO from '../../../../../dto';
+import * as DTO from '../../../../dto';
 
 @Component({
   selector: 'ann-appointments',

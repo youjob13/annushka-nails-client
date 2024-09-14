@@ -1,23 +1,14 @@
 import { Routes } from '@angular/router';
 import { adminProfileGuard } from './appereance/profiles/admin-profile/admin-profile.guard';
 import { userProfileGuard } from './appereance/profiles/user-profile/user-profile.guard';
-import { authorizationGuard } from './authorization/services/authorization.guard';
 import { MainRoute } from './domain/router.constants';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: MainRoute.Home,
     data: { animation: 'Home' },
     loadComponent: () =>
       import('./appereance/home/home.component').then((m) => m.HomeComponent),
-  },
-  {
-    path: MainRoute.About,
-    data: { animation: 'About' },
-    loadComponent: () =>
-      import('./appereance/about/about.component').then(
-        (m) => m.AboutComponent
-      ),
   },
   {
     path: MainRoute.Gallery,
@@ -36,21 +27,12 @@ const routes: Routes = [
       ),
   },
   {
-    path: MainRoute.Auth,
-    data: { animation: 'Auth' },
-    canActivate: [authorizationGuard],
-    loadChildren: () =>
-      import('./authorization/auth-routing.module').then(
-        (m) => m.AuthRoutingModule
-      ),
-  },
-  {
     path: MainRoute.UserProfile,
     canActivate: [userProfileGuard],
-    loadComponent: () =>
-      import('./appereance/profiles/user-profile/user-profile.component').then(
-        (m) => m.UserProfileComponent
-      ),
+    loadChildren: () =>
+      import(
+        './appereance/profiles/user-profile/user-profile.module.routing'
+      ).then((m) => m.UserProfileModuleRouting),
   },
   {
     path: MainRoute.AdminProfile,
@@ -60,14 +42,9 @@ const routes: Routes = [
         './appereance/profiles/admin-profile/admin-profile.module.routing'
       ).then((m) => m.AdminProfileModuleRouting),
   },
-];
-
-export const installedMobileRoutes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: MainRoute.UserProfile },
-  ...routes,
-];
-
-export const browserRoutes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: MainRoute.Home },
-  ...routes,
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: MainRoute.UserProfile,
+  },
 ];

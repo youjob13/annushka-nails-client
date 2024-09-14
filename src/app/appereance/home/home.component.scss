@@ -73,10 +73,6 @@
     margin: 0 auto;
     width: 70%;
   }
-
-  .subbg {
-    margin: 50px auto 0;
-  }
 }
 
 .section.map {
@@ -96,48 +92,6 @@
 
   .about {
     position: relative;
-
-    .subbg {
-      position: absolute;
-      bottom: 0;
-      left: 95%;
-      transform: translate(-50%, 0);
-      bottom: 0;
-    }
-  }
-
-  .apply-for-service {
-    .title {
-      margin-bottom: 50px;
-    }
-  }
-
-  .about-app {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-
-    &::before {
-      content: "";
-
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: gray;
-      height: 1px;
-    }
-
-    .title {
-      margin-bottom: 40px;
-    }
-
-    .row {
-      display: flex;
-      column-gap: 40px;
-    }
   }
 
   .map-content {

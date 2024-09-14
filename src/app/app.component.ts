@@ -16,8 +16,7 @@ import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import { of } from 'rxjs';
 import { slideInAnimation } from './animations/route.animations';
 import { HeaderComponent } from './appereance/header/header.component';
-import { AuthService } from './authorization/services/auth.service';
-import { PWAPromptComponent } from './common/pwa-prompt/pwa-prompt.component';
+import { AuthService } from './authentication/auth.service';
 import { ResponsiveService } from './common/services/responsive.service';
 import { TelegramService } from './domain/services/telegram/telegram.service';
 
@@ -32,10 +31,8 @@ import { TelegramService } from './domain/services/telegram/telegram.service';
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
-    PWAPromptComponent,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
   animations: [slideInAnimation],
   providers: [
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
